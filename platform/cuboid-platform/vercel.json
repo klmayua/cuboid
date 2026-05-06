@@ -1,8 +1,6 @@
 {
-  "projects": [
-    {
-      "path": "apps/web-marketing",
-      "name": "cuboid-web-marketing"
-    }
-  ]
+  "version": 2,
+  "buildCommand": "pnpm --filter @cuboid/web-marketing build",
+  "installCommand": "pnpm install --frozen-lockfile",
+  "framework": "nextjs"
 }

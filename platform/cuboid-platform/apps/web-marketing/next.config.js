@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // empty config for Vercel deployment
+  reactStrictMode: true,
+  poweredByHeader: false,
+  experimental: {
+    optimizePackageImports: ['lucide-react']
+  }
 };
 
 module.exports = nextConfig;

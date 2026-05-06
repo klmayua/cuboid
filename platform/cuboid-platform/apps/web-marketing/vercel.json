@@ -1,5 +1,6 @@
 {
+  "version": 2,
   "framework": "nextjs",
-  "buildCommand": "pnpm build",
-  "installCommand": "pnpm install"
+  "installCommand": "pnpm install --frozen-lockfile",
+  "buildCommand": "pnpm --filter @cuboid/web-marketing build"
 }
