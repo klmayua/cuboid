@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { CuboidLogo } from '@cuboid/design-system';
+import { CuboidLogo } from '../../components/CuboidLogo';
 import { ArrowLeft, Check, Globe, Zap, Shield, Headphones, CreditCard, ArrowRight } from 'lucide-react';
 
 const plans = [

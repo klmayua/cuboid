@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { CuboidLogo } from '@cuboid/design-system';
+import { CuboidLogo } from '../../components/CuboidLogo';
 import { ArrowLeft, FileText, Plus, Search, Edit, Trash2, Eye, Calendar, User, MessageCircle } from 'lucide-react';
 
 const posts = [

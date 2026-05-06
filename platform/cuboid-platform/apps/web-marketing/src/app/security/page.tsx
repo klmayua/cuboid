@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { CuboidLogo } from '@cuboid/design-system';
+import { CuboidLogo } from '../../components/CuboidLogo';
 import { ArrowLeft, Shield, Lock, FileCheck, Server, Globe, Award, CheckCircle } from 'lucide-react';
 
 const certifications = [

@@ -1,9 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ['@cuboid/design-system', '@cuboid/tokens'],
-  images: {
-    domains: [],
-  },
+  // empty config for Vercel deployment
 };
 
 module.exports = nextConfig;

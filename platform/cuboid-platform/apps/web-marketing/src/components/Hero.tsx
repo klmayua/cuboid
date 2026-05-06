@@ -1,5 +1,15 @@
 import { motion } from 'framer-motion';
-import { CuboidLogo } from '@cuboid/design-system';
+
+function CuboidLogo({ variant = 'full', width = 80, height = 80, className = '' }) {
+  const svg = (
+    <svg width={width} height={height} viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+      <rect x="10" y="20" width="40" height="40" rx="4" stroke="#5E8DFF" strokeWidth="2" fill="none"/>
+      <rect x="30" y="20" width="40" height="40" rx="4" stroke="#123E91" strokeWidth="2" fill="none"/>
+      <rect x="10" y="20" width="40" height="40" rx="4" stroke="#0A2A66" strokeWidth="2" fill="rgba(10, 42, 102, 0.5)"/>
+    </svg>
+  );
+  return svg;
+}
 
 export function Hero() {
   return (

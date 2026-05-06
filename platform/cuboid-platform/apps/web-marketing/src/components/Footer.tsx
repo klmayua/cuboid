@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { CuboidLogo } from '@cuboid/design-system';
+import { CuboidLogo } from './CuboidLogo';
 
 export function Footer() {
   const footerLinks = {

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CuboidLogo } from '@cuboid/design-system';
+import { CuboidLogo } from '@/components/CuboidLogo';
 import { 
   MapPin, 
   ArrowRight, 

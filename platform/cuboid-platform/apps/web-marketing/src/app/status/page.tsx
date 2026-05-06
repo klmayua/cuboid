@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { CuboidLogo } from '@cuboid/design-system';
+import { CuboidLogo } from '../../components/CuboidLogo';
 import { ArrowLeft, CheckCircle, XCircle, AlertTriangle, Clock, RefreshCw, Activity } from 'lucide-react';
 
 const services = [

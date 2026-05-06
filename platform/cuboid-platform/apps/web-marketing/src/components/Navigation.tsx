@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { CuboidLogo } from '@cuboid/design-system';
+import { CuboidLogo } from './CuboidLogo';
 
 export function Navigation() {
   const navItems = [
