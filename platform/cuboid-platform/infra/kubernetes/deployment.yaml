@@ -1,0 +1,103 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cuboid-platform
+  namespace: cuboid
+  labels:
+    app: cuboid-platform
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cuboid-platform
+  template:
+    metadata:
+      labels:
+        app: cuboid-platform
+    spec:
+      containers:
+      - name: api
+        image: cuboid/platform:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: NODE_ENV
+          value: production
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: cuboid-secrets
+              key: database-url
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: cuboid-secrets
+              key: jwt-secret
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health/live
+            port: 3000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cuboid-platform
+  namespace: cuboid
+spec:
+  selector:
+    app: cuboid-platform
+  ports:
+  - port: 80
+    targetPort: 3000
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cuboid-platform
+  namespace: cuboid
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  tls:
+  - hosts:
+    - api.cuboid.io
+    - app.cuboid.io
+    secretName: cuboid-tls
+  rules:
+  - host: api.cuboid.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: cuboid-platform
+            port:
+              number: 80
+  - host: app.cuboid.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: cuboid-web
+            port:
+              number: 80

@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-brand-deep-trust: #0A2A66;
+  --color-brand-royal-trust: #123E91;
+  --color-brand-light-trust: #5E8DFF;
+  --color-dark-midnight: #05070D;
+  --color-dark-surface: #0B1020;
+  --color-dark-elevated: #10182B;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter Tight', system-ui, sans-serif;
+  background-color: #05070D;
+  color: #F5F8FF;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: rgba(94, 141, 255, 0.3);
+  color: #F5F8FF;
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/[0.06] backdrop-blur-xl border border-white/12;
+  }
+  
+  .glass-elevated {
+    @apply bg-white/[0.10] backdrop-blur-xl border border-white/14;
+  }
+  
+  .glass-input {
+    @apply bg-white/[0.08] border border-white/12 focus:outline-none focus:ring-2 focus:ring-brand-light-trust/30 focus:border-brand-light-trust/50;
+  }
+}

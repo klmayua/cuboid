@@ -1,0 +1,8 @@
+{
+  "name": "cuboid-platform",
+  "version": "1.0.0",
+  "description": "Institutional economic infrastructure platform",
+  "author": "Insane Technologies",
+  "license": "UNLICENSED",
+  "private": true
+}

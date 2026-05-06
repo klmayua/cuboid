@@ -1,0 +1,23 @@
+{
+  "name": "@cuboid/compliance-service",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@cuboid/domain-core": "workspace:*",
+    "@cuboid/event-contracts": "workspace:*",
+    "@cuboid/schemas": "workspace:*",
+    "uuid": "^9.0.0",
+    "zod": "^3.22.4",
+    "pino": "^8.19.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "tsx": "^4.7.0"
+  }
+}

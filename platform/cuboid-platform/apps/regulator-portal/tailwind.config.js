@@ -1,0 +1,1 @@
+module.exports = { content: ['./src/**/*.{js,ts,jsx,tsx}'], theme: { extend: { colors: { brand: { deepTrust: '#0A2A66', royalTrust: '#123E91', lightTrust: '#5E8DFF' }, dark: { midnight: '#05070D', surface: '#0B1020' }, typography: { primary: '#F5F8FF', secondary: '#AAB7D1', muted: '#7183A6' } } } }, plugins: [] };

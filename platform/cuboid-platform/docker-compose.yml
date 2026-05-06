@@ -1,0 +1,200 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:14-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: cuboid
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docs/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Core Services
+  identity-service:
+    build:
+      context: ./services/identity-service
+    ports:
+      - "3001:3000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:password@postgres:5432/cuboid
+      - JWT_SECRET=dev-secret-change-in-production
+      - NODE_ENV=development
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  auth-service:
+    build:
+      context: ./services/auth-service
+    ports:
+      - "3002:3000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:password@postgres:5432/cuboid
+      - JWT_SECRET=dev-secret-change-in-production
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  ledger-service:
+    build:
+      context: ./services/ledger-service
+    ports:
+      - "3010:3000"
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - redis
+
+  trust-service:
+    build:
+      context: ./services/trust-service
+    ports:
+      - "3011:3000"
+    environment:
+      - NODE_ENV=development
+
+  compliance-service:
+    build:
+      context: ./services/compliance-service
+    ports:
+      - "3012:3000"
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - postgres
+
+  quote-service:
+    build:
+      context: ./services/quote-service
+    ports:
+      - "3013:3000"
+    environment:
+      - NODE_ENV=development
+
+  settlement-service:
+    build:
+      context: ./services/settlement-service
+    ports:
+      - "3014:3000"
+    environment:
+      - NODE_ENV=development
+
+  workflow-service:
+    build:
+      context: ./services/workflow-service
+    ports:
+      - "3015:3000"
+    environment:
+      - NODE_ENV=development
+
+  bdc-service:
+    build:
+      context: ./services/bdc-service
+    ports:
+      - "3016:3000"
+    environment:
+      - NODE_ENV=development
+
+  geo-service:
+    build:
+      context: ./services/geo-service
+    ports:
+      - "3017:3000"
+    environment:
+      - NODE_ENV=development
+
+  visitor-service:
+    build:
+      context: ./services/visitor-service
+    ports:
+      - "3018:3000"
+    environment:
+      - NODE_ENV=development
+
+  whatsapp-service:
+    build:
+      context: ./services/whatsapp-service
+    ports:
+      - "3019:3000"
+    environment:
+      - NODE_ENV=development
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - redis
+
+  # Web Applications
+  web-app:
+    build:
+      context: ./apps/web-app
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://localhost:3000
+    depends_on:
+      - auth-service
+
+  web-marketing:
+    build:
+      context: ./apps/web-marketing
+    ports:
+      - "3005:3000"
+    environment:
+      - NODE_ENV=development
+
+  admin-tower:
+    build:
+      context: ./apps/admin-tower
+    ports:
+      - "3010:3000"
+    environment:
+      - NODE_ENV=development
+
+  docs-portal:
+    build:
+      context: ./apps/docs-portal
+    ports:
+      - "3020:3000"
+    environment:
+      - NODE_ENV=development
+
+  partner-portal:
+    build:
+      context: ./apps/partner-portal
+    ports:
+      - "3011:3000"
+    environment:
+      - NODE_ENV=development
+
+  regulator-portal:
+    build:
+      context: ./apps/regulator-portal
+    ports:
+      - "3012:3000"
+    environment:
+      - NODE_ENV=development
+
+volumes:
+  postgres_data:
+  redis_data:

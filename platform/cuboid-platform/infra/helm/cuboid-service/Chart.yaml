@@ -1,0 +1,26 @@
+apiVersion: v1
+description: CUBOID Service Helm Chart
+name: cuboid-service
+version: 0.0.1
+appVersion: "1.0.0"
+
+annotations:
+  category: Infrastructure
+
+kubeVersion: ">=1.24.0"
+
+type: application
+
+keywords:
+  - cuboid
+  - infrastructure
+
+maintainers:
+  - name: Insane Technologies
+
+dependencies:
+  - name: common
+    version: 2.x.x
+    repository: https://charts.bitnami.com/bitnami
+    tags:
+      - keep-out-of-doc

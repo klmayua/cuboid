@@ -1,0 +1,8 @@
+{
+  "name": "@cuboid/support-service",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": { "dev": "tsx watch src/index.ts", "build": "tsc" },
+  "dependencies": { "uuid": "^9.0.0" },
+  "devDependencies": { "typescript": "^5.4.0", "tsx": "^4.7.0" }
+}
