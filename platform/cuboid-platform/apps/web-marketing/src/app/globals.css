@@ -38,14 +38,47 @@ body {
 
 @layer utilities {
   .glass {
-    @apply bg-white/[0.06] backdrop-blur-xl border border-white/12;
+    background-color: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
   }
   
   .glass-elevated {
-    @apply bg-white/[0.10] backdrop-blur-xl border border-white/14;
+    background-color: rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
   }
   
   .glass-input {
-    @apply bg-white/[0.08] border border-white/12 focus:outline-none focus:ring-2 focus:ring-brand-light-trust/30 focus:border-brand-light-trust/50;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  
+  .glass-input:focus {
+    outline: none;
+    border-color: rgba(94, 141, 255, 0.5);
+    box-shadow: 0 0 0 3px rgba(94, 141, 255, 0.3);
+  }
+  
+  .text-brand-light-trust {
+    color: #5E8DFF;
+  }
+  
+  .bg-brand-light-trust {
+    background-color: #5E8DFF;
+  }
+  
+  .border-brand-light-trust {
+    border-color: #5E8DFF;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 bg-gradient-to-br from-[#0A2A66] to-[#123E91] text-white rounded-xl font-medium;
+  }
+  
+  .btn-primary:hover {
+    box-shadow: 0 8px 32px rgba(10, 42, 102, 0.4);
   }
 }

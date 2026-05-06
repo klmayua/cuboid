@@ -36,7 +36,7 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <CuboidLogo variant="mark" mode="dark" width={28} height={28} />
+              <CuboidLogo variant="mark" width={28} height={28} />
               <span className="text-lg font-semibold text-[#0A2A66]">CUBOID</span>
             </Link>
             <p className="text-sm text-[#7183A6]">

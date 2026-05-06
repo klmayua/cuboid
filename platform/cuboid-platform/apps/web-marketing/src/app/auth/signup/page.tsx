@@ -16,7 +16,7 @@ export default function SignupPage() {
         </Link>
 
         <div className="text-center mb-8">
-          <CuboidLogo variant="full" mode="light" width={60} height={60} className="mx-auto mb-4" />
+          <CuboidLogo variant="full" width={60} height={60} className="mx-auto mb-4" />
           <h1 className="text-3xl font-bold text-white mb-2">Create Account</h1>
           <p className="text-[#7183A6]">Join thousands of users using Cuboid</p>
         </div>

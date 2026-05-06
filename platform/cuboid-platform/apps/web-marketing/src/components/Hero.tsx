@@ -21,7 +21,7 @@ export function Hero() {
           transition={{ duration: 0.6 }}
           className="mb-8"
         >
-          <CuboidLogo variant="full" mode="light" width={80} height={80} className="mx-auto mb-8" />
+          <CuboidLogo variant="full" width={80} height={80} className="mx-auto mb-8" />
         </motion.div>
 
         <motion.h1
