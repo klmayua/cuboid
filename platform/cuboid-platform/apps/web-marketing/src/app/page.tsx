@@ -86,15 +86,15 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-[#05070D]">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 px-4 py-3">
-        <div className="max-w-7xl mx-auto">
-          <div className="glass rounded-2xl px-4 md:px-6 py-3 flex items-center justify-between">
+      <nav className="fixed top-5 left-0 right-0 z-50">
+        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+          <div className="h-[72px] rounded-[20px] bg-[#0B1020]/80 backdrop-blur-md border border-white/10 px-4 md:px-6 flex items-center justify-between">
             <Link href="/" className="flex items-center gap-2">
               <CuboidLogo variant="mark" width={32} height={32} />
               <span className="text-xl font-semibold text-white">CUBOID</span>
             </Link>
 
-            <div className="hidden md:flex items-center gap-6">
+            <div className="hidden md:flex items-center gap-8">
               {navItems.map((item) => (
                 <Link key={item.href} href={item.href} className="text-sm text-[#7183A6] hover:text-white transition-colors">
                   {item.label}
@@ -124,7 +124,7 @@ export default function LandingPage() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 bg-[#05070D] pt-20 px-6 md:hidden"
+            className="fixed inset-0 z-40 bg-[#05070D] pt-24 px-4 md:px-6 md:hidden"
           >
             <div className="space-y-4">
               {navItems.map((item) => (
@@ -146,8 +146,8 @@ export default function LandingPage() {
       </AnimatePresence>
 
       {/* Hero Section */}
-      <section className="pt-28 pb-12 md:py-16 lg:py-20 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+      <section className="pt-32 pb-12 md:pb-16 lg:py-20 px-4 md:px-6">
+        <div className="max-w-[1280px] mx-auto">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#5E8DFF]/20 border border-[#5E8DFF]/30 mb-4">
@@ -155,12 +155,12 @@ export default function LandingPage() {
                 <span className="text-sm text-[#5E8DFF]">Trusted by 25,000+ users</span>
               </div>
               
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+              <h1 className="text-[36px] md:text-[44px] lg:text-[56px] font-bold text-white mb-4 leading-tight">
                 Move Money<br />
                 <span className="text-[#5E8DFF]">With Confidence</span>
               </h1>
               
-              <p className="text-base md:text-lg text-[#7183A6] mb-6 max-w-xl">
+              <p className="text-base md:text-lg text-[#7183A6] mb-6 max-w-lg">
                 Access verified currency exchange partners across Africa. 
                 Compare live rates, reserve your rate, and transact securely— 
                 all from your phone.
@@ -171,7 +171,7 @@ export default function LandingPage() {
                   <MapPin className="w-5 h-5" />
                   Find Nearest BDC
                 </Link>
-                <a href="https://wa.me/254700000000" className="flex items-center justify-center gap-2 px-5 py-3 glass rounded-xl font-medium text-white hover:bg-white/10 transition-colors">
+                <a href="https://wa.me/254700000000" className="flex items-center justify-center gap-2 px-5 py-3 bg-white/5 border border-white/10 rounded-xl font-medium text-white hover:bg-white/10 transition-colors">
                   <MessageCircle className="w-5 h-5" />
                   Chat on WhatsApp
                 </a>
@@ -188,7 +188,7 @@ export default function LandingPage() {
               <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="text-white font-semibold flex items-center gap-2">
-                    <Activity className="w-5 h-5 text-[#5E8DFF]" />
+                    <Activity className="w-4 h-4 text-[#5E8DFF]" />
                     Live Rates
                   </h3>
                   <div className="flex gap-1.5">
@@ -198,7 +198,7 @@ export default function LandingPage() {
                 </div>
                 <div className="space-y-2">
                   {liveRates.map((rate, i) => (
-                    <div key={i} className="flex items-center justify-between p-2.5 rounded-xl bg-white/5">
+                    <div key={i} className="flex items-center justify-between h-12 px-3 rounded-xl bg-white/5">
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-lg bg-[#5E8DFF]/20 flex items-center justify-center text-[#5E8DFF] font-bold text-xs">{rate.pair.slice(0,3)}</div>
                         <span className="text-white font-medium text-sm">{rate.pair}</span>
@@ -215,14 +215,14 @@ export default function LandingPage() {
               <div className="p-4 rounded-2xl bg-gradient-to-br from-[#5E8DFF]/20 to-[#0A2A66]/20 border border-[#5E8DFF]/30">
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="text-white font-semibold flex items-center gap-2">
-                    <Building2 className="w-5 h-5 text-[#5E8DFF]" />
+                    <Building2 className="w-4 h-4 text-[#5E8DFF]" />
                     Nearest Verified BDCs
                   </h3>
                   <Link href="/nearest-bdc" className="text-xs text-[#5E8DFF] hover:underline">View all</Link>
                 </div>
                 <div className="space-y-2">
                   {nearestBDCs.map((bdc, i) => (
-                    <div key={i} className="flex items-center justify-between p-2.5 rounded-xl bg-white/5">
+                    <div key={i} className="flex items-center justify-between h-12 px-3 rounded-xl bg-white/5">
                       <div>
                         <p className="text-white font-medium text-sm">{bdc.name}</p>
                         <p className="text-xs text-[#7183A6]">{bdc.distance} • {bdc.wait} wait</p>
@@ -244,8 +244,8 @@ export default function LandingPage() {
       </section>
 
       {/* Trust Metrics */}
-      <section className="py-12 md:py-16 lg:py-20 px-6 lg:px-8 bg-white/5 border-y border-white/10">
-        <div className="max-w-7xl mx-auto">
+      <section className="py-10 md:py-12 lg:py-14 px-4 md:px-6 bg-white/5 border-y border-white/10">
+        <div className="max-w-[1280px] mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
               { label: 'Users', value: '25,000+', icon: Users },
@@ -254,7 +254,7 @@ export default function LandingPage() {
               { label: 'Countries', value: '10+', icon: Globe },
             ].map((stat, i) => (
               <div key={i} className="text-center">
-                <stat.icon className="w-6 h-6 md:w-8 md:h-8 text-[#5E8DFF] mx-auto mb-2" />
+                <stat.icon className="w-6 h-6 md:w-7 md:h-7 text-[#5E8DFF] mx-auto mb-2" />
                 <p className="text-2xl md:text-3xl font-bold text-white">{stat.value}</p>
                 <p className="text-[#7183A6] text-sm">{stat.label}</p>
               </div>
@@ -264,9 +264,9 @@ export default function LandingPage() {
       </section>
 
       {/* Supported Currencies Strip */}
-      <section className="py-8 md:py-10 px-6 lg:px-8 border-b border-white/10 overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          <p className="text-center text-[#7183A6] text-xs md:text-sm mb-4 uppercase tracking-wider">Supported Currencies</p>
+      <section className="py-6 md:py-8 px-4 md:px-6 border-b border-white/10 overflow-hidden">
+        <div className="max-w-[1280px] mx-auto">
+          <p className="text-center text-[#7183A6] text-xs md:text-sm mb-3 uppercase tracking-wider">Supported Currencies</p>
           <div className="flex flex-wrap justify-center gap-2 md:gap-3">
             {currencies.map((curr, i) => (
               <span key={i} className="px-3 py-1.5 rounded-full bg-white/5 text-white text-xs md:text-sm border border-white/10">
@@ -278,9 +278,9 @@ export default function LandingPage() {
       </section>
 
       {/* How It Works */}
-      <section id="how-it-works" className="py-12 md:py-16 lg:py-20 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-8 md:mb-12">
+      <section id="how-it-works" className="py-12 md:py-14 lg:py-16 px-4 md:px-6">
+        <div className="max-w-[1280px] mx-auto">
+          <div className="text-center mb-8">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3">How It Works</h2>
             <p className="text-[#7183A6] max-w-2xl mx-auto">Get the best exchange rates in four simple steps</p>
           </div>
@@ -293,18 +293,18 @@ export default function LandingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="p-5 md:p-6 rounded-2xl bg-white/5 border border-white/10 text-center"
+                className="p-5 rounded-2xl bg-white/5 border border-white/10 text-center"
               >
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0A2A66] to-[#123E91] flex items-center justify-center text-white font-bold mx-auto mb-3 text-sm">
                   {step.step}
                 </div>
-                <h3 className="text-base md:text-lg font-semibold text-white mb-2">{step.title}</h3>
+                <h3 className="text-base font-semibold text-white mb-2">{step.title}</h3>
                 <p className="text-sm text-[#7183A6]">{step.description}</p>
               </motion.div>
             ))}
           </div>
 
-          <div className="mt-8 md:mt-10 text-center">
+          <div className="mt-8 text-center">
             <Link href="/nearest-bdc" className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#5E8DFF] text-white rounded-xl font-medium hover:bg-[#4A7AE8] transition-colors">
               Try It Now <ArrowRight className="w-4 h-4" />
             </Link>
@@ -313,24 +313,26 @@ export default function LandingPage() {
       </section>
 
       {/* Active Corridors */}
-      <section id="rates" className="py-12 md:py-16 lg:py-20 px-6 lg:px-8 bg-white/5">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-8 md:mb-12">
+      <section id="rates" className="py-12 md:py-14 lg:py-16 px-4 md:px-6 bg-white/5">
+        <div className="max-w-[1280px] mx-auto">
+          <div className="text-center mb-8">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3">Active Corridors</h2>
             <p className="text-[#7183A6]">High-volume remittance routes we power daily</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {corridors.map((corridor, i) => (
-              <div key={i} className="p-4 md:p-5 rounded-2xl bg-[#0B1020] border border-white/10">
-                <div className="flex items-center gap-2 mb-3">
+              <div key={i} className="h-[140px] md:h-[160px] p-4 rounded-2xl bg-[#0B1020] border border-white/10 flex flex-col justify-between">
+                <div className="flex items-center gap-2">
                   <Globe2 className="w-4 h-4 text-[#5E8DFF]" />
                   <span className="text-white font-medium text-sm">{corridor.from} → {corridor.to}</span>
                 </div>
-                <p className="text-xl md:text-2xl font-bold text-white mb-1">{corridor.volume}</p>
-                <span className="text-green-500 text-xs md:text-sm flex items-center gap-1">
-                  <TrendingUp className="w-3.5 h-3.5" /> {corridor.growth} YoY
-                </span>
+                <div>
+                  <p className="text-xl md:text-2xl font-bold text-white mb-1">{corridor.volume}</p>
+                  <span className="text-green-500 text-xs md:text-sm flex items-center gap-1">
+                    <TrendingUp className="w-3.5 h-3.5" /> {corridor.growth} YoY
+                  </span>
+                </div>
               </div>
             ))}
           </div>
@@ -338,8 +340,8 @@ export default function LandingPage() {
       </section>
 
       {/* Business Section */}
-      <section id="business" className="py-12 md:py-16 lg:py-20 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+      <section id="business" className="py-12 md:py-14 lg:py-16 px-4 md:px-6">
+        <div className="max-w-[1280px] mx-auto">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div>
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 md:mb-6">Built for Business</h2>
@@ -380,9 +382,9 @@ export default function LandingPage() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-12 md:py-16 lg:py-20 px-6 lg:px-8 bg-white/5">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center mb-8 md:mb-12">Trusted by Thousands</h2>
+      <section className="py-12 md:py-14 lg:py-16 px-4 md:px-6 bg-white/5">
+        <div className="max-w-[1280px] mx-auto">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center mb-8">Trusted by Thousands</h2>
           
           <div className="grid md:grid-cols-3 gap-4 md:gap-6">
             {testimonials.map((testimonial, i) => (
@@ -409,9 +411,9 @@ export default function LandingPage() {
       </section>
 
       {/* Security Section */}
-      <section id="security" className="py-12 md:py-16 lg:py-20 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-8 md:mb-12">
+      <section id="security" className="py-12 md:py-14 lg:py-16 px-4 md:px-6">
+        <div className="max-w-[1280px] mx-auto">
+          <div className="text-center mb-8">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3">Bank-Grade Security</h2>
             <p className="text-[#7183A6] max-w-2xl mx-auto">Your money is protected by institutional-level security infrastructure</p>
           </div>
@@ -422,10 +424,12 @@ export default function LandingPage() {
               { icon: Shield, title: 'Regulated Partners', desc: 'Only work with licensed financial institutions' },
               { icon: Award, title: 'Insurance Coverage', desc: 'Funds protected up to required limits' },
             ].map((item, i) => (
-              <div key={i} className="p-5 md:p-6 rounded-2xl bg-white/5 border border-white/10 text-center">
-                <item.icon className="w-10 h-10 md:w-12 md:h-12 text-[#5E8DFF] mx-auto mb-3" />
-                <h3 className="text-base md:text-lg font-semibold text-white mb-1.5">{item.title}</h3>
-                <p className="text-[#7183A6] text-sm">{item.desc}</p>
+              <div key={i} className="h-[180px] md:h-[200px] p-5 rounded-2xl bg-white/5 border border-white/10 text-center flex flex-col justify-between">
+                <div>
+                  <item.icon className="w-10 h-10 md:w-11 md:h-11 text-[#5E8DFF] mx-auto mb-3" />
+                  <h3 className="text-base font-semibold text-white mb-1.5">{item.title}</h3>
+                  <p className="text-[#7183A6] text-sm">{item.desc}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -433,9 +437,9 @@ export default function LandingPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-12 md:py-16 lg:py-20 px-6 lg:px-8 bg-white/5">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center mb-8 md:mb-12">Frequently Asked Questions</h2>
+      <section className="py-12 md:py-14 lg:py-16 px-4 md:px-6 bg-white/5">
+        <div className="max-w-[1100px] mx-auto">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center mb-8">Frequently Asked Questions</h2>
           
           <div className="space-y-2.5">
             {faqs.map((faq, i) => (
@@ -466,8 +470,8 @@ export default function LandingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 md:py-16 lg:py-20 px-6 lg:px-8">
-        <div className="max-w-3xl mx-auto text-center">
+      <section className="py-12 md:py-14 lg:py-16 px-4 md:px-6">
+        <div className="max-w-[1100px] mx-auto text-center">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4">Ready to Move Money Better?</h2>
           <p className="text-[#7183A6] mb-6">Join thousands of users who trust Cuboid for their cross-border payments</p>
           
@@ -475,7 +479,7 @@ export default function LandingPage() {
             <Link href="/auth/signup" className="px-6 py-3 bg-gradient-to-br from-[#0A2A66] to-[#123E91] text-white rounded-xl font-medium hover:shadow-xl transition-shadow">
               Create Free Account
             </Link>
-            <a href="https://wa.me/254700000000" className="px-6 py-3 glass rounded-xl font-medium text-white hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
+            <a href="https://wa.me/254700000000" className="px-6 py-3 bg-white/5 border border-white/10 rounded-xl font-medium text-white hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
               <MessageCircle className="w-5 h-5" /> Chat on WhatsApp
             </a>
           </div>
@@ -483,9 +487,9 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-[#0B1020] border-t border-white/10 py-10 md:py-14 lg:py-16 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8 mb-10 md:mb-12">
+      <footer className="bg-[#0B1020] border-t border-white/10 py-8 md:py-10 lg:py-12 px-4 md:px-6">
+        <div className="max-w-[1280px] mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8 mb-8 md:mb-10">
             <div className="col-span-2">
               <Link href="/" className="flex items-center gap-2 mb-4">
                 <CuboidLogo variant="mark" mode="light" width={28} height={28} />
@@ -527,7 +531,7 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <div className="pt-6 md:pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-sm text-[#7183A6]">© 2024 Cuboid Technologies. All rights reserved.</p>
             <div className="flex items-center gap-3 md:gap-4">
               <a href="https://wa.me/254700000000" className="p-2 rounded-lg bg-white/5 text-[#7183A6] hover:text-white">
