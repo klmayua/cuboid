@@ -1,45 +1,26 @@
 "use client";
 
-import { Navigation, Footer } from "@/components";
+import { Navigation } from "@/components";
 
 export default function About() {
   return (
-    <main className="min-h-screen bg-[#060D20]">
+    <main className="min-h-screen bg-obsidian">
       <Navigation />
-      <section className="pt-[96px]">
-        <div className="max-w-[1600px] mx-auto px-[80px] py-[140px]">
-          <div className="text-[12px] font-semibold tracking-[0.12em] uppercase opacity-70 text-[#6B8CFF] mb-6">
-            ABOUT
-          </div>
-          <h1 className="text-[40px] font-bold text-[rgba(255,255,255,0.96)] leading-[1.05] max-w-[20ch] mb-6">
-            Africa's institutional financial operating system
-          </h1>
-          <p className="text-[18px] text-[rgba(255,255,255,0.82)] max-w-[32ch] mb-16">
-            We build the infrastructure that powers African institutional finance.
-          </p>
-          <div className="grid grid-cols-12 gap-[32px]">
-            {[
-              { value: "$2.4B+", label: "Daily Volume" },
-              { value: "40+", label: "Currencies" },
-              { value: "847", label: "Active Corridors" },
-              { value: "99.99%", label: "Uptime SLA" },
-            ].map((s, i) => (
-              <div
-                key={i}
-                className="col-span-6 md:col-span-3 glass-panel p-8 text-center"
-              >
-                <div className="text-[48px] font-bold text-[#6B8CFF] mb-2">
-                  {s.value}
-                </div>
-                <div className="text-sm text-[rgba(255,255,255,0.62)]">
-                  {s.label}
-                </div>
+      <section className="pt-navbar">
+        <div className="max-w-container mx-auto px-gutter pt-premium_section">
+          <span className="badge-premium mb-lg block">ABOUT</span>
+          <h1 className="font-section text-pure_white mb-lg">Africa's institutional financial operating system</h1>
+          <p className="font-body text-silver_blue max-w-[32ch] mb-xxl">We build infrastructure powering African institutional finance.</p>
+          <div className="grid grid-cols-4 gap-lg">
+            {[{ v: "$2.4B+", l: "Daily Volume" }, { v: "40+", l: "Currencies" }, { v: "847", l: "Active Corridors" }, { v: "99.99%", l: "Uptime SLA" }].map((s, i) => (
+              <div key={i} className="premium_panel rounded-card p-xl text-center">
+                <div className="font-metric text-gold_soft mb-2">{s.v}</div>
+                <div className="text-muted_slate text-xs">{s.l}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
-      <Footer />
     </main>
   );
 }

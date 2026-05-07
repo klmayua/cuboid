@@ -1,13 +1,9 @@
-"use client";
-
-import { Navigation, Hero, Footer } from "@/components";
+import { Navigation, Hero } from "@/components";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#060D20]">
-      <Navigation />
+    <main>
       <Hero />
-      <Footer />
     </main>
   );
 }

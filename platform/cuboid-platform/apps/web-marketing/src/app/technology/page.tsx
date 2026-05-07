@@ -1,34 +1,32 @@
 "use client";
 
-import { Navigation, Footer } from "@/components";
-
-const techFeatures = [
-  { title: "Real-time Settlement", desc: "Sub-second settlement across all supported corridors." },
-  { title: "API-First Architecture", desc: "RESTful APIs with 99.99% availability SLA." },
-  { title: "Regulatory Integration", desc: "Direct integration with CBN, SEC, and local regulators." },
-  { title: "Multi-currency Engine", desc: "40+ African currencies with real-time pricing." }
-];
+import { Navigation } from "@/components";
 
 export default function Technology() {
   return (
-    <main className="min-h-screen bg-[#060D20]">
+    <main className="min-h-screen bg-obsidian">
       <Navigation />
-      <section className="pt-[96px]">
-        <div className="max-w-[1600px] mx-auto px-[80px] py-[140px]">
-          <div className="text-[12px] font-semibold tracking-[0.12em] uppercase opacity-70 text-[#6B8CFF] mb-6">TECHNOLOGY</div>
-          <h1 className="text-[40px] font-bold text-[rgba(255,255,255,0.96)] leading-[1.05] max-w-[20ch] mb-6">Built for institutional scale</h1>
-          <p className="text-[18px] text-[rgba(255,255,255,0.82)] max-w-[32ch] mb-16">Enterprise-grade infrastructure designed for mission-critical financial operations.</p>
-          <div className="grid grid-cols-12 gap-[32px]">
-            {techFeatures.map((f, i) => (
-              <div key={i} className="col-span-12 md:col-span-6 glass-panel p-8">
-                <h3 className="text-xl font-semibold text-[rgba(255,255,255,0.96)] mb-3">{f.title}</h3>
-                <p className="text-sm text-[rgba(255,255,255,0.62)]">{f.desc}</p>
+      <section className="pt-navbar">
+        <div className="max-w-container mx-auto px-gutter pt-premium_section">
+          <span className="badge-premium mb-lg block">TECHNOLOGY</span>
+          <h1 className="font-section text-pure_white mb-lg">Built for institutional scale</h1>
+          <p className="font-body text-silver_blue max-w-[32ch] mb-xxl">Enterprise-grade infrastructure for mission-critical operations.</p>
+          
+          <div className="grid grid-cols-2 gap-lg">
+            {[
+              { title: "Real-time Settlement", desc: "Sub-second settlement across all corridors." },
+              { title: "API-First Architecture", desc: "RESTful APIs with 99.99% SLA." },
+              { title: "Regulatory Integration", desc: "Direct integration with CBN, SEC." },
+              { title: "Multi-currency Engine", desc: "40+ African currencies." },
+            ].map((f, i) => (
+              <div key={i} className="premium_panel rounded-card p-xl">
+                <h3 className="font-card text-pure_white mb-3">{f.title}</h3>
+                <p className="text-muted_slate text-sm">{f.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
-      <Footer />
     </main>
   );
 }
