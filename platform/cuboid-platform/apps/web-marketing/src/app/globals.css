@@ -1,39 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  /* Exact colors from Stitch design */
-  --color-primary: #4fdbc8;
-  --color-primary-container: #14b8a6;
-  --color-on-primary: #003731;
-  --color-on-primary-container: #00423b;
-  --color-surface-tint: #4fdbc8;
-
-  --color-secondary: #e9c349;
-  --color-secondary-container: #af8d11;
-  --color-on-secondary: #3c2f00;
-  --color-on-secondary-container: #342800;
-
-  --color-surface: #0b1326;
-  --color-surface-container-low: #131b2e;
-  --color-surface-container: #171f33;
-  --color-surface-container-high: #222a3e;
-  --color-surface-container-highest: #2d3449;
-  --color-surface-container-lowest: #060d20;
-  --color-surface-variant: #2d3449;
-  --color-surface-bright: #31394e;
-
-  --color-on-surface: #dbe2fd;
-  --color-on-surface-variant: #bbcac6;
-  --color-on-background: #dbe2fd;
-
-  --color-outline: #859490;
-  --color-outline-variant: #3c4947;
-
-  --color-background: #0b1326;
+  --color-background: #050816;
+  --color-surface: #0D1326;
+  --color-surface-elevated: #121A33;
+  --color-primary: #5E8DFF;
+  --color-primary-dim: #5E8DFF;
+  --color-on-primary: #050816;
+  --color-text: #F5F7FF;
+  --color-muted: #A7B3D0;
+  --color-border: rgba(255, 255, 255, 0.08);
 }
 
 * {
@@ -48,32 +28,11 @@ html {
 
 body {
   font-family: 'Inter', system-ui, sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
-  background-color: #0b1326;
-  color: #dbe2fd;
+  background-color: #050816;
+  color: #F5F7FF;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Exact glass panel from design */
-.glass-panel {
-  background: rgba(11, 19, 38, 0.4);
-  backdrop-filter: blur(20px);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  border-left: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.active-glow {
-  box-shadow: 0 0 15px rgba(79, 219, 200, 0.2);
-}
-
-.gold-accent-border {
-  border: 1px solid rgba(212, 175, 55, 0.3);
-}
-
-.glass-card {
-  background: rgba(23, 31, 51, 0.4);
-  backdrop-filter: blur(20px);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  border-left: 1px solid rgba(255, 255, 255, 0.04);
+::selection {
+  background-color: rgba(94, 141, 255, 0.3);
 }
