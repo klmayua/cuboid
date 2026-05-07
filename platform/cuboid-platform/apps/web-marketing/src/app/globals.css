@@ -1,20 +1,74 @@
+/* CUBOID DESIGN SYSTEM - INSTITUTIONAL FINANCIAL OPERATING SYSTEM */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================
+   DESIGN TOKENS - DO NOT MODIFY
+   ============================================ */
+
 :root {
-  --color-background: #050816;
-  --color-surface: #0D1326;
-  --color-surface-elevated: #121A33;
-  --color-primary: #5E8DFF;
-  --color-primary-dim: #5E8DFF;
-  --color-on-primary: #050816;
-  --color-text: #F5F7FF;
-  --color-muted: #A7B3D0;
-  --color-border: rgba(255, 255, 255, 0.08);
+  /* COLORS - Deep Navy Institutional */
+  --bg-primary: #050816;
+  --bg-surface: #0D1326;
+  --bg-elevated: #121A33;
+  --bg-card: #141D32;
+  --bg-hover: #1A2540;
+  
+  --accent-primary: #5E8DFF;
+  --accent-primary-hover: #7BA4FF;
+  --accent-glow: rgba(94, 141, 255, 0.4);
+  --accent-success: #34D399;
+  --accent-warning: #FBBF24;
+  --accent-danger: #F87171;
+  
+  --text-primary: #F5F7FF;
+  --text-secondary: #A7B3D0;
+  --text-muted: #6B7A94;
+  --text-disabled: #4A5568;
+  
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-default: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  
+  /* GLASS SYSTEM */
+  --glass-surface: rgba(13, 19, 38, 0.7);
+  --glass-blur: 24px;
+  --glass-border: rgba(255, 255, 255, 0.08);
+  
+  /* TYPOGRAPHY */
+  --font-display: 'Inter', system-ui, sans-serif;
+  
+  /* SPACING */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 80px;
+  
+  /* RADIUS */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+  
+  /* SHADOWS */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 40px var(--accent-glow);
+  --shadow-glow-sm: 0 0 20px var(--accent-glow);
 }
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
 
 * {
   margin: 0;
@@ -24,15 +78,272 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 16px;
 }
 
 body {
-  font-family: 'Inter', system-ui, sans-serif;
-  background-color: #050816;
-  color: #F5F7FF;
+  font-family: var(--font-display);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
+/* ============================================
+   TYPOGRAPHY SYSTEM
+   ============================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.text-display {
+  font-size: clamp(72px, 10vw, 140px);
+  font-weight: 800;
+  line-height: 0.92;
+}
+
+.text-h1 {
+  font-size: clamp(48px, 6vw, 72px);
+  font-weight: 700;
+}
+
+.text-h2 {
+  font-size: clamp(36px, 4vw, 52px);
+  font-weight: 700;
+}
+
+.text-h3 {
+  font-size: clamp(28px, 3vw, 36px);
+  font-weight: 600;
+}
+
+.text-h4 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.text-body-lg {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+.text-body {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.text-body-sm {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.text-caption {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.text-mono {
+  font-family: 'JetBrains Mono', 'SF Mono', monospace;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* ============================================
+   GLASS & SURFACE COMPONENTS
+   ============================================ */
+
+.glass {
+  background: var(--glass-surface);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+}
+
+.glass-card {
+  background: linear-gradient(135deg, rgba(20, 29, 50, 0.8) 0%, rgba(18, 26, 51, 0.9) 100%);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+}
+
+.glass-panel {
+  background: rgba(13, 19, 38, 0.6);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+}
+
+/* ============================================
+   BUTTON SYSTEM
+   ============================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  border-radius: var(--radius-lg);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.btn-primary {
+  height: 56px;
+  padding: 0 32px;
+  background: var(--accent-primary);
+  color: var(--bg-primary);
+  font-size: 16px;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.1);
+  box-shadow: var(--shadow-glow);
+}
+
+.btn-secondary {
+  height: 56px;
+  padding: 0 32px;
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-default);
+  font-size: 16px;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--border-strong);
+}
+
+.btn-ghost {
+  padding: 12px 20px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.btn-ghost:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* ============================================
+   INPUT SYSTEM
+   ============================================ */
+
+.input {
+  width: 100%;
+  height: 56px;
+  padding: 0 20px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 16px;
+  transition: all 0.2s ease;
+}
+
+.input::placeholder {
+  color: var(--text-muted);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(94, 141, 255, 0.15);
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+.container-main {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 var(--space-4xl);
+}
+
+.section-py {
+  padding-top: 140px;
+  padding-bottom: 140px;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.grid-pattern {
+  background-image: 
+    linear-gradient(rgba(94, 141, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(94, 141, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.glow-primary {
+  box-shadow: var(--shadow-glow-sm);
+}
+
+.animate-pulse-slow {
+  animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-elevated);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--bg-hover);
+}
+
+/* ============================================
+   SELECTION & FOCUS
+   ============================================ */
+
 ::selection {
-  background-color: rgba(94, 141, 255, 0.3);
+  background: rgba(94, 141, 255, 0.3);
+  color: var(--text-primary);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   ANIMATION TRANSITIONS
+   ============================================ */
+
+.transition-base {
+  transition: all 0.2s ease;
+}
+
+.transition-smooth {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
