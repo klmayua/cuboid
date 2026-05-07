@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CUBOID FX | Network Health</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#6bd8cb",
+                    "on-secondary-container": "#342800",
+                    "tertiary-container": "#44b5a8",
+                    "on-secondary": "#3c2f00",
+                    "on-primary-container": "#00423b",
+                    "on-error": "#690005",
+                    "surface-container": "#171f33",
+                    "on-primary-fixed-variant": "#005048",
+                    "tertiary-fixed": "#89f5e7",
+                    "on-tertiary-fixed-variant": "#005049",
+                    "outline": "#859490",
+                    "surface-container-low": "#131b2e",
+                    "inverse-on-surface": "#283044",
+                    "error": "#ffb4ab",
+                    "on-primary-fixed": "#00201c",
+                    "surface-container-lowest": "#060d20",
+                    "secondary-container": "#af8d11",
+                    "error-container": "#93000a",
+                    "primary-fixed-dim": "#4fdbc8",
+                    "surface-bright": "#31394e",
+                    "surface-dim": "#0b1326",
+                    "secondary-fixed-dim": "#e9c349",
+                    "outline-variant": "#3c4947",
+                    "surface-variant": "#2d3449",
+                    "surface-container-highest": "#2d3449",
+                    "on-surface-variant": "#bbcac6",
+                    "surface-container-high": "#222a3e",
+                    "on-secondary-fixed": "#241a00",
+                    "surface": "#0b1326",
+                    "inverse-surface": "#dbe2fd",
+                    "on-background": "#dbe2fd",
+                    "secondary-fixed": "#ffe088",
+                    "secondary": "#e9c349",
+                    "primary": "#4fdbc8",
+                    "primary-container": "#14b8a6",
+                    "primary-fixed": "#71f8e4",
+                    "on-surface": "#dbe2fd",
+                    "on-tertiary": "#003732",
+                    "background": "#0b1326",
+                    "on-secondary-fixed-variant": "#574500",
+                    "on-tertiary-fixed": "#00201d",
+                    "tertiary": "#6bd8cb",
+                    "inverse-primary": "#006b5f",
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary-container": "#00423c",
+                    "surface-tint": "#4fdbc8",
+                    "on-primary": "#003731"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "container-max": "1600px",
+                    "unit": "4px",
+                    "gutter": "16px",
+                    "margin": "32px",
+                    "density": "compact"
+            },
+            "fontFamily": {
+                    "body-base": ["Inter"],
+                    "data-mono": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "headline-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-base": ["14px", {"lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "data-mono": ["13px", {"lineHeight": "1.0", "letterSpacing": "0em", "fontWeight": "500"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(11, 19, 38, 0.1);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-left: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .heatmap-bar {
+            width: 3px;
+            height: 24px;
+            border-radius: 1px;
+        }
+        .institutional-shadow {
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+        .scrolling-content::-webkit-scrollbar {
+            width: 4px;
+        }
+        .scrolling-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .scrolling-content::-webkit-scrollbar-thumb {
+            background: rgba(79, 219, 200, 0.2);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-base selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin h-16 bg-surface/5 bg-surface/10 backdrop-blur-[20px] border-b border-outline-variant/20 shadow-sm">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3">
+<img alt="CUBOID Logo" class="h-8" src="https://lh3.googleusercontent.com/aida/ADBb0ujKT08f8hrmN89H8EX9TWr04ydyIJekqTG-ziBTZ1zfQinT9qh14kyRW_pkGNDGD5QDfumjysgZ5rN6q1TU3xBPJNwhQ6HXiqQ_wVNJwdzHb5L2Ui_Br73Kr9bW76e8tGK-s5TBCLkN4yyAdr9d6IEICp02IBJcBhDeQDQkpiPNNg159F8vIe8WcJBNfBRGk82pb_z6z2Am5uOe-w2hhknGkHvgW22x9nn1FCTwcUzl78wjjE0_WGPlAJ3d3JX0GCy3dqAXfqDiIg"/>
+<span class="font-display-lg text-headline-md font-bold text-primary tracking-tight">CUBOID FX</span>
+</div>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Network</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">Transparency</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Investors</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Compliance</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Regulator</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden lg:flex items-center bg-surface-container-high px-3 py-1.5 rounded-full border border-outline-variant/30">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-base placeholder:text-on-surface-variant/50 w-48" placeholder="Search hash or node..." type="text"/>
+</div>
+<div class="flex items-center gap-3">
+<button class="text-on-surface-variant hover:text-primary p-1.5 transition-all"><span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span></button>
+<button class="text-on-surface-variant hover:text-primary p-1.5 transition-all"><span class="material-symbols-outlined" data-icon="public">public</span></button>
+<button class="bg-primary text-on-primary px-4 py-1.5 rounded-full font-label-sm text-label-sm hover:opacity-90 transition-opacity">Secure Login</button>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen w-64 z-40 flex flex-col pt-20 bg-surface-container-low/10 backdrop-blur-[40px] border-r border-outline-variant/30 shadow-xl hidden lg:flex">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3 p-3 bg-surface-variant/20 rounded-xl border border-outline-variant/10">
+<div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-on-secondary font-bold text-xs">RI</div>
+<div>
+<div class="font-headline-md text-[14px] leading-tight text-secondary">Regulator Portal</div>
+<div class="font-label-sm text-[10px] text-on-surface-variant">CUBOID FX Institutional</div>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="text-on-surface-variant flex items-center px-6 py-3 hover:bg-surface-variant/10 group transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-4 group-hover:text-secondary" data-icon="monitoring">monitoring</span>
+<span class="font-label-sm text-label-sm">Flows</span>
+</a>
+<a class="bg-secondary-container/20 text-secondary border-r-2 border-secondary flex items-center px-6 py-3 translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="analytics" data-weight="fill" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="font-label-sm text-label-sm">Metrics</span>
+</a>
+<a class="text-on-surface-variant flex items-center px-6 py-3 hover:bg-surface-variant/10 group transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-4 group-hover:text-secondary" data-icon="warning">warning</span>
+<span class="font-label-sm text-label-sm">Alerts</span>
+</a>
+<a class="text-on-surface-variant flex items-center px-6 py-3 hover:bg-surface-variant/10 group transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-4 group-hover:text-secondary" data-icon="verified_user">verified_user</span>
+<span class="font-label-sm text-label-sm">Compliance</span>
+</a>
+<a class="text-on-surface-variant flex items-center px-6 py-3 hover:bg-surface-variant/10 group transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-4 group-hover:text-secondary" data-icon="account_tree">account_tree</span>
+<span class="font-label-sm text-label-sm">Ledger</span>
+</a>
+</nav>
+<div class="p-6 mt-auto">
+<button class="w-full bg-secondary-container text-on-secondary-container py-2.5 rounded-lg font-label-sm text-label-sm flex items-center justify-center gap-2 mb-6 hover:opacity-90">
+<span class="material-symbols-outlined text-sm" data-icon="file_download">file_download</span>
+                Export Report
+            </button>
+<div class="space-y-1">
+<a class="text-on-surface-variant flex items-center py-2 text-xs hover:text-secondary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px] mr-3" data-icon="settings">settings</span>
+                    Settings
+                </a>
+<a class="text-on-surface-variant flex items-center py-2 text-xs hover:text-secondary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px] mr-3" data-icon="contact_support">contact_support</span>
+                    Support
+                </a>
+</div>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="lg:ml-64 pt-20 px-margin pb- margin min-h-screen">
+<!-- Hero Section: System Status -->
+<section class="flex flex-col md:flex-row items-center gap-8 mb-10 py-8">
+<div class="relative">
+<div class="w-32 h-32 rounded-full glass-panel flex items-center justify-center border border-secondary/30 institutional-shadow">
+<span class="material-symbols-outlined text-secondary text-5xl" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="absolute inset-0 rounded-full border border-secondary/20 animate-pulse"></div>
+</div>
+<div class="text-center md:text-left">
+<div class="flex items-center justify-center md:justify-start gap-3 mb-2">
+<h1 class="font-display-lg text-headline-md text-primary-fixed uppercase tracking-widest">SYSTEM OPERATIONAL</h1>
+<span class="w-2 h-2 rounded-full bg-primary-container shadow-[0_0_8px_rgba(20,184,166,0.6)]"></span>
+</div>
+<p class="text-on-surface-variant font-label-sm tracking-wide">GLOBAL NETWORK UPTIME (LAST 24H)</p>
+<div class="text-4xl md:text-6xl font-display-lg text-primary tracking-tighter">99.9994%</div>
+</div>
+<div class="md:ml-auto grid grid-cols-2 gap-4">
+<div class="glass-panel p-4 rounded-xl border border-outline-variant/10 min-w-[140px]">
+<div class="text-on-surface-variant text-[10px] uppercase font-bold mb-1">Avg. Latency</div>
+<div class="text-primary font-display-lg text-headline-md">14ms</div>
+</div>
+<div class="glass-panel p-4 rounded-xl border border-outline-variant/10 min-w-[140px]">
+<div class="text-on-surface-variant text-[10px] uppercase font-bold mb-1">Throughput</div>
+<div class="text-primary font-display-lg text-headline-md">42k <span class="text-xs opacity-60">TPS</span></div>
+</div>
+</div>
+</section>
+<!-- Main Content Grid -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-gutter">
+<!-- Left Column: Regional Clusters -->
+<div class="xl:col-span-8 space-y-gutter">
+<div class="glass-panel rounded-xl p-6 border border-outline-variant/10">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline-md text-on-surface">Regional Node Clusters</h2>
+<div class="flex gap-2">
+<span class="flex items-center gap-1.5 text-[10px] text-on-surface-variant"><span class="w-2 h-2 rounded-sm bg-primary-container"></span> Operational</span>
+<span class="flex items-center gap-1.5 text-[10px] text-on-surface-variant"><span class="w-2 h-2 rounded-sm bg-secondary"></span> Partial</span>
+<span class="flex items-center gap-1.5 text-[10px] text-on-surface-variant"><span class="w-2 h-2 rounded-sm bg-error"></span> Downtime</span>
+</div>
+</div>
+<!-- Region: Americas -->
+<div class="mb-8">
+<div class="flex justify-between items-end mb-2">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-on-surface">AMERICAS</span>
+<span class="text-[10px] text-primary px-1.5 py-0.5 rounded border border-primary/20 bg-primary/5 uppercase">Healthy</span>
+</div>
+<span class="text-[11px] font-data-mono text-on-surface-variant">100.0% Uptime</span>
+</div>
+<div class="flex gap-[1px] h-6">
+<!-- Heatmap simulation -->
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-secondary h-full rounded-sm opacity-90"></div> <!-- Small glitch -->
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+</div>
+</div>
+<!-- Region: EMEA -->
+<div class="mb-8">
+<div class="flex justify-between items-end mb-2">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-on-surface">EMEA</span>
+<span class="text-[10px] text-secondary px-1.5 py-0.5 rounded border border-secondary/20 bg-secondary/5 uppercase">Degraded Performance</span>
+</div>
+<span class="text-[11px] font-data-mono text-on-surface-variant">99.8% Uptime</span>
+</div>
+<div class="flex gap-[1px] h-6">
+<!-- Heatmap simulation -->
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-error h-full rounded-sm opacity-90"></div> <!-- Issue -->
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+</div>
+</div>
+<!-- Region: APAC -->
+<div class="mb-4">
+<div class="flex justify-between items-end mb-2">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-on-surface">APAC</span>
+<span class="text-[10px] text-primary px-1.5 py-0.5 rounded border border-primary/20 bg-primary/5 uppercase">Healthy</span>
+</div>
+<span class="text-[11px] font-data-mono text-on-surface-variant">99.99% Uptime</span>
+</div>
+<div class="flex gap-[1px] h-6">
+<!-- Heatmap simulation -->
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+<div class="flex-1 bg-primary-container h-full rounded-sm opacity-90"></div>
+</div>
+</div>
+</div>
+<!-- Incident History -->
+<div class="glass-panel rounded-xl border border-outline-variant/10 overflow-hidden">
+<div class="px-6 py-4 border-b border-outline-variant/20 flex justify-between items-center bg-surface-container/30">
+<h2 class="font-headline-md text-on-surface">Incident History</h2>
+<span class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest">Q3 2024 Audit</span>
+</div>
+<div class="divide-y divide-outline-variant/10">
+<div class="p-4 flex gap-6 hover:bg-surface-variant/5 transition-colors">
+<div class="text-on-surface-variant font-data-mono text-[12px] pt-1">AUG 24</div>
+<div>
+<h3 class="font-label-sm text-secondary mb-1">Scheduled Maintenance: APAC Gateway Update</h3>
+<p class="text-body-base text-[13px] text-on-surface-variant">Core relay nodes in Singapore were successfully migrated to high-capacity infrastructure. Zero customer impact recorded during the window.</p>
+<div class="flex gap-2 mt-2">
+<span class="text-[10px] bg-primary-container/10 text-primary-fixed-dim px-2 py-0.5 rounded border border-primary/20">Resolved</span>
+</div>
+</div>
+</div>
+<div class="p-4 flex gap-6 hover:bg-surface-variant/5 transition-colors">
+<div class="text-on-surface-variant font-data-mono text-[12px] pt-1">AUG 12</div>
+<div>
+<h3 class="font-label-sm text-error mb-1">Partial Outage: Latency Spikes (US-East-1)</h3>
+<p class="text-body-base text-[13px] text-on-surface-variant">Intermittent connectivity issues reported between bridge interfaces and custodial nodes. Rerouted traffic through Backup Cluster B.</p>
+<div class="flex gap-2 mt-2">
+<span class="text-[10px] bg-primary-container/10 text-primary-fixed-dim px-2 py-0.5 rounded border border-primary/20">Resolved</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Live Activity Feed -->
+<div class="xl:col-span-4 h-full">
+<div class="glass-panel rounded-xl border border-outline-variant/10 h-[640px] flex flex-col">
+<div class="p-4 border-b border-outline-variant/20 bg-surface-container/30">
+<div class="flex items-center gap-2 mb-1">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<h2 class="font-headline-md text-on-surface text-lg">Live Activity Feed</h2>
+</div>
+<p class="text-[11px] text-on-surface-variant">Real-time infrastructure ledger telemetry</p>
+</div>
+<div class="flex-1 overflow-y-auto scrolling-content p-4 space-y-4">
+<!-- Activity Entry 1 -->
+<div class="p-3 bg-surface-container-high/40 rounded border border-outline-variant/5">
+<div class="flex justify-between items-center mb-2">
+<span class="text-[10px] font-bold text-primary tracking-tighter uppercase">Block Verification</span>
+<span class="text-[10px] font-data-mono text-on-surface-variant">2s ago</span>
+</div>
+<div class="text-[12px] font-data-mono text-on-surface mb-1 truncate">ID: 0x82...BF920</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-primary" data-icon="verified" data-weight="fill" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="text-[11px] text-on-surface-variant">Consensus achieved across 92 nodes</span>
+</div>
+</div>
+<!-- Activity Entry 2 -->
+<div class="p-3 bg-surface-container-high/40 rounded border border-outline-variant/5">
+<div class="flex justify-between items-center mb-2">
+<span class="text-[10px] font-bold text-secondary tracking-tighter uppercase">Security Rotation</span>
+<span class="text-[10px] font-data-mono text-on-surface-variant">45s ago</span>
+</div>
+<div class="text-[12px] text-on-surface mb-1">Rotating Encryption Keys</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-secondary" data-icon="key">key</span>
+<span class="text-[11px] text-on-surface-variant">Quantum-resistant cycle #8821</span>
+</div>
+</div>
+<!-- Activity Entry 3 -->
+<div class="p-3 bg-surface-container-high/40 rounded border border-outline-variant/5">
+<div class="flex justify-between items-center mb-2">
+<span class="text-[10px] font-bold text-tertiary tracking-tighter uppercase">Bridge Reconciliation</span>
+<span class="text-[10px] font-data-mono text-on-surface-variant">1m ago</span>
+</div>
+<div class="text-[12px] text-on-surface mb-1">Asset Bridging Event</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-tertiary" data-icon="account_tree">account_tree</span>
+<span class="text-[11px] text-on-surface-variant">802.4 ETH verified at L2 ingress</span>
+</div>
+</div>
+<!-- Activity Entry 4 (Repetition for scroll demo) -->
+<div class="p-3 bg-surface-container-high/40 rounded border border-outline-variant/5">
+<div class="flex justify-between items-center mb-2">
+<span class="text-[10px] font-bold text-primary tracking-tighter uppercase">Block Verification</span>
+<span class="text-[10px] font-data-mono text-on-surface-variant">3m ago</span>
+</div>
+<div class="text-[12px] font-data-mono text-on-surface mb-1 truncate">ID: 0x11...CC02A</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-primary" data-icon="verified" data-weight="fill" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="text-[11px] text-on-surface-variant">Consensus achieved across 94 nodes</span>
+</div>
+</div>
+<!-- Activity Entry 5 -->
+<div class="p-3 bg-surface-container-high/40 rounded border border-outline-variant/5 opacity-60">
+<div class="flex justify-between items-center mb-2">
+<span class="text-[10px] font-bold text-on-surface-variant tracking-tighter uppercase">Network Sync</span>
+<span class="text-[10px] font-data-mono text-on-surface-variant">8m ago</span>
+</div>
+<div class="text-[12px] text-on-surface mb-1">Archive Node Catch-up</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant" data-icon="sync">sync</span>
+<span class="text-[11px] text-on-surface-variant">Block height parity: 19,203,812</span>
+</div>
+</div>
+</div>
+<div class="p-3 border-t border-outline-variant/20">
+<button class="w-full text-[11px] font-bold text-primary text-center uppercase tracking-widest py-2 hover:bg-primary/5 rounded transition-all">View Full Network Ledger</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Map/Infrastructure Background Image (Conceptual) -->
+<div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none opacity-20">
+<img class="w-full h-full object-cover grayscale" data-alt="A sophisticated dark network topology map with glowing teal lines connecting international data centers across a futuristic world map. The aesthetic is institutional, high-tech, and secure, featuring subtle data-driven overlays and a premium matte finish with deep shadows and sharp glass-like reflections." src="https://lh3.googleusercontent.com/aida-public/AB6AXuByS1Qk_K-7sT7uPAGX1w-L09VtpzuLCgChN17zHcEsfgC8lRXgjncdceE-7KAfydtmhKDd8BBQY4iYRmfnucDM-jHcvFL7ICiOuMnP4DL4T7jw-CvmAc8NfXEVgKbMWqSnSTwkktDnNvvNcc2q2Qg2Z7nFFmPmQJGCEvXzAsLDKrip_JKu9XxA3uES541DRq6UFqlFuUZ9aWq8GS5g8SMGlnXGD1i1DdPLzzvjcfK9fHSPLPjGOyVciZA6ZHNGqh0VabIt1X1CNe4"/>
+</div>
+<!-- Footer -->
+<footer class="w-full py-gutter px-margin flex flex-col md:flex-row justify-between items-center gap-4 border-t border-outline-variant/10 bg-surface-container-lowest mt-12 relative z-10">
+<div class="flex flex-col items-center md:items-start">
+<span class="font-display-lg text-primary text-lg font-bold mb-1">CUBOID FX</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">© 2024 CUBOID FX NETWORK. INSTITUTIONAL GRADE LIQUIDITY.</span>
+</div>
+<div class="flex gap-8">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Network Status</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Terms of Access</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Privacy Protocol</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">API Docs</a>
+</div>
+</footer>
+</body></html>

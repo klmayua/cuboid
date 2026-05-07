@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FX Institutional Portal - Secure Access</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#6bd8cb",
+                        "primary-container": "#14b8a6",
+                        "on-secondary-container": "#342800",
+                        "tertiary": "#6bd8cb",
+                        "surface-container-low": "#131b2e",
+                        "on-secondary-fixed-variant": "#574500",
+                        "primary-fixed": "#71f8e4",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-lowest": "#060d20",
+                        "surface-tint": "#4fdbc8",
+                        "on-surface": "#dbe2fd",
+                        "inverse-surface": "#dbe2fd",
+                        "inverse-on-surface": "#283044",
+                        "on-primary": "#003731",
+                        "outline-variant": "#3c4947",
+                        "surface-container-high": "#222a3e",
+                        "on-tertiary-fixed-variant": "#005049",
+                        "secondary-container": "#af8d11",
+                        "surface-bright": "#31394e",
+                        "on-tertiary-container": "#00423c",
+                        "surface-container-highest": "#2d3449",
+                        "on-secondary": "#3c2f00",
+                        "surface-dim": "#0b1326",
+                        "tertiary-container": "#44b5a8",
+                        "outline": "#859490",
+                        "on-tertiary": "#003732",
+                        "error-container": "#93000a",
+                        "secondary-fixed": "#ffe088",
+                        "on-surface-variant": "#bbcac6",
+                        "on-secondary-fixed": "#241a00",
+                        "on-primary-container": "#00423b",
+                        "tertiary-fixed": "#89f5e7",
+                        "surface-variant": "#2d3449",
+                        "on-background": "#dbe2fd",
+                        "inverse-primary": "#006b5f",
+                        "on-primary-fixed": "#00201c",
+                        "surface": "#0b1326",
+                        "error": "#ffb4ab",
+                        "background": "#0b1326",
+                        "secondary-fixed-dim": "#e9c349",
+                        "secondary": "#e9c349",
+                        "on-primary-fixed-variant": "#005048",
+                        "on-tertiary-fixed": "#00201d",
+                        "surface-container": "#171f33",
+                        "on-error": "#690005",
+                        "primary": "#4fdbc8",
+                        "primary-fixed-dim": "#4fdbc8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "container-max": "1600px",
+                        "unit": "4px",
+                        "margin": "32px",
+                        "density": "compact"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-base": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "data-mono": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-base": ["14px", {"lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "data-mono": ["13px", {"lineHeight": "1.0", "letterSpacing": "0em", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-refraction {
+            background: radial-gradient(circle at 20% 20%, rgba(79, 219, 200, 0.05) 0%, transparent 40%),
+                        radial-gradient(circle at 80% 80%, rgba(233, 195, 73, 0.03) 0%, transparent 40%);
+        }
+        .institutional-glass {
+            backdrop-filter: blur(20px);
+            background: rgba(19, 27, 46, 0.6);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .active-toggle-glow {
+            box-shadow: 0 0 15px rgba(79, 219, 200, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-base overflow-hidden flex flex-col items-center justify-center relative">
+<!-- Background Layers -->
+<div class="fixed inset-0 z-0 bg-surface-dim glass-refraction"></div>
+<div class="fixed inset-0 z-0 opacity-20 pointer-events-none" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAPZ3uSN1qFIGxDnDXSPN9KOMqU3EjH_Ds5N05ZGv4m5M0ypjp4HW4Mos32XJOxe69EMc3D5l3EhAWsBP2A2ZanMmglbn-_coWGbt05QyWQY_YdaUX6PZDE5vqL0XHjYLHb9PZBOp0D7PHV8RkWjAVdLSIVxdhvMESIio7V8OTf7WroucqFtSUVEwampPoQk5-oZLjZ05YC4SmUc0r_kCDqAZe31f-BDCTsYiyV0-Takl_8bu2xO9oBN96iHQt9gvCsas7XZA9B8aA');"></div>
+<!-- Main Content Canvas -->
+<main class="relative z-10 w-full max-w-[1200px] grid grid-cols-12 gap-gutter px-margin items-center">
+<!-- Left Side: Branding & Context -->
+<div class="col-span-12 lg:col-span-6 flex flex-col space-y-8 pr-12 hidden lg:flex">
+<div class="flex items-center space-x-4">
+<img alt="CUBOID Logo" class="h-12 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0ujKT08f8hrmN89H8EX9TWr04ydyIJekqTG-ziBTZ1zfQinT9qh14kyRW_pkGNDGD5QDfumjysgZ5rN6q1TU3xBPJNwhQ6HXiqQ_wVNJwdzHb5L2Ui_Br73Kr9bW76e8tGK-s5TBCLkN4yyAdr9d6IEICp02IBJcBhDeQDQkpiPNNg159F8vIe8WcJBNfBRGk82pb_z6z2Am5uOe-w2hhknGkHvgW22x9nn1FCTwcUzl78wjjE0_WGPlAJ3d3JX0GCy3dqAXfqDiIg"/>
+<div class="h-8 w-px bg-outline-variant"></div>
+<span class="font-headline-md text-headline-md text-primary tracking-tight">Institutional Portal</span>
+</div>
+<div class="space-y-4">
+<h1 class="font-display-lg text-display-lg text-on-surface leading-tight">
+                    Secure <span class="text-secondary">Gateway</span> for Global Markets
+                </h1>
+<p class="text-on-surface-variant font-body-base max-w-md">
+                    Access the high-performance FX liquidity pool and multi-asset desk. Engineered for institutional transparency and execution speed.
+                </p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-4 rounded-xl institutional-glass border border-white/5 space-y-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">security</span>
+<p class="font-label-sm text-label-sm text-on-surface">AES-256 Encryption</p>
+</div>
+<div class="p-4 rounded-xl institutional-glass border border-white/5 space-y-2">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">speed</span>
+<p class="font-label-sm text-label-sm text-on-surface">Sub-ms Execution</p>
+</div>
+</div>
+</div>
+<!-- Right Side: Login Card -->
+<div class="col-span-12 lg:col-span-6 flex justify-center lg:justify-end">
+<div class="w-full max-w-[440px] institutional-glass p-10 rounded-xl shadow-2xl relative overflow-hidden">
+<!-- Sheen effect -->
+<div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+<!-- Logo for mobile -->
+<div class="lg:hidden flex justify-center mb-8">
+<img alt="CUBOID Logo" class="h-10 w-auto" src="https://lh3.googleusercontent.com/aida/ADBb0ujKT08f8hrmN89H8EX9TWr04ydyIJekqTG-ziBTZ1zfQinT9qh14kyRW_pkGNDGD5QDfumjysgZ5rN6q1TU3xBPJNwhQ6HXiqQ_wVNJwdzHb5L2Ui_Br73Kr9bW76e8tGK-s5TBCLkN4yyAdr9d6IEICp02IBJcBhDeQDQkpiPNNg159F8vIe8WcJBNfBRGk82pb_z6z2Am5uOe-w2hhknGkHvgW22x9nn1FCTwcUzl78wjjE0_WGPlAJ3d3JX0GCy3dqAXfqDiIg"/>
+</div>
+<div class="mb-10">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2">Secure Login</h2>
+<p class="text-on-surface-variant text-label-sm font-label-sm uppercase tracking-widest">Global Institutional Access</p>
+</div>
+<!-- Role Selection Toggle -->
+<div class="bg-surface-container-low p-1 rounded-lg flex mb-8 border border-white/5">
+<button class="flex-1 py-3 px-2 rounded-md font-label-sm text-label-sm bg-primary-container text-on-primary-container shadow-lg active-toggle-glow transition-all">
+                        Institutional Partner
+                    </button>
+<button class="flex-1 py-3 px-2 rounded-md font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors">
+                        Independent Broker
+                    </button>
+</div>
+<!-- Form Fields -->
+<form class="space-y-6">
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant ml-1">Authentication Method</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-primary text-[20px]">phone_android</span>
+<input class="w-full bg-surface-container-highest/30 border border-outline-variant rounded-lg py-4 pl-12 pr-4 text-on-surface font-body-base focus:ring-1 focus:ring-primary focus:border-primary transition-all outline-none" placeholder="Phone Number / Portal ID" type="text"/>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-center px-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Security Key</label>
+<a class="font-label-sm text-label-sm text-primary hover:underline transition-all" href="#">Request OTP</a>
+</div>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-primary text-[20px]">lock</span>
+<input class="w-full bg-surface-container-highest/30 border border-outline-variant rounded-lg py-4 pl-12 pr-4 text-on-surface font-body-base focus:ring-1 focus:ring-primary focus:border-primary transition-all outline-none" placeholder="••••••••••••" type="password"/>
+</div>
+</div>
+<!-- MFA Notice -->
+<div class="flex items-start space-x-3 p-3 bg-primary/5 rounded-lg border border-primary/10">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">verified_user</span>
+<p class="text-[11px] leading-relaxed text-on-surface-variant">
+                            Multi-Factor Authentication is active. You may be prompted for a hardware key or biometric verification upon submission.
+                        </p>
+</div>
+<button class="w-full bg-gradient-to-r from-primary to-primary-container text-on-primary py-4 rounded-lg font-headline-md text-headline-md hover:opacity-90 transition-all shadow-lg shadow-primary/10 active:scale-[0.98]" type="submit">
+                        Authorize Session
+                    </button>
+</form>
+<div class="mt-10 pt-8 border-t border-white/5 flex flex-col items-center space-y-4">
+<p class="text-on-surface-variant text-[12px]">Need technical assistance?</p>
+<div class="flex space-x-6">
+<a class="flex items-center space-x-2 text-on-surface-variant hover:text-secondary transition-colors font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">support_agent</span>
+<span>Institutional Desk</span>
+</a>
+<a class="flex items-center space-x-2 text-on-surface-variant hover:text-secondary transition-colors font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">key</span>
+<span>Reset Credentials</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Security Banner -->
+<footer class="fixed bottom-0 left-0 w-full p-6 flex justify-between items-center z-10 px-margin">
+<div class="flex items-center space-x-6 text-on-surface-variant/40">
+<span class="font-label-sm text-label-sm">SEC REGULATED</span>
+<span class="font-label-sm text-label-sm">GDPR COMPLIANT</span>
+<span class="font-label-sm text-label-sm">ISO 27001</span>
+</div>
+<div class="flex items-center space-x-2 text-on-surface-variant/40">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span class="font-label-sm text-label-sm">Node: SG-WEST-01</span>
+</div>
+</footer>
+<!-- Decorative Refraction Elements -->
+<div class="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-primary/5 blur-[120px] pointer-events-none"></div>
+<div class="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] rounded-full bg-secondary/5 blur-[100px] pointer-events-none"></div>
+</body></html>

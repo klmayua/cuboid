@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CUBOID FX | Institutional Trust</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#6bd8cb",
+                        "on-secondary-container": "#342800",
+                        "tertiary-container": "#44b5a8",
+                        "on-secondary": "#3c2f00",
+                        "on-primary-container": "#00423b",
+                        "on-error": "#690005",
+                        "surface-container": "#171f33",
+                        "on-primary-fixed-variant": "#005048",
+                        "tertiary-fixed": "#89f5e7",
+                        "on-tertiary-fixed-variant": "#005049",
+                        "outline": "#859490",
+                        "surface-container-low": "#131b2e",
+                        "inverse-on-surface": "#283044",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed": "#00201c",
+                        "surface-container-lowest": "#060d20",
+                        "secondary-container": "#af8d11",
+                        "error-container": "#93000a",
+                        "primary-fixed-dim": "#4fdbc8",
+                        "surface-bright": "#31394e",
+                        "surface-dim": "#0b1326",
+                        "secondary-fixed-dim": "#e9c349",
+                        "outline-variant": "#3c4947",
+                        "surface-variant": "#2d3449",
+                        "surface-container-highest": "#2d3449",
+                        "on-surface-variant": "#bbcac6",
+                        "surface-container-high": "#222a3e",
+                        "on-secondary-fixed": "#241a00",
+                        "surface": "#0b1326",
+                        "inverse-surface": "#dbe2fd",
+                        "on-background": "#dbe2fd",
+                        "secondary-fixed": "#ffe088",
+                        "secondary": "#e9c349",
+                        "primary": "#4fdbc8",
+                        "primary-container": "#14b8a6",
+                        "primary-fixed": "#71f8e4",
+                        "on-surface": "#dbe2fd",
+                        "on-tertiary": "#003732",
+                        "background": "#0b1326",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-tertiary-fixed": "#00201d",
+                        "tertiary": "#6bd8cb",
+                        "inverse-primary": "#006b5f",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-container": "#00423c",
+                        "surface-tint": "#4fdbc8",
+                        "on-primary": "#003731"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-max": "1600px",
+                        "unit": "4px",
+                        "gutter": "16px",
+                        "margin": "32px",
+                        "density": "compact"
+                    },
+                    "fontFamily": {
+                        "body-base": ["Inter"],
+                        "data-mono": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-base": ["14px", {"lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "data-mono": ["13px", {"lineHeight": "1.0", "letterSpacing": "0em", "fontWeight": "500"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0b1326;
+            background-image: radial-gradient(circle at 50% 0%, rgba(20, 184, 166, 0.08) 0%, transparent 50%);
+            color: #dbe2fd;
+        }
+        .glass-card {
+            backdrop-filter: blur(20px);
+            background: rgba(23, 31, 51, 0.4);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-left: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .gold-accent-border {
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        .institutional-gradient {
+            background: linear-gradient(135deg, #14b8a6 0%, #006b5f 100%);
+        }
+        .grid-pattern {
+            background-image: linear-gradient(rgba(79, 219, 200, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(79, 219, 200, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+<body class="font-body-base text-body-base overflow-x-hidden">
+<!-- TopNavBar from Shared Components -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin h-16 bg-surface/5 bg-surface/10 backdrop-blur-[20px] border-b border-outline-variant/20 shadow-sm">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2">
+<img alt="CUBOID Logo" class="h-8 w-auto" src="https://lh3.googleusercontent.com/aida/ADBb0ujKT08f8hrmN89H8EX9TWr04ydyIJekqTG-ziBTZ1zfQinT9qh14kyRW_pkGNDGD5QDfumjysgZ5rN6q1TU3xBPJNwhQ6HXiqQ_wVNJwdzHb5L2Ui_Br73Kr9bW76e8tGK-s5TBCLkN4yyAdr9d6IEICp02IBJcBhDeQDQkpiPNNg159F8vIe8WcJBNfBRGk82pb_z6z2Am5uOe-w2hhknGkHvgW22x9nn1FCTwcUzl78wjjE0_WGPlAJ3d3JX0GCy3dqAXfqDiIg"/>
+<span class="font-display-lg text-headline-md font-bold text-primary dark:text-primary tracking-tight">CUBOID FX</span>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-sm text-label-sm" href="#">Ecosystem</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300 font-label-sm text-label-sm" href="#">Network</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300 font-label-sm text-label-sm" href="#">Transparency</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300 font-label-sm text-label-sm" href="#">Investors</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300 font-label-sm text-label-sm" href="#">Compliance</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="public">public</span>
+</button>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-lg font-bold text-label-sm transition-all hover:scale-105 active:scale-95">
+                Secure Login
+            </button>
+</div>
+</header>
+<main class="pt-16">
+<!-- Hero Section -->
+<section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden grid-pattern">
+<div class="absolute inset-0 bg-gradient-to-b from-surface/0 via-surface/80 to-surface"></div>
+<div class="relative z-10 max-w-5xl mx-auto px-margin text-center">
+<div class="inline-flex items-center gap-2 px-4 py-1 glass-card gold-accent-border rounded-full mb-8">
+<span class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_#e9c349]"></span>
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">Network Status: Operational</span>
+</div>
+<h1 class="font-display-lg text-[64px] leading-tight mb-6 text-on-surface tracking-tighter">
+                    The Future of <span class="text-primary">Institutional Trust.</span>
+</h1>
+<p class="font-body-base text-lg text-on-surface-variant max-w-2xl mx-auto mb-12 leading-relaxed">
+                    Engineer for the demands of modern financial hegemony. <br/>
+                    Cryptographic integrity at global scale. Secure. Verifiable. Limitless.
+                </p>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+<button class="w-full sm:w-auto institutional-gradient text-on-primary font-bold px-8 py-4 rounded-xl shadow-xl transition-all hover:brightness-110 active:scale-95">
+                        Request Institutional Access
+                    </button>
+<button class="w-full sm:w-auto glass-card border border-outline/20 text-on-surface font-bold px-8 py-4 rounded-xl transition-all hover:bg-surface-variant/20 active:scale-95">
+                        Explore Ecosystem
+                    </button>
+</div>
+</div>
+<!-- Abstract Background Visual -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 blur-[120px] rounded-full -z-10"></div>
+</section>
+<!-- Network Stats Bento Grid -->
+<section class="py-24 px-margin max-w-container-max mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="glass-card p-8 rounded-xl flex flex-col justify-between group hover:bg-surface-variant/30 transition-all duration-500">
+<div>
+<span class="material-symbols-outlined text-primary text-4xl mb-6" data-icon="hub">hub</span>
+<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-2">Active Nodes</h3>
+</div>
+<div class="flex items-end justify-between">
+<span class="font-display-lg text-headline-md text-primary">1,204</span>
+<span class="text-secondary text-label-sm font-data-mono">+12.4% MoM</span>
+</div>
+</div>
+<div class="glass-card p-8 rounded-xl flex flex-col justify-between gold-accent-border group hover:bg-surface-variant/30 transition-all duration-500">
+<div>
+<span class="material-symbols-outlined text-secondary text-4xl mb-6" data-icon="account_balance">account_balance</span>
+<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-2">Verified Assets</h3>
+</div>
+<div class="flex items-end justify-between">
+<span class="font-display-lg text-headline-md text-secondary">$14.2B</span>
+<span class="text-primary text-label-sm font-data-mono">AUDITED</span>
+</div>
+</div>
+<div class="glass-card p-8 rounded-xl flex flex-col justify-between group hover:bg-surface-variant/30 transition-all duration-500">
+<div>
+<span class="material-symbols-outlined text-tertiary text-4xl mb-6" data-icon="bolt">bolt</span>
+<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-2">Uptime</h3>
+</div>
+<div class="flex items-end justify-between">
+<span class="font-display-lg text-headline-md text-tertiary">99.999%</span>
+<span class="text-on-surface-variant text-label-sm font-data-mono">SLA GUARANTEED</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Core Pillars Section -->
+<section class="py-24 relative">
+<div class="px-margin max-w-container-max mx-auto">
+<div class="mb-16">
+<h2 class="font-display-lg text-headline-md text-on-surface mb-4">Foundation of the Hegemony</h2>
+<p class="text-on-surface-variant max-w-xl">Advanced cryptographic architecture designed for the world's most demanding financial institutions.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left: Large Feature -->
+<div class="lg:col-span-7 h-[500px] rounded-2xl relative overflow-hidden glass-card group">
+<img class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-1000" data-alt="A macro shot of a complex circuit board with glowing sea-green data pathways and gold contact points. The lighting is dramatic and dark, emphasizing the intricate micro-technology and institutional security aesthetic of high-performance computing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOfQabLFPEVetQOadRaFW3WgmhmYbChjS3gOX0MFUUbSDJR9J8CLzLIxA16JOVuULQksUYJfhVY11vpEqqEt4k2nTcEX9dr7JFTPsQikADUirYt0jlA_JWT2f9s9WTmXrq7vxncBmE16K8ea04If7VX4gEEhH5mWBBZaZVRvIIppwf7BAQeNr-5OMCOxg4xdJyONw2dFoO765M-mkclyDbFvNdSs_meBc1bq_-BVSr3XvK63-ZUPHZwT2crrH1Kv_9U9gU6DgXsDo"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent"></div>
+<div class="absolute bottom-0 p-12">
+<span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-label-sm font-bold mb-4 inline-block">CORE PILLAR</span>
+<h3 class="font-display-lg text-headline-md text-on-surface mb-4">Quantum-Resistant Security</h3>
+<p class="text-on-surface-variant max-w-md">Our network utilizes lattice-based cryptography to ensure asset integrity against the next generation of computational threats.</p>
+</div>
+</div>
+<!-- Right: Two Smaller Stacks -->
+<div class="lg:col-span-5 flex flex-col gap-8">
+<div class="glass-card p-10 rounded-2xl flex-1 hover:border-primary/40 transition-colors">
+<span class="material-symbols-outlined text-primary mb-6 text-3xl" data-icon="update">update</span>
+<h3 class="font-headline-md text-on-surface mb-3">Real-time Settlement</h3>
+<p class="text-on-surface-variant">Instant finality across multi-jurisdictional borders with zero counterparty risk and automated atomic swaps.</p>
+</div>
+<div class="glass-card p-10 rounded-2xl flex-1 border-l-4 border-secondary/50">
+<span class="material-symbols-outlined text-secondary mb-6 text-3xl" data-icon="gavel">gavel</span>
+<h3 class="font-headline-md text-on-surface mb-3">Regulatory Compliance</h3>
+<p class="text-on-surface-variant">Built-in KYC/AML frameworks that adapt dynamically to evolving global mandates and reporting standards.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Logo Cloud -->
+<section class="py-24 border-y border-outline-variant/10 bg-surface-container-lowest/50">
+<div class="px-margin max-w-container-max mx-auto text-center">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-12">Trusted by Global Entities</p>
+<div class="flex flex-wrap justify-center items-center gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-700">
+<img class="h-8" data-alt="A minimalist abstract company logo representing a high-end financial institution, styled in monochrome white for a dark background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTXkyJXf6J5wycKrtvnEJeTYebhfp-OHjcHOF5T-7Se2kKCBuhwxrpBlsb_BAlK91jvVD-Bx51909H8yPEp7l9-E0MQ7BoguCoyJsvFazdjh4dPa3X2jVCg9jpOu29hidIJPuGQ0WKbjHs-jVqP-k-Z6-53S9YGwhRgN4P7XjbgdWnfOo_k__E8DZO0jYDjRIku_OPj60bcbHwpkHFG7DGc3XTb6fC-bCOt262GfnPGXdNmpoKfZK_yrLWFMnPG1_Mw-L_rs0PRNA"/>
+<img class="h-10" data-alt="A sleek modern geometric corporate emblem for an institutional investment firm, rendered in flat white on a dark navy surface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJnOtBc51NKMYkkVoTHNmBbC7OUo7FQsoOTpeXcKxERrXUs06NqOqfdGclKkd7elltcURSHdDQJPXJ5R-NnYrDBGR4fbHVcvkPWik5h50B70Xtw3JPEpa2ulJEX7S0xK1RJJoPZZ4UvIzstSB4Yj-5kEiO1SQzNAut_DmvvHqklU7XO_9D1-WgjzC30Fj6UJvg8pRLH_lexI-zfCBqxBxNY971GbWMHingmKV-WdfUNgZemWR93wDlOXikBV1mRo2zlARWkf5A-oQ"/>
+<img class="h-7" data-alt="Minimalist luxury banking logo with clean lines and sophisticated typography, presented in a crisp white vector format." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtJS_-Idbnr8U_zuOTkGVf5BOahq_IK2mUt59lOePq54QugbWvxTlYjAoeuUtAoA9pI8VMfJ0GIQxqp9PKItSwx6t8bOYo4SNizxWJLDMKZNn7Ou_tKX5DVOdecv7fSqWRKJaaijCEcTxga8P3Ie7DuhTR8opG4MobMdHVHSLHuUTFGZ8JgGnvGVaYxFEqt7yWdPHfbjO1hLKinnIQMKbteR7NW3SFT16pP6ZZ4trRhujbW9RWE6RRaakNucPGfoWM5X1UNrJQt7k"/>
+<img class="h-9" data-alt="A professional high-tech consulting firm logo featuring abstract interconnected dots, solid white on dark background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZepHUr23d4R2TYdcctwEb5_xTi3ELDSY9weU3l9Vooh9pf_KaRo0-7qST3RKGP_LvKmHY9Lqo92n_GIcrHcwhCxwnBD23cqb3tr9R_R3J4BG7fg2cA_FxQ9TM_NwgexpVKVnaz-8M9DMiMGj55Uwirx3wvb_sih3jQ-FUimUXibdYH_y1RjwLvPitC8Mw_Ois5uuGSawGcc7iV0yiN-NbsNNbydzCcN6tUUwCkmKvaZ_QmcttcCkck0sAT2m4rNihJOPRhtrySE8"/>
+<img class="h-8" data-alt="An elegant global logistics and finance logo with a stylized globe icon, rendered in clean white." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAznAewS8RqMB93IJDh6HHk5DNZQWDZfgim3YkrLDb6KNmRBeQ-iFiFHZKre0hXhTW1BZqJcqM_19ul9pa4yh4FwHq1Hvc4pfBOQKRKeAYxgBAQpZW-nj4WunFT74sDLCSxpbxDk2F9Ee5ywkXIPC9bAMdCeU_HeQ9-Ov3E7VI6HDMCN-8upfB84qMPbVmImcvvKUCpEShmKp7U4A_--1mDsXZqnhJxv7noCACCXWLzxytPNWMR2exjCosMXyd6sDu4oXsHxx985ag"/>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-32 relative overflow-hidden">
+<div class="absolute inset-0 bg-primary/5 opacity-30"></div>
+<div class="px-margin max-w-4xl mx-auto text-center relative z-10">
+<h2 class="font-display-lg text-[48px] text-on-surface mb-8">Enter the Vanguard of Liquidity.</h2>
+<div class="glass-card p-12 rounded-3xl gold-accent-border">
+<p class="text-xl text-on-surface-variant mb-10">Limited institutional slots are available for the Q4 expansion. Secure your position in the future of the global ledger.</p>
+<button class="bg-secondary text-on-secondary font-bold px-12 py-5 rounded-full text-lg shadow-[0_0_20px_rgba(233,195,73,0.3)] transition-all hover:scale-105 active:scale-95">
+                        Inquire for Onboarding
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer from Shared Components -->
+<footer class="w-full py-gutter px-margin flex flex-col md:flex-row justify-between items-center gap-4 bg-surface-container-lowest border-t border-outline-variant/10">
+<div class="flex flex-col gap-2">
+<span class="font-display-lg text-primary text-headline-md tracking-tight">CUBOID FX</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant">© 2024 CUBOID FX NETWORK. INSTITUTIONAL GRADE LIQUIDITY.</p>
+</div>
+<div class="flex gap-8">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Network Status</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Terms of Access</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Privacy Protocol</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">API Docs</a>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors" data-icon="public">public</span>
+</div>
+</footer>
+</body></html>

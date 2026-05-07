@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Broker Bridge Productivity Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b1326;
+            color: #dbe2fd;
+            overflow-x: hidden;
+        }
+        .glass-panel {
+            backdrop-filter: blur(20px);
+            background: rgba(23, 31, 51, 0.4);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-left: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .glass-panel-gold {
+            backdrop-filter: blur(20px);
+            background: rgba(23, 31, 51, 0.6);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        /* Custom scrollbar for high-density UI */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(79, 219, 200, 0.2);
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#6bd8cb",
+                        "primary-container": "#14b8a6",
+                        "on-secondary-container": "#342800",
+                        "tertiary": "#6bd8cb",
+                        "surface-container-low": "#131b2e",
+                        "on-secondary-fixed-variant": "#574500",
+                        "primary-fixed": "#71f8e4",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-lowest": "#060d20",
+                        "surface-tint": "#4fdbc8",
+                        "on-surface": "#dbe2fd",
+                        "inverse-surface": "#dbe2fd",
+                        "inverse-on-surface": "#283044",
+                        "on-primary": "#003731",
+                        "outline-variant": "#3c4947",
+                        "surface-container-high": "#222a3e",
+                        "on-tertiary-fixed-variant": "#005049",
+                        "secondary-container": "#af8d11",
+                        "surface-bright": "#31394e",
+                        "on-tertiary-container": "#00423c",
+                        "surface-container-highest": "#2d3449",
+                        "on-secondary": "#3c2f00",
+                        "surface-dim": "#0b1326",
+                        "tertiary-container": "#44b5a8",
+                        "outline": "#859490",
+                        "on-tertiary": "#003732",
+                        "error-container": "#93000a",
+                        "secondary-fixed": "#ffe088",
+                        "on-surface-variant": "#bbcac6",
+                        "on-secondary-fixed": "#241a00",
+                        "on-primary-container": "#00423b",
+                        "tertiary-fixed": "#89f5e7",
+                        "surface-variant": "#2d3449",
+                        "on-background": "#dbe2fd",
+                        "inverse-primary": "#006b5f",
+                        "on-primary-fixed": "#00201c",
+                        "surface": "#0b1326",
+                        "error": "#ffb4ab",
+                        "background": "#0b1326",
+                        "secondary-fixed-dim": "#e9c349",
+                        "secondary": "#e9c349",
+                        "on-primary-fixed-variant": "#005048",
+                        "on-tertiary-fixed": "#00201d",
+                        "surface-container": "#171f33",
+                        "on-error": "#690005",
+                        "primary": "#4fdbc8",
+                        "primary-fixed-dim": "#4fdbc8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "container-max": "1600px",
+                        "unit": "4px",
+                        "margin": "32px",
+                        "density": "compact"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-base": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "data-mono": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-base": ["14px", {"lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "data-mono": ["13px", {"lineHeight": "1.0", "letterSpacing": "0em", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface min-h-screen selection:bg-primary/30">
+<!-- TopNavBar -->
+<header class="w-full h-16 bg-surface-container/10 dark:bg-surface-container/10 backdrop-blur-xl border-b border-white/10 shadow-sm flex items-center justify-between px-margin sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<span class="font-display-lg text-headline-md font-bold text-primary dark:text-primary">FX Institutional Portal</span>
+<nav class="hidden md:flex items-center gap-6 h-full">
+<a class="text-primary border-b-2 border-primary h-16 flex items-center px-2 font-body-base text-body-base transition-colors" href="#">Conversations</a>
+<a class="text-on-surface-variant hover:bg-primary/10 h-16 flex items-center px-2 font-body-base text-body-base transition-colors" href="#">Client List</a>
+<a class="text-on-surface-variant hover:bg-primary/10 h-16 flex items-center px-2 font-body-base text-body-base transition-colors" href="#">Quotes</a>
+<a class="text-on-surface-variant hover:bg-primary/10 h-16 flex items-center px-2 font-body-base text-body-base transition-colors" href="#">Referral Earnings</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined text-on-surface-variant absolute left-3 top-1/2 -translate-y-1/2">search</span>
+<input class="bg-surface-container-high/40 border border-white/10 rounded-lg pl-10 pr-4 py-1.5 text-body-base focus:outline-none focus:ring-1 focus:ring-primary w-64" placeholder="Global search..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-on-surface-variant hover:bg-primary/10 rounded-full transition-colors"><span class="material-symbols-outlined">notifications</span></button>
+<button class="p-2 text-on-surface-variant hover:bg-primary/10 rounded-full transition-colors"><span class="material-symbols-outlined">settings</span></button>
+<button class="p-2 text-on-surface-variant hover:bg-primary/10 rounded-full transition-colors"><span class="material-symbols-outlined">admin_panel_settings</span></button>
+</div>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-primary/20">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="A professional headshot of a senior financial analyst in a dark suit against a blurred architectural backdrop. High-key studio lighting with soft shadows. The image has a cool, corporate tone with subtle blue and sea-green color grading to match a premium institutional portal aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrWM0j3pt4G8ny2HCEDq68Eh1eTjHITcqZTMLi1iJbnblWWS6jn-j8oubJou_WNMI6aGuxOgAuMjC8Kr826pnOo5d8OO2_IWpPfDRZeFE8R255zOJvyx0qYAORc8G9PBubYYW34KJowEPzNFd7T2SVccp3k2EJMymsMAMxyKKxAmluat-sX60nYSmiZxpxhPnkMS9DppLF46HOeCtocv7PonucI0x5cLTlI-3RYM2kt6DDpkhxI2aGONJQxDibB2oJgMrE6EClIi8"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 bottom-0 z-40 flex flex-col pt-20 h-screen w-64 bg-surface-container-lowest/20 dark:bg-surface-container-lowest/20 backdrop-blur-2xl border-r border-white/5 shadow-2xl transition-all duration-300 ease-in-out">
+<div class="px-6 mb-8 flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary font-bold" data-weight="fill">token</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-secondary dark:text-secondary leading-none">Global Markets</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant opacity-70">Institutional Desk</p>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container/20 text-primary border-r-2 border-secondary font-label-sm text-label-sm group" href="#">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high/40 font-label-sm text-label-sm transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">swap_horiz</span>
+                Inter-Trading
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high/40 font-label-sm text-label-sm transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">gavel</span>
+                Compliance
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high/40 font-label-sm text-label-sm transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">query_stats</span>
+                Analytics
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high/40 font-label-sm text-label-sm transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">history_edu</span>
+                Audit Log
+            </a>
+</nav>
+<div class="p-4 mt-auto">
+<button class="w-full py-3 bg-primary hover:brightness-110 text-on-primary font-bold rounded-lg transition-all shadow-lg flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">bolt</span>
+                Execute Trade
+            </button>
+</div>
+<div class="p-4 space-y-1 border-t border-white/5">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-high/40 font-label-sm text-label-sm transition-all" href="#">
+<span class="material-symbols-outlined">contact_support</span>
+                Support
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-high/40 font-label-sm text-label-sm transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+                Sign Out
+            </a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="ml-64 p-gutter grid grid-cols-12 gap-gutter h-[calc(100vh-64px)] overflow-hidden">
+<!-- Left Column: Chat-to-Trade -->
+<section class="col-span-3 flex flex-col glass-panel rounded-xl overflow-hidden">
+<div class="p-4 border-b border-white/10 flex items-center justify-between">
+<h3 class="font-headline-md text-body-base font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">chat_bubble</span>
+                    Chat-to-Trade
+                </h3>
+<span class="px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-bold rounded border border-primary/20">AI POWERED</span>
+</div>
+<div class="flex-1 p-4 overflow-y-auto space-y-4">
+<div class="flex gap-2">
+<div class="w-6 h-6 rounded-full bg-primary flex-shrink-0 flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[14px]">smart_toy</span></div>
+<div class="bg-surface-container-high/60 rounded-lg p-3 text-body-base max-w-[85%] border border-white/5">
+                        How can I assist your desk today? You can request liquidity, quote conversions, or check order status.
+                    </div>
+</div>
+<div class="flex gap-2 flex-row-reverse">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest flex-shrink-0 border border-white/10"></div>
+<div class="glass-panel-gold rounded-lg p-3 text-body-base max-w-[85%] border border-secondary/30">
+                        I need a quote for $5M USD/EUR for client J. Peterson.
+                    </div>
+</div>
+<div class="flex gap-2">
+<div class="w-6 h-6 rounded-full bg-primary flex-shrink-0 flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[14px]">smart_toy</span></div>
+<div class="bg-surface-container-high/60 rounded-lg p-3 text-body-base max-w-[85%] border border-white/5">
+                        Sourcing liquidity for $5M USD/EUR. Current best rate: 0.9241. <br/>
+<button class="mt-2 w-full py-1.5 bg-secondary text-on-secondary font-bold text-label-sm rounded uppercase tracking-wider">Execute Transaction</button>
+</div>
+</div>
+</div>
+<div class="p-4 bg-surface-container-lowest/50">
+<div class="relative">
+<input class="w-full bg-surface-dim border border-white/10 rounded-full py-2 pl-4 pr-12 text-body-base focus:ring-1 focus:ring-primary focus:outline-none" placeholder="Type a request..." type="text"/>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-primary/20 text-primary flex items-center justify-center hover:bg-primary/40 transition-colors">
+<span class="material-symbols-outlined text-[18px]">send</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Center Column: Market Discovery Feed -->
+<section class="col-span-6 flex flex-col gap-gutter">
+<!-- Hero Stat Panel -->
+<div class="h-48 relative rounded-xl overflow-hidden glass-panel group">
+<div class="absolute inset-0 z-0">
+<img alt="Market data background" class="w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-700" data-alt="A sophisticated abstract visualization of global market data flows and financial networks. Shimmering lines of light in sea-green and gold trace paths across a deep obsidian digital landscape. The atmosphere is professional and high-tech, representing the vast liquidity of institutional banking. The lighting is low-key with sharp, glowing data points." src="https://lh3.googleusercontent.com/aida/ADBb0ujKT08f8hrmN89H8EX9TWr04ydyIJekqTG-ziBTZ1zfQinT9qh14kyRW_pkGNDGD5QDfumjysgZ5rN6q1TU3xBPJNwhQ6HXiqQ_wVNJwdzHb5L2Ui_Br73Kr9bW76e8tGK-s5TBCLkN4yyAdr9d6IEICp02IBJcBhDeQDQkpiPNNg159F8vIe8WcJBNfBRGk82pb_z6z2Am5uOe-w2hhknGkHvgW22x9nn1FCTwcUzl78wjjE0_WGPlAJ3d3JX0GCy3dqAXfqDiIg"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent z-10"></div>
+<div class="relative z-20 p-6 flex flex-col justify-end h-full">
+<span class="text-secondary font-label-sm uppercase tracking-[0.2em]">Live BDC Liquidity</span>
+<h2 class="font-display-lg text-[32px] font-bold text-white leading-tight">Institutional Rate Feed</h2>
+<div class="flex gap-4 mt-2">
+<div class="flex items-center gap-1 text-primary"><span class="material-symbols-outlined text-[16px]">trending_up</span> <span class="font-data-mono text-body-base">VOL: $4.2B</span></div>
+<div class="flex items-center gap-1 text-on-surface-variant"><span class="material-symbols-outlined text-[16px]">access_time</span> <span class="font-data-mono text-body-base">LAST: 2s ago</span></div>
+</div>
+</div>
+</div>
+<!-- Discovery Feed Grid -->
+<div class="flex-1 overflow-y-auto space-y-4 pr-1">
+<div class="glass-panel rounded-xl p-4 flex items-center justify-between border-l-4 border-primary">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded bg-surface-container-high flex items-center justify-center border border-white/5">
+<span class="material-symbols-outlined text-primary text-3xl">account_balance</span>
+</div>
+<div>
+<div class="font-headline-md text-body-base font-bold">Goldman Liquidity Pool</div>
+<div class="text-on-surface-variant text-label-sm">High-Volume BDC • Stable Rates</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-data-mono text-headline-md text-primary">0.9241</div>
+<div class="text-on-surface-variant text-label-sm">USD / EUR Spread: 0.2%</div>
+</div>
+<button class="ml-4 px-4 py-2 glass-panel-gold text-secondary font-bold text-label-sm hover:bg-secondary/10 transition-colors uppercase tracking-widest">Connect</button>
+</div>
+<div class="glass-panel rounded-xl p-4 flex items-center justify-between border-l-4 border-on-surface-variant/30">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded bg-surface-container-high flex items-center justify-center border border-white/5">
+<span class="material-symbols-outlined text-on-surface-variant text-3xl">hub</span>
+</div>
+<div>
+<div class="font-headline-md text-body-base font-bold">Standard Charter Hub</div>
+<div class="text-on-surface-variant text-label-sm">EM Currency Focus • Dynamic Spread</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-data-mono text-headline-md text-on-surface">1.2678</div>
+<div class="text-on-surface-variant text-label-sm">GBP / USD Spread: 0.5%</div>
+</div>
+<button class="ml-4 px-4 py-2 border border-white/10 hover:bg-white/5 text-on-surface-variant font-bold text-label-sm transition-colors uppercase tracking-widest">Connect</button>
+</div>
+<div class="glass-panel rounded-xl p-4 flex items-center justify-between border-l-4 border-primary">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded bg-surface-container-high flex items-center justify-center border border-white/5">
+<span class="material-symbols-outlined text-primary text-3xl">corporate_fare</span>
+</div>
+<div>
+<div class="font-headline-md text-body-base font-bold">JPM Chase Insto-Trade</div>
+<div class="text-on-surface-variant text-label-sm">Direct Institutional Access • Low Latency</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-data-mono text-headline-md text-primary">154.21</div>
+<div class="text-on-surface-variant text-label-sm">USD / JPY Spread: 0.1%</div>
+</div>
+<button class="ml-4 px-4 py-2 glass-panel-gold text-secondary font-bold text-label-sm hover:bg-secondary/10 transition-colors uppercase tracking-widest">Connect</button>
+</div>
+</div>
+</section>
+<!-- Right Column: Personal Customer CRM -->
+<section class="col-span-3 flex flex-col glass-panel rounded-xl overflow-hidden">
+<div class="p-4 border-b border-white/10 flex items-center justify-between">
+<h3 class="font-headline-md text-body-base font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-weight="fill">person_celebrate</span>
+                    Customer CRM
+                </h3>
+<button class="text-primary hover:underline text-label-sm">Add Client</button>
+</div>
+<div class="flex-1 overflow-y-auto">
+<div class="px-4 py-2 bg-surface-container-low/50 text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">Top Priority Clients</div>
+<div class="p-4 border-b border-white/5 hover:bg-white/5 transition-colors cursor-pointer group">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded bg-secondary/20 flex items-center justify-center text-secondary font-bold">JP</div>
+<span class="font-body-base font-semibold">Julian Peterson</span>
+</div>
+<div class="text-secondary font-data-mono text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-weight="fill">verified</span> 982
+                        </div>
+</div>
+<div class="flex justify-between items-center text-label-sm text-on-surface-variant">
+<span>AUM: $24.5M</span>
+<span class="px-1.5 py-0.5 bg-primary/20 text-primary rounded text-[10px]">ACTIVE QUOTE</span>
+</div>
+</div>
+<div class="p-4 border-b border-white/5 hover:bg-white/5 transition-colors cursor-pointer group">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded bg-primary/20 flex items-center justify-center text-primary font-bold">SL</div>
+<span class="font-body-base font-semibold">Sarah Lemaire</span>
+</div>
+<div class="text-on-surface-variant font-data-mono text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">shield</span> 845
+                        </div>
+</div>
+<div class="flex justify-between items-center text-label-sm text-on-surface-variant">
+<span>AUM: $12.1M</span>
+<span class="text-[10px]">LAST TRADE: 2D AGO</span>
+</div>
+</div>
+<div class="p-4 border-b border-white/5 hover:bg-white/5 transition-colors cursor-pointer group">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded bg-on-surface-variant/20 flex items-center justify-center text-on-surface-variant font-bold">MK</div>
+<span class="font-body-base font-semibold">Marcus Kane</span>
+</div>
+<div class="text-error font-data-mono text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">warning</span> 412
+                        </div>
+</div>
+<div class="flex justify-between items-center text-label-sm text-on-surface-variant">
+<span>AUM: $3.2M</span>
+<span class="text-error text-[10px]">RISK ALERT</span>
+</div>
+</div>
+<div class="px-4 py-2 bg-surface-container-low/50 text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">Potential Referrals</div>
+<div class="p-4 flex items-center justify-between opacity-70">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full border border-white/10 overflow-hidden">
+<img alt="Client 4" class="w-full h-full object-cover" data-alt="A professional woman with a welcoming expression, dressed in business casual attire. The image is clean and bright, styled for a modern financial platform with subtle glassmorphism overlays in the corner. Professional corporate lighting and high resolution." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE5icIV2YFZCenlspvaFyVA_oKyK3Q7IXU-hdrRFtb1M-owm6EDErrHyOrX8N-wzFubBDavehIDAbNzjM0biACctNbx3WX4R3SfmnwhMZKe-Fuu-qKaJAAFJeCc5njAr8mgrzdMX3ivUTYT9J00tOoJQyyRDhFOct0EfF_NzJtOtdxk8pBYDEg6WgSrbx7daLXkp0e1DdaZDbpMEUbM2poXzgNI__t0veUFXMYNu8MzGCQDOSY7gVTjPiuQr0yBGYreQNvpvIcjRA"/>
+</div>
+<span class="text-body-base">Elena Rodriguez</span>
+</div>
+<button class="text-primary material-symbols-outlined">add_circle</button>
+</div>
+</div>
+<div class="p-4 mt-auto glass-panel-gold rounded-t-xl mx-2">
+<div class="flex justify-between items-center mb-2">
+<span class="text-label-sm font-bold text-secondary">Referral Earnings</span>
+<span class="font-data-mono text-body-base">$14,240.00</span>
+</div>
+<div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full" style="width: 72%"></div>
+</div>
+<p class="text-[10px] mt-2 text-on-surface-variant text-center">Next Tier: +2% Commission at $20k</p>
+</div>
+</section>
+</main>
+<!-- FAB (Suppressed on this complex hub layout as per Relevance Check, but if needed for global trade trigger) -->
+<!-- The prompt says suppress FAB on details/transactional screens. This is a productivity hub, a top-level destination. -->
+<button class="fixed bottom-8 right-8 w-14 h-14 rounded-full bg-secondary text-on-secondary shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-transform z-50">
+<span class="material-symbols-outlined text-3xl" data-weight="fill">add</span>
+</button>
+</body></html>

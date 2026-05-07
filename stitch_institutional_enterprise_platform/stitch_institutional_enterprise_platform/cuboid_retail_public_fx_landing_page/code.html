@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CUBOID | Institutional FX for Everyone</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-high": "#222a3e",
+                      "secondary-fixed": "#ffe088",
+                      "surface-tint": "#4fdbc8",
+                      "surface-container-low": "#131b2e",
+                      "secondary-fixed-dim": "#e9c349",
+                      "surface-container-highest": "#2d3449",
+                      "on-surface-variant": "#bbcac6",
+                      "inverse-surface": "#dbe2fd",
+                      "surface-variant": "#2d3449",
+                      "secondary-container": "#af8d11",
+                      "on-secondary-fixed-variant": "#574500",
+                      "on-primary-fixed": "#00201c",
+                      "on-error-container": "#ffdad6",
+                      "surface": "#0b1326",
+                      "primary": "#4fdbc8",
+                      "outline": "#859490",
+                      "on-tertiary-fixed": "#00201d",
+                      "on-tertiary": "#003732",
+                      "on-background": "#dbe2fd",
+                      "tertiary-fixed": "#89f5e7",
+                      "on-tertiary-container": "#00423c",
+                      "primary-fixed-dim": "#4fdbc8",
+                      "secondary": "#e9c349",
+                      "surface-bright": "#31394e",
+                      "tertiary": "#6bd8cb",
+                      "on-secondary-fixed": "#241a00",
+                      "on-error": "#690005",
+                      "outline-variant": "#3c4947",
+                      "surface-container-lowest": "#060d20",
+                      "on-secondary-container": "#342800",
+                      "inverse-primary": "#006b5f",
+                      "background": "#0b1326",
+                      "primary-container": "#14b8a6",
+                      "on-secondary": "#3c2f00",
+                      "surface-dim": "#0b1326",
+                      "on-primary-fixed-variant": "#005048",
+                      "tertiary-fixed-dim": "#6bd8cb",
+                      "primary-fixed": "#71f8e4",
+                      "error": "#ffb4ab",
+                      "on-tertiary-fixed-variant": "#005049",
+                      "error-container": "#93000a",
+                      "inverse-on-surface": "#283044",
+                      "on-surface": "#dbe2fd",
+                      "tertiary-container": "#44b5a8",
+                      "on-primary": "#003731",
+                      "surface-container": "#171f33",
+                      "on-primary-container": "#00423b"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "container-max": "1600px",
+                      "density": "compact",
+                      "unit": "4px",
+                      "margin": "32px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "data-mono": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "body-base": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "display-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "data-mono": ["13px", {"lineHeight": "1.0", "letterSpacing": "0em", "fontWeight": "500"}],
+                      "headline-md": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "body-base": ["14px", {"lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(11, 19, 38, 0.4);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .active-glow {
+            box-shadow: 0 0 15px rgba(79, 219, 200, 0.2);
+        }
+        .gold-accent-border {
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-base antialiased">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/40 backdrop-blur-xl border-b border-outline-variant/30 shadow-sm">
+<div class="flex justify-between items-center px-margin py-4 max-w-container-max mx-auto">
+<div class="flex items-center gap-gutter">
+<img alt="CUBOID Logo" class="h-8 w-auto" src="https://lh3.googleusercontent.com/aida/ADBb0ujKT08f8hrmN89H8EX9TWr04ydyIJekqTG-ziBTZ1zfQinT9qh14kyRW_pkGNDGD5QDfumjysgZ5rN6q1TU3xBPJNwhQ6HXiqQ_wVNJwdzHb5L2Ui_Br73Kr9bW76e8tGK-s5TBCLkN4yyAdr9d6IEICp02IBJcBhDeQDQkpiPNNg159F8vIe8WcJBNfBRGk82pb_z6z2Am5uOe-w2hhknGkHvgW22x9nn1FCTwcUzl78wjjE0_WGPlAJ3d3JX0GCy3dqAXfqDiIg"/>
+<span class="font-headline-md text-headline-md font-bold tracking-tight text-primary">INSTITUTIONAL FX</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-body-base text-body-base text-primary border-b-2 border-primary pb-1 transition-colors duration-200" href="#">Market Rates</a>
+<a class="font-body-base text-body-base text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">BDC Locator</a>
+<a class="font-body-base text-body-base text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Convert</a>
+<a class="font-body-base text-body-base text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Corporate</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors opacity-80 hover:opacity-100">Login</button>
+<button class="bg-primary-container text-on-primary-container px-6 py-2 rounded-lg font-label-sm text-label-sm scale-95 active:scale-90 transition-transform font-bold">Open Account</button>
+</div>
+</div>
+</nav>
+<main class="pt-24">
+<!-- Hero Section -->
+<section class="relative min-h-[80vh] flex items-center px-margin py-20 overflow-hidden">
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-br from-surface via-surface/90 to-primary/10"></div>
+<div class="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-secondary/5 rounded-full blur-[100px]"></div>
+</div>
+<div class="relative z-10 max-w-container-max mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-7">
+<span class="text-secondary font-label-sm text-label-sm tracking-[0.2em] mb-4 block">TRUSTED BY INSTITUTIONS, BUILT FOR YOU</span>
+<h1 class="font-display-lg text-display-lg text-white mb-6 leading-tight">Global Rates, <br/><span class="text-primary">Local Trust.</span></h1>
+<p class="text-on-surface-variant text-headline-md max-w-xl mb-10">Access institutional-grade foreign exchange rates for travel, business, and education with the transparency you deserve.</p>
+<div class="flex flex-wrap gap-4">
+<div class="flex items-center gap-3 bg-surface-container-high/50 px-4 py-3 rounded-xl border border-outline-variant/30">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+<span class="font-label-sm text-label-sm">CBN Licensed</span>
+</div>
+<div class="flex items-center gap-3 bg-surface-container-high/50 px-4 py-3 rounded-xl border border-outline-variant/30">
+<span class="material-symbols-outlined text-primary">speed</span>
+<span class="font-label-sm text-label-sm">Instant Settlement</span>
+</div>
+</div>
+</div>
+<div class="lg:col-span-5">
+<div class="glass-panel p-8 rounded-xl border border-white/10 active-glow">
+<h3 class="font-headline-md text-headline-md mb-6 text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">currency_exchange</span>
+                            Quick Convert
+                        </h3>
+<div class="space-y-4">
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant">YOU SEND</label>
+<div class="flex items-center bg-surface-container-lowest border border-outline-variant rounded-lg p-3 focus-within:border-primary transition-all">
+<input class="bg-transparent border-none focus:ring-0 text-white font-headline-md w-full" type="number" value="1000"/>
+<div class="flex items-center gap-2 border-l border-outline-variant pl-4 ml-4">
+<div class="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center text-[10px] text-white font-bold">USD</div>
+<span class="font-label-sm">USD</span>
+</div>
+</div>
+</div>
+<div class="flex justify-center -my-2 relative z-10">
+<button class="bg-surface-container-highest border border-outline-variant/50 p-2 rounded-full text-primary hover:rotate-180 transition-transform duration-500">
+<span class="material-symbols-outlined">swap_vert</span>
+</button>
+</div>
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant">YOU RECEIVE (EST.)</label>
+<div class="flex items-center bg-surface-container-lowest border border-outline-variant rounded-lg p-3 focus-within:border-primary transition-all">
+<input class="bg-transparent border-none focus:ring-0 text-white font-headline-md w-full" readonly="" type="text" value="1,540,000.00"/>
+<div class="flex items-center gap-2 border-l border-outline-variant pl-4 ml-4">
+<div class="w-6 h-6 rounded-full bg-green-700 flex items-center justify-center text-[10px] text-white font-bold">NGN</div>
+<span class="font-label-sm">NGN</span>
+</div>
+</div>
+</div>
+<div class="pt-4 space-y-3">
+<div class="flex justify-between font-label-sm text-on-surface-variant">
+<span>Rate</span>
+<span class="text-primary">1 USD = 1,540.00 NGN</span>
+</div>
+<div class="flex justify-between font-label-sm text-on-surface-variant">
+<span>Service Fee</span>
+<span class="text-white">₦0.00 (Zero Fee)</span>
+</div>
+<button class="w-full bg-primary text-on-primary py-4 rounded-lg font-headline-md font-bold mt-4 shadow-lg shadow-primary/20 hover:brightness-110 transition-all">
+                                    Book This Rate
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Live Market Rates -->
+<section class="py-20 px-margin max-w-container-max mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+<div>
+<h2 class="font-headline-md text-display-lg text-white mb-2">Live Market Rates</h2>
+<p class="text-on-surface-variant">Real-time interbank and retail liquidity pools updated every 60 seconds.</p>
+</div>
+<div class="flex gap-4">
+<div class="bg-surface-container-high rounded-full px-4 py-2 flex items-center gap-2 text-primary font-label-sm">
+<span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
+                        LIVE STREAMING
+                    </div>
+</div>
+</div>
+<div class="glass-panel overflow-hidden rounded-xl border border-white/10">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-highest/50">
+<th class="p-5 font-label-sm text-on-surface-variant border-b border-outline-variant/30">CURRENCY PAIR</th>
+<th class="p-5 font-label-sm text-on-surface-variant border-b border-outline-variant/30">INSTITUTIONAL BUY</th>
+<th class="p-5 font-label-sm text-on-surface-variant border-b border-outline-variant/30">INSTITUTIONAL SELL</th>
+<th class="p-5 font-label-sm text-on-surface-variant border-b border-outline-variant/30">RETAIL SPREAD</th>
+<th class="p-5 font-label-sm text-on-surface-variant border-b border-outline-variant/30">24H CHANGE</th>
+<th class="p-5 font-label-sm text-on-surface-variant border-b border-outline-variant/30">ACTION</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/20">
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="p-5">
+<div class="flex items-center gap-3">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-blue-600 flex items-center justify-center text-[10px] font-bold">USD</div>
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-green-700 flex items-center justify-center text-[10px] font-bold">NGN</div>
+</div>
+<span class="font-headline-md text-white">USD / NGN</span>
+</div>
+</td>
+<td class="p-5 font-data-mono text-white text-data-mono">1,535.40</td>
+<td class="p-5 font-data-mono text-white text-data-mono">1,542.10</td>
+<td class="p-5 font-data-mono text-secondary text-data-mono">0.45%</td>
+<td class="p-5">
+<span class="text-primary flex items-center gap-1 font-label-sm">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+                                        +1.2%
+                                    </span>
+</td>
+<td class="p-5">
+<button class="text-primary font-label-sm hover:underline">Trade Now</button>
+</td>
+</tr>
+<tr class="bg-primary/2 hover:bg-primary/5 transition-colors group">
+<td class="p-5">
+<div class="flex items-center gap-3">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-blue-600 flex items-center justify-center text-[10px] font-bold">USD</div>
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-red-600 flex items-center justify-center text-[10px] font-bold">GHS</div>
+</div>
+<span class="font-headline-md text-white">USD / GHS</span>
+</div>
+</td>
+<td class="p-5 font-data-mono text-white text-data-mono">15.42</td>
+<td class="p-5 font-data-mono text-white text-data-mono">15.58</td>
+<td class="p-5 font-data-mono text-secondary text-data-mono">1.02%</td>
+<td class="p-5">
+<span class="text-error flex items-center gap-1 font-label-sm">
+<span class="material-symbols-outlined text-[16px]">trending_down</span>
+                                        -0.4%
+                                    </span>
+</td>
+<td class="p-5">
+<button class="text-primary font-label-sm hover:underline">Trade Now</button>
+</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="p-5">
+<div class="flex items-center gap-3">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-blue-600 flex items-center justify-center text-[10px] font-bold">USD</div>
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-black flex items-center justify-center text-[10px] font-bold">KES</div>
+</div>
+<span class="font-headline-md text-white">USD / KES</span>
+</div>
+</td>
+<td class="p-5 font-data-mono text-white text-data-mono">130.50</td>
+<td class="p-5 font-data-mono text-white text-data-mono">131.25</td>
+<td class="p-5 font-data-mono text-secondary text-data-mono">0.57%</td>
+<td class="p-5">
+<span class="text-primary flex items-center gap-1 font-label-sm">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+                                        +0.8%
+                                    </span>
+</td>
+<td class="p-5">
+<button class="text-primary font-label-sm hover:underline">Trade Now</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- BDC Locator Section -->
+<section class="py-20 bg-surface-container-lowest">
+<div class="max-w-container-max mx-auto px-margin">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div>
+<h2 class="font-display-lg text-display-lg text-white mb-6">Find a Verified BDC</h2>
+<p class="text-on-surface-variant text-headline-md mb-10">We've partnered with licensed Bureau De Change operators to ensure you get safe, physical cash exchange at verified CUBOID rates.</p>
+<div class="space-y-6">
+<div class="flex items-start gap-4 p-6 glass-panel rounded-xl gold-accent-border">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">verified</span>
+<div>
+<h4 class="text-white font-headline-md mb-2">CUBOID Certified</h4>
+<p class="text-on-surface-variant font-body-base">Every partner on our map is vetted and adheres to our fair-pricing institutional standard.</p>
+</div>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-container-high border border-outline-variant rounded-full py-4 pl-12 pr-6 text-white focus:border-primary transition-all" placeholder="Enter your city or neighborhood..." type="text"/>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 bg-primary text-on-primary px-6 py-2 rounded-full font-label-sm">SEARCH</button>
+</div>
+</div>
+</div>
+<div class="relative rounded-2xl overflow-hidden aspect-video border border-outline-variant/30 group">
+<img class="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700" data-alt="A high-tech digital world map with glowing teal data points and lines of connectivity across Africa and Europe. The map is displayed on a dark glass surface with subtle reflections and a futuristic UI overlay. Soft amber lighting highlights major financial hubs, creating a sense of global reach and local precision in the institutional FX space." data-location="Lagos, Nigeria" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXpR-NG_bWI_Wr_rob3ewkW5BJzL_rBMdxZeBcEpi5BFlVggCw3xU6OZ0CjmHXDUH4CZFv7btWbXkQZIoES9hbTnyCU7ml1_nGWov2Z_wdEMugYHYrQewTHlJoX_vWRQj-I5vSfjTXxYrsEpFllrRVqibx8u0siIGlf3cqDDXufu7SRHdkDZiWpZ9pb6yKKvuFQR4Kqzc3hZVA15MlWO6CytQjzkTojhEVNR-nr-xGGH9MKRJ2H-CpmZugl6hukbQQ1EH88poWYlk"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent"></div>
+<div class="absolute bottom-6 left-6 right-6 p-4 glass-panel rounded-lg flex justify-between items-center">
+<div>
+<p class="text-white font-bold">Victoria Island, Lagos</p>
+<p class="text-on-surface-variant text-label-sm">12 Verified Partners Nearby</p>
+</div>
+<button class="bg-secondary text-on-secondary px-4 py-2 rounded-lg font-label-sm">View List</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- How It Works -->
+<section class="py-24 px-margin max-w-container-max mx-auto text-center">
+<h2 class="font-display-lg text-display-lg text-white mb-4">How CUBOID Works</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto mb-16">Simple, secure, and transparent FX for regular people with institutional needs.</p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="p-10 glass-panel rounded-2xl border border-white/5 group hover:border-primary/30 transition-all">
+<div class="w-16 h-16 bg-surface-container-high rounded-2xl flex items-center justify-center text-primary mb-8 mx-auto group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl">ads_click</span>
+</div>
+<h3 class="font-headline-md text-white mb-4">1. Quote Your Rate</h3>
+<p class="text-on-surface-variant font-body-base">Select your currency pair and amount. See exactly what you'll get based on live institutional liquidity pools.</p>
+</div>
+<div class="p-10 glass-panel rounded-2xl border border-white/5 group hover:border-primary/30 transition-all">
+<div class="w-16 h-16 bg-surface-container-high rounded-2xl flex items-center justify-center text-primary mb-8 mx-auto group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl">lock_clock</span>
+</div>
+<h3 class="font-headline-md text-white mb-4">2. Lock It In</h3>
+<p class="text-on-surface-variant font-body-base">Once you're happy, lock the rate. Your quote is guaranteed for 15 minutes, protecting you from market volatility.</p>
+</div>
+<div class="p-10 glass-panel rounded-2xl border border-white/5 group hover:border-primary/30 transition-all">
+<div class="w-16 h-16 bg-surface-container-high rounded-2xl flex items-center justify-center text-primary mb-8 mx-auto group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl">account_balance_wallet</span>
+</div>
+<h3 class="font-headline-md text-white mb-4">3. Settle Locally</h3>
+<p class="text-on-surface-variant font-body-base">Complete the transaction via bank transfer or visit a verified local BDC partner for physical cash collection.</p>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-20 px-margin">
+<div class="max-w-container-max mx-auto glass-panel rounded-[2rem] p-12 lg:p-20 text-center relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-[100px] -mr-32 -mt-32"></div>
+<div class="relative z-10">
+<h2 class="font-display-lg text-display-lg text-white mb-6">Ready to Experience Institutional FX?</h2>
+<p class="text-on-surface-variant text-headline-md max-w-2xl mx-auto mb-10">Join thousands of individuals and SMEs saving on every transaction with CUBOID's transparent ecosystem.</p>
+<div class="flex flex-col sm:flex-row gap-6 justify-center">
+<button class="bg-primary text-on-primary px-10 py-5 rounded-xl font-headline-md font-bold shadow-xl shadow-primary/20 hover:brightness-110 transition-all">Create Free Account</button>
+<button class="glass-panel border border-outline-variant px-10 py-5 rounded-xl font-headline-md font-bold text-white hover:bg-white/5 transition-all">Contact Sales</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-surface-container-lowest border-t border-outline-variant/20">
+<div class="max-w-container-max mx-auto px-margin py-16">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-gutter mb-6">
+<img alt="CUBOID Logo" class="h-6 w-auto" src="https://lh3.googleusercontent.com/aida/ADBb0ujKT08f8hrmN89H8EX9TWr04ydyIJekqTG-ziBTZ1zfQinT9qh14kyRW_pkGNDGD5QDfumjysgZ5rN6q1TU3xBPJNwhQ6HXiqQ_wVNJwdzHb5L2Ui_Br73Kr9bW76e8tGK-s5TBCLkN4yyAdr9d6IEICp02IBJcBhDeQDQkpiPNNg159F8vIe8WcJBNfBRGk82pb_z6z2Am5uOe-w2hhknGkHvgW22x9nn1FCTwcUzl78wjjE0_WGPlAJ3d3JX0GCy3dqAXfqDiIg"/>
+<span class="font-headline-md text-primary">INSTITUTIONAL FX</span>
+</div>
+<p class="text-on-surface-variant text-body-base">Regulated liquidity provider delivering elite financial services to institutional and retail markets globally.</p>
+</div>
+<div>
+<h4 class="text-white font-label-sm mb-6 tracking-widest uppercase">Products</h4>
+<ul class="space-y-4 text-on-surface-variant font-label-sm">
+<li><a class="hover:text-secondary transition-colors" href="#">Spot FX</a></li>
+<li><a class="hover:text-secondary transition-colors" href="#">Forward Contracts</a></li>
+<li><a class="hover:text-secondary transition-colors" href="#">Market Analysis</a></li>
+<li><a class="hover:text-secondary transition-colors" href="#">API Access</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-label-sm mb-6 tracking-widest uppercase">Company</h4>
+<ul class="space-y-4 text-on-surface-variant font-label-sm">
+<li><a class="hover:text-secondary transition-colors" href="#">About Us</a></li>
+<li><a class="hover:text-secondary transition-colors" href="#">Careers</a></li>
+<li><a class="hover:text-secondary transition-colors" href="#">Compliance</a></li>
+<li><a class="hover:text-secondary transition-colors" href="#">Legal Hub</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-label-sm mb-6 tracking-widest uppercase">Support</h4>
+<ul class="space-y-4 text-on-surface-variant font-label-sm">
+<li><a class="hover:text-secondary transition-colors" href="#">Help Center</a></li>
+<li><a class="hover:text-secondary transition-colors" href="#">API Documentation</a></li>
+<li><a class="hover:text-secondary transition-colors" href="#">System Status</a></li>
+<li><a class="hover:text-secondary transition-colors" href="#">Contact</a></li>
+</ul>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-outline-variant/10 gap-gutter">
+<p class="font-label-sm text-label-sm text-on-surface-variant">© 2024 Institutional FX Global. Regulated Liquidity Provider.</p>
+<div class="flex gap-8">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Terms of Service</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Compliance</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Contact Support</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

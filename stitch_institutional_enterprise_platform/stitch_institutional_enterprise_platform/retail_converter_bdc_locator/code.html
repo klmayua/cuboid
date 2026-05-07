@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#222a3e",
+                    "secondary-fixed": "#ffe088",
+                    "surface-tint": "#4fdbc8",
+                    "surface-container-low": "#131b2e",
+                    "secondary-fixed-dim": "#e9c349",
+                    "surface-container-highest": "#2d3449",
+                    "on-surface-variant": "#bbcac6",
+                    "inverse-surface": "#dbe2fd",
+                    "surface-variant": "#2d3449",
+                    "secondary-container": "#af8d11",
+                    "on-secondary-fixed-variant": "#574500",
+                    "on-primary-fixed": "#00201c",
+                    "on-error-container": "#ffdad6",
+                    "surface": "#0b1326",
+                    "primary": "#4fdbc8",
+                    "outline": "#859490",
+                    "on-tertiary-fixed": "#00201d",
+                    "on-tertiary": "#003732",
+                    "on-background": "#dbe2fd",
+                    "tertiary-fixed": "#89f5e7",
+                    "on-tertiary-container": "#00423c",
+                    "primary-fixed-dim": "#4fdbc8",
+                    "secondary": "#e9c349",
+                    "surface-bright": "#31394e",
+                    "tertiary": "#6bd8cb",
+                    "on-secondary-fixed": "#241a00",
+                    "on-error": "#690005",
+                    "outline-variant": "#3c4947",
+                    "surface-container-lowest": "#060d20",
+                    "on-secondary-container": "#342800",
+                    "inverse-primary": "#006b5f",
+                    "background": "#0b1326",
+                    "primary-container": "#14b8a6",
+                    "on-secondary": "#3c2f00",
+                    "surface-dim": "#0b1326",
+                    "on-primary-fixed-variant": "#005048",
+                    "tertiary-fixed-dim": "#6bd8cb",
+                    "primary-fixed": "#71f8e4",
+                    "error": "#ffb4ab",
+                    "on-tertiary-fixed-variant": "#005049",
+                    "error-container": "#93000a",
+                    "inverse-on-surface": "#283044",
+                    "on-surface": "#dbe2fd",
+                    "tertiary-container": "#44b5a8",
+                    "on-primary": "#003731",
+                    "surface-container": "#171f33",
+                    "on-primary-container": "#00423b"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "container-max": "1600px",
+                    "density": "compact",
+                    "unit": "4px",
+                    "margin": "32px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "data-mono": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "body-base": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "display-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "data-mono": ["13px", {"lineHeight": "1.0", "letterSpacing": "0em", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-base": ["14px", {"lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0b1326;
+            color: #dbe2fd;
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-panel {
+            background: rgba(79, 219, 200, 0.04);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .glass-panel-active {
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            background: rgba(79, 219, 200, 0.08);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sheen {
+            position: relative;
+            overflow: hidden;
+        }
+        .sheen::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 45%, rgba(255,255,255,0.05) 50%, transparent 55%);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/40 backdrop-blur-xl border-b border-outline-variant/30 shadow-sm">
+<div class="flex justify-between items-center px-margin py-4 max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md font-bold tracking-tight text-primary">INSTITUTIONAL FX</div>
+<div class="hidden md:flex items-center gap-gutter">
+<a class="font-body-base text-body-base text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Market Rates</a>
+<a class="font-body-base text-body-base text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">BDC Locator</a>
+<a class="font-body-base text-body-base text-primary border-b-2 border-primary pb-1" href="#">Convert</a>
+<a class="font-body-base text-body-base text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Corporate</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors duration-200">Login</button>
+<button class="bg-primary-container text-on-primary-container px-4 py-2 rounded-lg font-label-sm text-label-sm scale-95 active:scale-90 transition-transform">Open Account</button>
+</div>
+</div>
+</nav>
+<main class="pt-24 pb-20 px-margin max-w-container-max mx-auto space-y-12">
+<!-- Hero Section: Currency Converter -->
+<section class="relative">
+<div class="absolute -top-24 -left-24 w-96 h-96 bg-primary/10 blur-[120px] rounded-full pointer-events-none"></div>
+<div class="mb-8">
+<h1 class="font-display-lg text-display-lg mb-2">Institutional-Grade <span class="text-primary">Conversion</span></h1>
+<p class="text-on-surface-variant max-w-2xl font-body-base text-body-base">Access real-time liquidity pools and lock in institutional rates for your public transactions. Transparent, secure, and regulated.</p>
+</div>
+<div class="glass-panel p-8 rounded-xl sheen grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+<div class="md:col-span-5 space-y-4">
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant">SELL AMOUNT</label>
+<div class="relative">
+<input class="w-full bg-surface-container-low border border-outline-variant/50 focus:border-primary rounded-lg px-4 py-4 text-headline-md font-headline-md outline-none transition-all" type="number" value="1000.00"/>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-2 bg-surface-container-highest px-3 py-1.5 rounded-full border border-outline-variant">
+<span class="material-symbols-outlined text-primary text-sm">monetization_on</span>
+<span class="font-label-sm text-label-sm">USD</span>
+</div>
+</div>
+</div>
+</div>
+<div class="md:col-span-2 flex justify-center">
+<div class="bg-surface-container-highest p-4 rounded-full border border-primary/30 shadow-[0_0_15px_rgba(79,219,200,0.2)]">
+<span class="material-symbols-outlined text-primary text-2xl">sync_alt</span>
+</div>
+</div>
+<div class="md:col-span-5 space-y-4">
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant">BUY AMOUNT (ESTIMATED)</label>
+<div class="relative">
+<input class="w-full bg-surface-container-low border border-outline-variant/50 focus:border-primary rounded-lg px-4 py-4 text-headline-md font-headline-md outline-none transition-all" type="number" value="1450000.00"/>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-2 bg-surface-container-highest px-3 py-1.5 rounded-full border border-outline-variant">
+<span class="material-symbols-outlined text-primary text-sm">payments</span>
+<span class="font-label-sm text-label-sm">NGN</span>
+</div>
+</div>
+</div>
+</div>
+<div class="md:col-span-12 flex flex-col md:flex-row justify-between items-center bg-surface-container-low/50 p-4 rounded-lg border border-outline-variant/20 gap-4">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-data-mono text-data-mono text-primary">LIVE RATE: 1 USD = 1,450.00 NGN</span>
+</div>
+<span class="text-outline text-sm">|</span>
+<div class="flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label-sm text-label-sm uppercase">Institutional Spread Applied</span>
+</div>
+</div>
+<button class="bg-primary text-on-primary px-8 py-3 rounded-lg font-label-sm text-label-sm flex items-center gap-2 hover:brightness-110 transition-all">
+<span class="material-symbols-outlined">lock</span>
+                        LOCK RATE FOR 15 MINS
+                    </button>
+</div>
+</div>
+</section>
+<!-- BDC Locator Section -->
+<section class="space-y-6">
+<div class="flex justify-between items-end">
+<div>
+<h2 class="font-headline-md text-headline-md">Verified BDC Locator</h2>
+<p class="text-on-surface-variant font-body-base text-body-base">Find trusted exchange partners near you with verified liquidity status.</p>
+</div>
+<div class="flex gap-2">
+<div class="bg-surface-container-high px-4 py-2 rounded-lg flex items-center gap-2 border border-outline-variant/30">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<select class="bg-transparent border-none outline-none font-label-sm text-label-sm cursor-pointer">
+<option>Lagos, Nigeria</option>
+<option>Abuja, Nigeria</option>
+<option>Nairobi, Kenya</option>
+</select>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter h-[600px]">
+<!-- List View -->
+<div class="lg:col-span-4 space-y-4 overflow-y-auto pr-2 custom-scrollbar">
+<div class="glass-panel-active p-4 rounded-lg space-y-3 cursor-pointer transition-all">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-label-sm text-label-sm text-primary">Apex Global Exchange</h3>
+<p class="text-xs text-on-surface-variant">Victoria Island, Lagos</p>
+</div>
+<span class="bg-secondary/20 text-secondary text-[10px] px-2 py-0.5 rounded font-bold">PREMIUM PARTNER</span>
+</div>
+<div class="flex justify-between items-center text-xs">
+<span class="text-outline">USD Liquidity: <span class="text-on-surface">$250k+</span></span>
+<span class="text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">directions_walk</span> 0.8 km
+                            </span>
+</div>
+</div>
+<div class="glass-panel p-4 rounded-lg space-y-3 cursor-pointer hover:bg-surface-container-high transition-all">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-label-sm text-label-sm">Standard Bureau de Change</h3>
+<p class="text-xs text-on-surface-variant">Ikoyi, Lagos</p>
+</div>
+<span class="bg-primary/20 text-primary text-[10px] px-2 py-0.5 rounded font-bold">VERIFIED</span>
+</div>
+<div class="flex justify-between items-center text-xs">
+<span class="text-outline">USD Liquidity: <span class="text-on-surface">$100k+</span></span>
+<span class="text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">directions_walk</span> 2.4 km
+                            </span>
+</div>
+</div>
+<div class="glass-panel p-4 rounded-lg space-y-3 cursor-pointer hover:bg-surface-container-high transition-all">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-label-sm text-label-sm">Capital Trust BDC</h3>
+<p class="text-xs text-on-surface-variant">Lekki Phase 1, Lagos</p>
+</div>
+<span class="bg-primary/20 text-primary text-[10px] px-2 py-0.5 rounded font-bold">VERIFIED</span>
+</div>
+<div class="flex justify-between items-center text-xs">
+<span class="text-outline">USD Liquidity: <span class="text-on-surface">$500k+</span></span>
+<span class="text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">directions_walk</span> 5.1 km
+                            </span>
+</div>
+</div>
+<div class="glass-panel p-4 rounded-lg space-y-3 cursor-pointer hover:bg-surface-container-high transition-all">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-label-sm text-label-sm">Lagos Central FX</h3>
+<p class="text-xs text-on-surface-variant">Broad Street, Lagos Island</p>
+</div>
+<span class="bg-primary/20 text-primary text-[10px] px-2 py-0.5 rounded font-bold">VERIFIED</span>
+</div>
+<div class="flex justify-between items-center text-xs">
+<span class="text-outline">USD Liquidity: <span class="text-on-surface">$1M+</span></span>
+<span class="text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">directions_walk</span> 8.9 km
+                            </span>
+</div>
+</div>
+</div>
+<!-- Map View -->
+<div class="lg:col-span-8 glass-panel rounded-xl relative overflow-hidden group">
+<img alt="Map of Lagos" class="w-full h-full object-cover opacity-50 grayscale contrast-125" data-alt="A high-fidelity digital map interface of Lagos, Nigeria, styled in deep navy and sea green hues. The map features luminous neon route lines and glowing dots representing verified currency exchange locations. The visual style is futuristic and institutional, emphasizing precision and security with a refined glassmorphic overlay on data panels. Soft cyan light emanates from the coastal regions, creating a high-performance digital environment." data-location="Lagos, Nigeria" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7e21b6NmBLaRCj9frS7SJ7Co6cULRMoEIW-Rbwdpp-XVabjLvJG_m68t7k3zDLPJq_F0-U5GkKba2Yct45s6ScHDwZKk8fcmmkyVvDK_YtFeWA2WnfOYWZnQeWIzDvAiIOGeYx6ZhJSXjzCM1e9vcKxaYn83lGV2K0jw4OOSACWB0njMeS35vMxSJOwpjgAO7Kb_H9NPsl2CrxmTpeBq6tfF5knbTfa4QS2TaFTra7skBB4GZQY-y2z2FOnKbaI0iQcbIEFgHcl8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent opacity-60"></div>
+<!-- Map Markers (Simulated) -->
+<div class="absolute top-1/4 left-1/3">
+<div class="relative group cursor-pointer">
+<div class="absolute -inset-2 bg-primary/40 blur-lg rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="relative w-4 h-4 bg-primary border-2 border-surface rounded-full shadow-[0_0_10px_rgba(79,219,200,0.8)]"></div>
+</div>
+</div>
+<div class="absolute top-1/2 left-1/2">
+<div class="relative group cursor-pointer">
+<div class="absolute -inset-4 bg-secondary/40 blur-lg rounded-full opacity-100"></div>
+<div class="relative w-6 h-6 bg-secondary border-2 border-surface rounded-full shadow-[0_0_15px_rgba(233,195,73,0.8)] flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-on-secondary" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+</div>
+<div class="absolute bottom-6 right-6 flex gap-2">
+<button class="w-10 h-10 bg-surface-container-highest border border-outline-variant/30 rounded-lg flex items-center justify-center hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">add</span>
+</button>
+<button class="w-10 h-10 bg-surface-container-highest border border-outline-variant/30 rounded-lg flex items-center justify-center hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<button class="w-10 h-10 bg-surface-container-highest border border-outline-variant/30 rounded-lg flex items-center justify-center hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">my_location</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Market Insights Section (Bento Grid) -->
+<section class="space-y-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">insights</span>
+<h2 class="font-headline-md text-headline-md">Market Insights</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Trend Card -->
+<div class="glass-panel p-6 rounded-xl space-y-4 sheen">
+<div class="flex justify-between items-start">
+<span class="font-label-sm text-label-sm text-outline">USD/NGN 7-DAY TREND</span>
+<span class="text-error flex items-center gap-1 font-data-mono text-data-mono">
+<span class="material-symbols-outlined text-sm">trending_up</span> +2.4%
+                        </span>
+</div>
+<div class="h-32 flex items-end gap-1">
+<div class="flex-1 bg-primary/20 h-1/2 rounded-t-sm"></div>
+<div class="flex-1 bg-primary/20 h-2/3 rounded-t-sm"></div>
+<div class="flex-1 bg-primary/20 h-1/2 rounded-t-sm"></div>
+<div class="flex-1 bg-primary/20 h-3/4 rounded-t-sm"></div>
+<div class="flex-1 bg-primary/40 h-5/6 rounded-t-sm"></div>
+<div class="flex-1 bg-primary/60 h-2/3 rounded-t-sm"></div>
+<div class="flex-1 bg-primary h-full rounded-t-sm"></div>
+</div>
+<p class="text-xs text-on-surface-variant font-body-base">Volatile morning session. Analysts suggest locking rates before the afternoon liquidity dip.</p>
+</div>
+<!-- Tip Card -->
+<div class="glass-panel p-6 rounded-xl space-y-4 border-l-2 border-l-secondary/50">
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">tips_and_updates</span>
+<span class="font-label-sm text-label-sm uppercase">Travel FX Tip</span>
+</div>
+<h3 class="font-headline-md text-base">The 'Off-Peak' Advantage</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">BDC operators in commercial hubs like Abuja Central typically offer tighter spreads between 10 AM and 2 PM when wholesale banks are active.</p>
+<a class="text-primary text-xs font-bold hover:underline flex items-center gap-1" href="#">
+                        Read Full Report <span class="material-symbols-outlined text-xs">arrow_forward</span>
+</a>
+</div>
+<!-- Promotional Institutional Card -->
+<div class="relative rounded-xl overflow-hidden group">
+<img alt="Institutional Trading" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida/ADBb0ujKT08f8hrmN89H8EX9TWr04ydyIJekqTG-ziBTZ1zfQinT9qh14kyRW_pkGNDGD5QDfumjysgZ5rN6q1TU3xBPJNwhQ6HXiqQ_wVNJwdzHb5L2Ui_Br73Kr9bW76e8tGK-s5TBCLkN4yyAdr9d6IEICp02IBJcBhDeQDQkpiPNNg159F8vIe8WcJBNfBRGk82pb_z6z2Am5uOe-w2hhknGkHvgW22x9nn1FCTwcUzl78wjjE0_WGPlAJ3d3JX0GCy3dqAXfqDiIg"/>
+<div class="absolute inset-0 bg-surface/80 backdrop-blur-sm p-6 flex flex-col justify-end">
+<h3 class="text-primary font-headline-md text-lg mb-2">Corporate Liquidity?</h3>
+<p class="text-xs text-on-surface-variant mb-4">Moving over $100k? Access our high-touch institutional desk for preferential rates and T+0 settlement.</p>
+<button class="w-full py-2 border border-primary text-primary rounded-lg font-label-sm text-label-sm hover:bg-primary hover:text-on-primary transition-all">TALK TO A DEALER</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-outline-variant/20 bg-surface-container-lowest">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin py-8 gap-gutter max-w-container-max mx-auto">
+<div class="font-headline-md text-primary">INSTITUTIONAL FX</div>
+<div class="flex gap-gutter">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors opacity-80 hover:opacity-100" href="#">Compliance</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors opacity-80 hover:opacity-100" href="#">Contact Support</a>
+</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant opacity-60">
+                © 2024 Institutional FX Global. Regulated Liquidity Provider.
+            </div>
+</div>
+</footer>
+</body></html>
