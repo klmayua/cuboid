@@ -1,5 +1,38 @@
+"use client";
+
 import { CuboidLogo } from "@/components";
-const settlements = [{ id: "STL-001", amount: "$5,000", corridor: "USD/NGN", status: "settled" }, { id: "STL-002", amount: "£2,400", corridor: "GBP/NGN", status: "pending" }];
+
+const settlements = [
+  { id: "STL-001", amount: "$5,000", corridor: "USD/NGN", status: "settled" },
+  { id: "STL-002", amount: "£2,400", corridor: "GBP/NGN", status: "pending" }
+];
+
 export default function MobileSettlements() {
-  return <main className="min-h-screen bg-[#060D20]"><div className="p-6 pb-24"><div className="flex items-center gap-3 mb-8"><CuboidLogo width={32} height={32} /><span className="text-lg font-semibold text-[rgba(255,255,255,0.96)]">Settlements</span></div><div className="space-y-3">{settlements.map((s, i) => (<div key={i} className="glass-panel p-4"><div className="flex justify-between mb-2"><span className="text-[rgba(255,255,255,0.96)]">{s.corridor}</span><span className="text-[rgba(255,255,255,0.96)]">{s.amount}</span></div><span className={`text-sm ${s.status === 'settled' ? 'text-[#71F8E4]' : 'text-[#E9C349]'}`}>{s.status}</span></div>))}</div></div><div className="fixed bottom-0 left-0 right-0 bg-[#0B1326] border-t border-[rgba(255,255,255,0.08)] p-4 flex justify-around"><a href="/mobile-dashboard" className="text-[rgba(255,255,255,0.62)] text-xs">Home</a><a href="/mobile-settlements" className="text-[#6B8CFF] text-xs">Settle</a><a href="/mobile-wallet" className="text-[rgba(255,255,255,0.62)] text-xs">Wallet</a><a href="/mobile-settings" className="text-[rgba(255,255,255,0.62)] text-xs">Settings</a></div></main>;
+  return (
+    <main className="min-h-screen bg-[#060D20]">
+      <div className="p-6 pb-24">
+        <div className="flex items-center gap-3 mb-8">
+          <CuboidLogo width={32} height={32} />
+          <span className="text-lg font-semibold text-[rgba(255,255,255,0.96)]">Settlements</span>
+        </div>
+        <div className="space-y-3">
+          {settlements.map((s, i) => (
+            <div key={i} className="glass-panel p-4">
+              <div className="flex justify-between mb-2">
+                <span className="text-[rgba(255,255,255,0.96)]">{s.corridor}</span>
+                <span className="text-[rgba(255,255,255,0.96)]">{s.amount}</span>
+              </div>
+              <span className={`text-sm ${s.status === "settled" ? "text-[#71F8E4]" : "text-[#E9C349]"}`}>{s.status}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="fixed bottom-0 left-0 right-0 bg-[#0B1326] border-t border-[rgba(255,255,255,0.08)] p-4 flex justify-around">
+        <a href="/mobile-dashboard" className="text-[rgba(255,255,255,0.62)] text-xs">Home</a>
+        <a href="/mobile-settlements" className="text-[#6B8CFF] text-xs">Settle</a>
+        <a href="/mobile-wallet" className="text-[rgba(255,255,255,0.62)] text-xs">Wallet</a>
+        <a href="/mobile-settings" className="text-[rgba(255,255,255,0.62)] text-xs">Settings</a>
+      </div>
+    </main>
+  );
 }

@@ -1,5 +1,35 @@
+"use client";
+
 import { Navigation } from "@/components";
-const services = [{ name: "API Gateway", status: "healthy", uptime: "99.99%" }, { name: "Settlement Engine", status: "healthy", uptime: "99.98%" }, { name: "Compliance Service", status: "healthy", uptime: "100%" }, { name: "Rate Feed", status: "degraded", uptime: "99.85%" }];
+
+const services = [
+  { name: "API Gateway", status: "healthy", uptime: "99.99%" },
+  { name: "Settlement Engine", status: "healthy", uptime: "99.98%" },
+  { name: "Compliance Service", status: "healthy", uptime: "100%" },
+  { name: "Rate Feed", status: "degraded", uptime: "99.85%" }
+];
+
 export default function Infrastructure() {
-  return <main className="min-h-screen bg-[#060D20]"><Navigation /><section className="pt-[96px]"><div className="max-w-[1600px] mx-auto px-[80px] py-[140px]"><h1 className="text-[40px] font-bold text-[rgba(255,255,255,0.96)] mb-2">Infrastructure Monitoring</h1><p className="text-[rgba(255,255,255,0.62)] mb-8">System health and status</p><div className="space-y-2">{services.map((s, i) => (<div key={i} className="glass-panel p-4 flex items-center justify-between"><span className="text-[rgba(255,255,255,0.96)]">{s.name}</span><div className="flex items-center gap-4"><span className="text-sm text-[rgba(255,255,255,0.62)]">{s.uptime}</span><span className={`text-sm ${s.status === 'healthy' ? 'text-[#71F8E4]' : 'text-[#E9C349]'}`}>{s.status}</span></div></div>))}</div></div></section></main>;
+  return (
+    <main className="min-h-screen bg-[#060D20]">
+      <Navigation />
+      <section className="pt-[96px]">
+        <div className="max-w-[1600px] mx-auto px-[80px] py-[140px]">
+          <h1 className="text-[40px] font-bold text-[rgba(255,255,255,0.96)] mb-2">Infrastructure Monitoring</h1>
+          <p className="text-[rgba(255,255,255,0.62)] mb-8">System health and status</p>
+          <div className="space-y-2">
+            {services.map((s, i) => (
+              <div key={i} className="glass-panel p-4 flex items-center justify-between">
+                <span className="text-[rgba(255,255,255,0.96)]">{s.name}</span>
+                <div className="flex items-center gap-4">
+                  <span className="text-sm text-[rgba(255,255,255,0.62)]">{s.uptime}</span>
+                  <span className={`text-sm ${s.status === "healthy" ? "text-[#71F8E4]" : "text-[#E9C349]"}`}>{s.status}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
+  );
 }

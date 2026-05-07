@@ -1,4 +1,40 @@
+"use client";
+
 import { Navigation, Footer } from "@/components";
+
 export default function Contact() {
-  return <main className="min-h-screen bg-[#060D20]"><Navigation /><section className="pt-[96px]"><div className="max-w-[1600px] mx-auto px-[80px] py-[140px]"><div className="text-[12px] font-semibold tracking-[0.12em] uppercase opacity-70 text-[#6B8CFF] mb-6">CONTACT</div><h1 className="text-[40px] font-bold text-[rgba(255,255,255,0.96)] leading-[1.05] max-w-[20ch] mb-6">Get in touch</h1><p className="text-[18px] text-[rgba(255,255,255,0.82)] max-w-[32ch] mb-16">Ready to transform your institutional FX operations?</p><div className="grid grid-cols-12 gap-[32px]"><div className="col-span-12 md:col-span-6 glass-panel p-8"><h3 className="text-xl font-semibold text-[rgba(255,255,255,0.96)] mb-6">Send us a message</h3><div className="space-y-4"><input placeholder="Name" className="w-full h-[60px] bg-[#131B2E] border border-[rgba(255,255,255,0.08)] rounded-[14px] px-4 text-[rgba(255,255,255,0.96)]" /><input placeholder="Email" className="w-full h-[60px] bg-[#131B2E] border border-[rgba(255,255,255,0.08)] rounded-[14px] px-4 text-[rgba(255,255,255,0.96)]" /><textarea placeholder="Message" rows={4} className="w-full bg-[#131B2E] border border-[rgba(255,255,255,0.08)] rounded-[14px] p-4 text-[rgba(255,255,255,0.96)]" /><button className="h-[60px] px-8 bg-[#6B8CFF] text-white rounded-[18px] font-semibold hover:bg-[#5A7AE8] transition-all w-full">Send Message</button></div></div><div className="col-span-12 md:col-span-6"><div className="glass-panel p-8 mb-8"><h3 className="text-xl font-semibold text-[rgba(255,255,255,0.96)] mb-4">Lagos, Nigeria</h3><p className="text-sm text-[rgba(255,255,255,0.62)]">Victoria Island<br />Lagos, Nigeria</p></div><div className="glass-panel p-8"><h3 className="text-xl font-semibold text-[rgba(255,255,255,0.96)] mb-4">Email</h3><p className="text-sm text-[rgba(255,255,255,0.62)]">institutions@cuboid.technology</p></div></div></div></div></section></section><Footer /></main>;
+  return (
+    <main className="min-h-screen bg-[#060D20]">
+      <Navigation />
+      <section className="pt-[96px]">
+        <div className="max-w-[1600px] mx-auto px-[80px] py-[140px]">
+          <div className="text-[12px] font-semibold tracking-[0.12em] uppercase opacity-70 text-[#6B8CFF] mb-6">CONTACT</div>
+          <h1 className="text-[40px] font-bold text-[rgba(255,255,255,0.96)] leading-[1.05] max-w-[20ch] mb-6">Get in touch</h1>
+          <p className="text-[18px] text-[rgba(255,255,255,0.82)] max-w-[32ch] mb-16">Ready to transform your institutional FX operations?</p>
+          <div className="grid grid-cols-12 gap-[32px]">
+            <div className="col-span-12 md:col-span-6 glass-panel p-8">
+              <h3 className="text-xl font-semibold text-[rgba(255,255,255,0.96)] mb-6">Send us a message</h3>
+              <div className="space-y-4">
+                <input placeholder="Name" className="w-full h-[60px] bg-[#131B2E] border border-[rgba(255,255,255,0.08)] rounded-[14px] px-4 text-[rgba(255,255,255,0.96)]" />
+                <input placeholder="Email" className="w-full h-[60px] bg-[#131B2E] border border-[rgba(255,255,255,0.08)] rounded-[14px] px-4 text-[rgba(255,255,255,0.96)]" />
+                <textarea placeholder="Message" rows={4} className="w-full bg-[#131B2E] border border-[rgba(255,255,255,0.08)] rounded-[14px] p-4 text-[rgba(255,255,255,0.96)]" />
+                <button className="h-[60px] px-8 bg-[#6B8CFF] text-white rounded-[18px] font-semibold hover:bg-[#5A7AE8] transition-all w-full">Send Message</button>
+              </div>
+            </div>
+            <div className="col-span-12 md:col-span-6">
+              <div className="glass-panel p-8 mb-8">
+                <h3 className="text-xl font-semibold text-[rgba(255,255,255,0.96)] mb-4">Lagos, Nigeria</h3>
+                <p className="text-sm text-[rgba(255,255,255,0.62)]">Victoria Island<br />Lagos, Nigeria</p>
+              </div>
+              <div className="glass-panel p-8">
+                <h3 className="text-xl font-semibold text-[rgba(255,255,255,0.96)] mb-4">Email</h3>
+                <p className="text-sm text-[rgba(255,255,255,0.62)]">institutions@cuboid.technology</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <Footer />
+    </main>
+  );
 }

@@ -1,3 +1,4 @@
+'use client'
 import type { Metadata } from 'next';
 import './globals.css';
 export const metadata: Metadata = { title: 'CUBOID — Institutional FX Infrastructure', description: 'Trust infrastructure for the movement of value across Africa.' };
