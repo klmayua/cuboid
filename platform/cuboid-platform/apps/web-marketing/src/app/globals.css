@@ -1,109 +1,45 @@
-/* CUBOID - EXACT STITCH DESIGN IMPLEMENTATION */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  /* EXACT COLORS FROM STITCH */
-  --color-primary: #4fdbc8;
-  --color-primary-container: #14b8a6;
-  --color-on-primary: #003731;
-  --color-on-primary-container: #00423b;
-  --color-secondary: #e9c349;
-  --color-secondary-container: #af8d11;
-  --color-on-secondary: #3c2f00;
-  --color-on-secondary-container: #342800;
-  --color-surface: #0b1326;
-  --color-surface-dim: #0b1326;
-  --color-surface-container-lowest: #060d20;
-  --color-surface-container-low: #131b2e;
-  --color-surface-container: #171f33;
-  --color-surface-container-high: #222a3e;
-  --color-surface-container-highest: #2d3449;
-  --color-surface-variant: #2d3449;
-  --color-surface-bright: #31394e;
-  --color-on-surface: #dbe2fd;
-  --color-on-surface-variant: #bbcac6;
-  --color-on-background: #dbe2fd;
-  --color-outline: #859490;
-  --color-outline-variant: #3c4947;
-  --color-error: #ffb4ab;
-  --color-background: #0b1326;
-  
-  /* EXACT SPACING FROM STITCH */
-  --spacing-margin: 32px;
-  --spacing-gutter: 16px;
-  --spacing-container-max: 1600px;
+  --bg-primary: #060D20;
+  --bg-secondary: #0B1326;
+  --bg-tertiary: #131B2E;
+  --accent-primary: #6B8CFF;
+  --accent-cyan: #71F8E4;
+  --accent-gold: #E9C349;
+  --accent-red: #FFB4AB;
+  --text-primary: rgba(255,255,255,0.96);
+  --text-secondary: rgba(255,255,255,0.82);
+  --text-muted: rgba(255,255,255,0.62);
+  --border-subtle: rgba(255,255,255,0.08);
+  --border-medium: rgba(255,255,255,0.12);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Inter', system-ui, sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
-  background-color: var(--color-surface);
-  color: var(--color-on-surface);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 18px;
+  line-height: 1.7;
+  background-color: var(--bg-primary);
+  color: var(--text-secondary);
   -webkit-font-smoothing: antialiased;
 }
 
-/* EXACT TYPOGRAPHY FROM STITCH */
-.font-display-lg {
-  font-size: 48px;
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-}
+.font-hero { font-size: clamp(72px, 9vw, 140px); font-weight: 800; line-height: 0.9; letter-spacing: -0.05em; }
+.font-section-heading { font-size: 40px; font-weight: 700; line-height: 1.05; }
+.font-dashboard-metric { font-size: 48px; font-weight: 700; }
+.font-body { font-size: 18px; line-height: 1.7; }
+.font-label { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7; }
 
-.font-headline-md {
-  font-size: 24px;
-  font-weight: 600;
-  line-height: 1.3;
-  letter-spacing: -0.01em;
-}
+.glass-panel { background: rgba(19,27,46,0.72); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.35); }
+.navbar-glass { background: rgba(6,13,32,0.72); backdrop-filter: blur(24px); border-bottom: 1px solid rgba(255,255,255,0.06); }
 
-.font-body-base {
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.5;
-}
-
-.font-label-sm {
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: 0.05em;
-}
-
-.font-data-mono {
-  font-family: 'Inter', monospace;
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 1.0;
-}
-
-/* EXACT GLASS PANEL FROM STITCH */
-.glass-panel {
-  background: rgba(11, 19, 38, 0.4);
-  backdrop-filter: blur(20px);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  border-left: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.active-glow {
-  box-shadow: 0 0 15px rgba(79, 219, 200, 0.2);
-}
-
-.gold-accent-border {
-  border: 1px solid rgba(212, 175, 55, 0.3);
-}
+.btn-primary { height: 60px; padding-inline: 32px; border-radius: 18px; font-weight: 600; background: #6B8CFF; color: #fff; border: none; cursor: pointer; transition: all 0.2s ease; }
+.btn-primary:hover { background: #5A7AE8; transform: translateY(-1px); }
+.btn-secondary { height: 60px; padding-inline: 32px; border-radius: 18px; font-weight: 600; background: transparent; border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.82); cursor: pointer; transition: all 0.2s ease; }
+.btn-secondary:hover { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.2); }

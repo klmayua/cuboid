@@ -1,65 +1,25 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    '../../packages/design-system/src/**/*.{js,ts,jsx,tsx}',
-  ],
+  content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
       colors: {
-        brand: {
-          deepTrust: '#0A2A66',
-          royalTrust: '#123E91',
-          lightTrust: '#5E8DFF',
-        },
-        dark: {
-          midnight: '#05070D',
-          surface: '#0B1020',
-          elevated: '#10182B',
-        },
-        glass: {
-          surface: 'rgba(255, 255, 255, 0.08)',
-          border: 'rgba(255, 255, 255, 0.14)',
-          hairline: 'rgba(255, 255, 255, 0.07)',
-        },
-        typography: {
-          primary: '#F5F8FF',
-          secondary: '#AAB7D1',
-          muted: '#7183A6',
-          disabled: '#51617D',
-        },
-        semantic: {
-          success: '#17C964',
-          warning: '#F5A524',
-          danger: '#F31260',
-          info: '#5E8DFF',
-          neutral: '#7C8AA5',
-          pending: '#9B7CFF',
-          escrow: '#00B8D9',
-        },
+        background: { primary: '#060D20', secondary: '#0B1326', tertiary: '#131B2E' },
+        accent: { primary: '#6B8CFF', cyan: '#71F8E4', gold: '#E9C349', red: '#FFB4AB' },
+        text: { primary: 'rgba(255,255,255,0.96)', secondary: 'rgba(255,255,255,0.82)', muted: 'rgba(255,255,255,0.62)' },
+        border: { subtle: 'rgba(255,255,255,0.08)', medium: 'rgba(255,255,255,0.12)' },
       },
-      fontFamily: {
-        primary: ['Inter Tight', 'system-ui', 'sans-serif'],
-        secondary: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
-        display: ['Manrope', 'system-ui', 'sans-serif'],
-        mono: ['IBM Plex Mono', 'monospace'],
-      },
-      borderRadius: {
-        card: '24px',
-        button: '16px',
-        input: '14px',
-        modal: '28px',
-      },
-      boxShadow: {
-        glass: '0 4px 24px rgba(0, 0, 0, 0.08)',
-        'glass-hover': '0 8px 32px rgba(0, 0, 0, 0.12)',
-        modal: '0 16px 48px rgba(0, 0, 0, 0.16)',
-        focus: '0 0 0 3px rgba(94, 141, 255, 0.3)',
-      },
-      backdropBlur: {
-        glass: '20px',
-      },
+      fontFamily: { primary: ['Inter', 'Geist', 'IBM Plex Sans', 'sans-serif'], display: ['Inter', 'Geist', 'sans-serif'], mono: ['IBM Plex Mono', 'monospace'] },
+      fontSize: { hero: 'clamp(72px, 9vw, 140px)', 'section-heading': '40px', 'dashboard-metric': '48px', body: '18px', label: '12px' },
+      fontWeight: { hero: 800, section: 700, metric: 700, label: 600 },
+      lineHeight: { hero: '0.9', section: '1.05', body: '1.7' },
+      letterSpacing: { hero: '-0.05em', label: '0.12em' },
+      borderRadius: { card: '24px', button: '18px', input: '14px' },
+      boxShadow: { card: '0 10px 30px rgba(0,0,0,0.35)', 'card-hover': '0 14px 40px rgba(0,0,0,0.45)', focus: '0 0 0 3px rgba(107,140,255,0.3)' },
+      backdropBlur: { glass: '20px', navbar: '24px' },
+      spacing: { container: '1600px', desktop: '80px', section: '140px', grid: '32px', navbar: '96px', button: '60px' },
+      maxWidth: { container: '1600px' },
+      height: { navbar: '96px', button: '60px' },
     },
   },
   plugins: [],

@@ -1,85 +1,34 @@
-import Link from 'next/link';
-import { CuboidLogo } from './CuboidLogo';
+"use client";
+import { motion } from "framer-motion";
+import { CuboidLogo } from "./CuboidLogo";
+
+const footerLinks = {
+  product: [{ label: "Solutions", href: "/solutions" }, { label: "Technology", href: "/technology" }, { label: "Compliance", href: "/compliance" }, { label: "Pricing", href: "/pricing" }],
+  company: [{ label: "About", href: "/about" }, { label: "Careers", href: "/careers" }, { label: "Contact", href: "/contact" }, { label: "Press", href: "/press" }],
+  resources: [{ label: "Documentation", href: "/docs" }, { label: "API Reference", href: "/api" }, { label: "Status", href: "/status" }, { label: "Blog", href: "/blog" }],
+  legal: [{ label: "Privacy Policy", href: "/privacy" }, { label: "Terms of Service", href: "/terms" }, { label: "Security", href: "/security" }, { label: "Compliance", href: "/compliance" }],
+};
 
 export function Footer() {
-  const footerLinks = {
-    Products: [
-      { label: 'Cuboid Connect', href: '/products/connect' },
-      { label: 'Cuboid FX', href: '/products/fx' },
-      { label: 'Cuboid Treasury', href: '/products/treasury' },
-      { label: 'Cuboid Pay', href: '/products/pay' },
-      { label: 'Cuboid Escrow', href: '/products/escrow' },
-    ],
-    Solutions: [
-      { label: 'For Banks', href: '/solutions/banks' },
-      { label: 'For IMTOs', href: '/solutions/imtos' },
-      { label: 'For Enterprises', href: '/solutions/enterprises' },
-      { label: 'For Developers', href: '/solutions/developers' },
-    ],
-    Resources: [
-      { label: 'Documentation', href: '/docs' },
-      { label: 'API Reference', href: '/docs/api' },
-      { label: 'Status', href: '/status' },
-      { label: 'Security', href: '/security' },
-    ],
-    Company: [
-      { label: 'About', href: '/about' },
-      { label: 'Careers', href: '/careers' },
-      { label: 'Press', href: '/press' },
-      { label: 'Contact', href: '/contact' },
-    ],
-  };
-
   return (
-    <footer className="bg-[#0B1020] border-t border-white/7 py-16 px-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
-          <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <CuboidLogo variant="mark" width={28} height={28} />
-              <span className="text-lg font-semibold text-[#0A2A66]">CUBOID</span>
-            </Link>
-            <p className="text-sm text-[#7183A6]">
-              Institutional economic infrastructure for Africa and beyond.
-            </p>
+    <motion.footer initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.4 }} className="bg-[#0B1326] border-t border-[rgba(255,255,255,0.08)]">
+      <div className="max-w-[1600px] mx-auto px-[80px] py-[140px]">
+        <div className="grid grid-cols-12 gap-[32px] mb-16">
+          <div className="col-span-12 lg:col-span-4">
+            <div className="flex items-center gap-3 mb-6"><CuboidLogo width={32} height={32} /><span className="text-[rgba(255,255,255,0.96)] font-semibold text-lg">CUBOID</span></div>
+            <p className="text-[rgba(255,255,255,0.62)] text-sm max-w-[24ch] mb-6">Institutional infrastructure for the movement of value across Africa.</p>
+            <div className="flex items-center gap-4"><div className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-[#71F8E4]" /><span className="text-[rgba(255,255,255,0.62)] text-xs">All Systems Operational</span></div></div>
           </div>
-
-          {Object.entries(footerLinks).map(([title, links]) => (
-            <div key={title}>
-              <h4 className="text-sm font-semibold text-[#F5F8FF] mb-4">{title}</h4>
-              <ul className="space-y-3">
-                {links.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-[#7183A6] hover:text-[#F5F8FF] transition-colors"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <div className="col-span-6 lg:col-span-2"><div className="text-[12px] font-semibold tracking-[0.12em] uppercase opacity-70 text-[rgba(255,255,255,0.62)] mb-4">PRODUCT</div><ul className="space-y-3">{footerLinks.product.map((link) => (<li key={link.href}><a href={link.href} className="text-[rgba(255,255,255,0.82)] text-sm hover:text-[rgba(255,255,255,0.96)] transition-colors">{link.label}</a></li>))}</ul></div>
+          <div className="col-span-6 lg:col-span-2"><div className="text-[12px] font-semibold tracking-[0.12em] uppercase opacity-70 text-[rgba(255,255,255,0.62)] mb-4">COMPANY</div><ul className="space-y-3">{footerLinks.company.map((link) => (<li key={link.href}><a href={link.href} className="text-[rgba(255,255,255,0.82)] text-sm hover:text-[rgba(255,255,255,0.96)] transition-colors">{link.label}</a></li>))}</ul></div>
+          <div className="col-span-6 lg:col-span-2"><div className="text-[12px] font-semibold tracking-[0.12em] uppercase opacity-70 text-[rgba(255,255,255,0.62)] mb-4">RESOURCES</div><ul className="space-y-3">{footerLinks.resources.map((link) => (<li key={link.href}><a href={link.href} className="text-[rgba(255,255,255,0.82)] text-sm hover:text-[rgba(255,255,255,0.96)] transition-colors">{link.label}</a></li>))}</ul></div>
+          <div className="col-span-6 lg:col-span-2"><div className="text-[12px] font-semibold tracking-[0.12em] uppercase opacity-70 text-[rgba(255,255,255,0.62)] mb-4">LEGAL</div><ul className="space-y-3">{footerLinks.legal.map((link) => (<li key={link.href}><a href={link.href} className="text-[rgba(255,255,255,0.82)] text-sm hover:text-[rgba(255,255,255,0.96)] transition-colors">{link.label}</a></li>))}</ul></div>
         </div>
-
-        <div className="pt-8 border-t border-white/7 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-[#7183A6]">
-            © 2024 Insane Technologies. All rights reserved.
-          </p>
-          <div className="flex items-center gap-6 text-sm text-[#7183A6]">
-            <Link href="/legal/privacy" className="hover:text-[#F5F8FF] transition-colors">
-              Privacy
-            </Link>
-            <Link href="/legal/terms" className="hover:text-[#F5F8FF] transition-colors">
-              Terms
-            </Link>
-            <Link href="/legal/compliance" className="hover:text-[#F5F8FF] transition-colors">
-              Compliance
-            </Link>
-          </div>
+        <div className="pt-8 border-t border-[rgba(255,255,255,0.08)] flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-[rgba(255,255,255,0.62)] text-sm">© 2026 CUBOID Technologies Ltd. All rights reserved.</p>
+          <div className="flex items-center gap-6"><span className="text-[rgba(255,255,255,0.62)] text-sm">Nigeria</span><span className="text-[rgba(255,255,255,0.62)] text-sm">•</span><span className="text-[rgba(255,255,255,0.62)] text-sm">Lagos</span></div>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 }

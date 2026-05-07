@@ -1,58 +1,33 @@
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { CuboidLogo } from './CuboidLogo';
+"use client";
+import { motion } from "framer-motion";
+import { CuboidLogo } from "./CuboidLogo";
+
+const navLinks = [
+  { label: "Solutions", href: "/solutions" },
+  { label: "Technology", href: "/technology" },
+  { label: "Compliance", href: "/compliance" },
+  { label: "About", href: "/about" },
+  { label: "Developers", href: "/developers" },
+];
 
 export function Navigation() {
-  const navItems = [
-    { label: 'Products', href: '/products' },
-    { label: 'Solutions', href: '/solutions' },
-    { label: 'Rates', href: '/rates' },
-    { label: 'Security', href: '/security' },
-    { label: 'Developers', href: '/developers' },
-    { label: 'Learn', href: '/learn' },
-  ];
-
   return (
-    <motion.nav
-      initial={{ y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      className="fixed top-0 left-0 right-0 z-50 px-6 py-4"
-    >
-      <div className="max-w-7xl mx-auto">
-        <div className="glass rounded-2xl px-6 py-3 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3">
-            <CuboidLogo variant="mark" width={32} height={32} />
-            <span className="text-xl font-semibold text-[#0A2A66]">CUBOID</span>
-          </Link>
-
-          <div className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-sm text-[#7183A6] hover:text-[#F5F8FF] transition-colors"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-3">
-            <Link
-              href="/auth/signin"
-              className="text-sm text-[#7183A6] hover:text-[#F5F8FF] transition-colors px-4 py-2"
-            >
-              Sign in
-            </Link>
-            <Link
-              href="/auth/signup"
-              className="text-sm bg-gradient-to-br from-[#0A2A66] to-[#123E91] text-white px-5 py-2 rounded-xl font-medium hover:shadow-lg transition-shadow"
-            >
-              Create account
-            </Link>
-          </div>
+    <motion.header initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="fixed top-0 left-0 right-0 z-50 h-[96px] navbar-glass">
+      <div className="max-w-[1600px] mx-auto px-[80px] h-full flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <CuboidLogo />
+          <span className="text-[rgba(255,255,255,0.96)] font-['Inter'] font-semibold text-xl tracking-tight">CUBOID</span>
+        </div>
+        <nav className="hidden lg:flex items-center gap-10">
+          {navLinks.map((link) => (
+            <a key={link.href} href={link.href} className="text-[rgba(255,255,255,0.82)] font-['Inter'] text-sm font-medium hover:text-[rgba(255,255,255,0.96)] transition-colors">{link.label}</a>
+          ))}
+        </nav>
+        <div className="flex items-center gap-4">
+          <a href="/login" className="text-[rgba(255,255,255,0.82)] font-['Inter'] text-sm font-medium hover:text-[rgba(255,255,255,0.96)] transition-colors">Sign In</a>
+          <button className="h-[60px] px-8 text-sm bg-[#6B8CFF] text-white rounded-[18px] font-semibold hover:bg-[#5A7AE8] transition-all">Request Access</button>
         </div>
       </div>
-    </motion.nav>
+    </motion.header>
   );
 }

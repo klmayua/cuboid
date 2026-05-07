@@ -1,0 +1,5 @@
+import { Navigation } from "@/components";
+const stats = [{ label: "Total Volume", value: "$1.2M" }, { label: "Transactions", value: "847" }, { label: "Active Users", value: "24" }];
+export default function PartnerDashboard() {
+  return <main className="min-h-screen bg-[#060D20]"><Navigation /><section className="pt-[96px]"><div className="max-w-[1600px] mx-auto px-[80px] py-[140px]"><h1 className="text-[40px] font-bold text-[rgba(255,255,255,0.96)] mb-2">Partner Dashboard</h1><p className="text-[rgba(255,255,255,0.62)] mb-8">Your partner overview</p><div className="grid grid-cols-3 gap-[32px]">{stats.map((s, i) => (<div key={i} className="glass-panel p-6"><div className="text-[12px] font-semibold tracking-[0.12em] uppercase opacity-70 text-[rgba(255,255,255,0.62)] mb-2">{s.label}</div><div className="text-[48px] font-bold text-[rgba(255,255,255,0.96)]">{s.value}</div></div>))}</div></div></section></main>;
+}
