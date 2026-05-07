@@ -147,32 +147,32 @@ export default function LandingPage() {
       </AnimatePresence>
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden grid-pattern">
+      <section className="relative pt-40 pb-24 lg:pb-32 overflow-hidden grid-pattern">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#171f33]/80 to-[#171f33]"></div>
-        <div className="relative z-10 max-w-[1440px] mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+        <div className="relative z-10 max-w-[1440px] mx-auto px-6 lg:px-12">
+          <div className="grid lg:grid-cols-12 gap-16 items-center">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="lg:col-span-7">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card gold-accent-border mb-6">
                 <span className="w-2 h-2 rounded-full bg-[#4edea3] shadow-[0_0_8px_#4edea3]" />
                 <span className="text-xs font-semibold text-[#4edea3] uppercase tracking-widest">Network Status: Operational</span>
               </div>
               
-              <h1 className="text-[36px] md:text-[48px] font-bold leading-tight mb-6 text-[#dae2fd] tracking-tight">
+              <h1 className="text-4xl lg:text-6xl xl:text-[72px] font-bold leading-[1.1] mb-8 text-[#dae2fd] tracking-tight">
                 The Future of <span className="text-[#89ceff]">Institutional Trust.</span>
               </h1>
               
-              <p className="text-base text-[#bec8d2] max-w-xl mb-8 leading-relaxed">
+              <p className="text-lg lg:text-xl text-[#bec8d2] max-w-2xl mb-10 leading-relaxed">
                 Access verified currency exchange partners across Africa. 
                 Compare live rates, reserve your rate, and transact securely— 
                 all from your phone.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <Link href="/nearest-bdc" className="flex items-center justify-center gap-2 px-8 py-4 rounded-lg font-bold transition-all bg-[#0ea5e9] text-[#00344d] hover:brightness-110">
+              <div className="flex flex-col sm:flex-row gap-4 mb-10">
+                <Link href="/nearest-bdc" className="flex items-center justify-center gap-2 px-8 py-5 rounded-lg font-bold text-lg transition-all bg-[#0ea5e9] text-[#00344d] hover:brightness-110 hover:shadow-[0_0_30px_rgba(14,165,233,0.4)]">
                   <MapPin className="w-5 h-5" />
                   Find Nearest BDC
                 </Link>
-                <Link href="/auth/signup" className="flex items-center justify-center gap-2 px-8 py-4 rounded-lg font-bold transition-all glass-card border border-white/20 text-[#dae2fd] hover:bg-[#222a3d]/30">
+                <Link href="/auth/signup" className="flex items-center justify-center gap-2 px-8 py-5 rounded-lg font-bold text-lg transition-all glass-card border border-white/20 text-[#dae2fd] hover:bg-[#222a3d]/30">
                   <MessageCircle className="w-5 h-5" />
                   Explore Ecosystem
                 </Link>
@@ -185,7 +185,7 @@ export default function LandingPage() {
               </div>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="space-y-4">
+            <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="lg:col-span-5 space-y-4">
               <div className="relative rounded-2xl border border-white/10 bg-[#171f33] p-6 shadow-2xl">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-[#dae2fd] font-semibold flex items-center gap-2">
@@ -288,12 +288,12 @@ export default function LandingPage() {
       {/* How It Works */}
       <section id="how-it-works" className="py-16 px-6">
         <div className="max-w-[1440px] mx-auto">
-          <div className="text-center mb-10">
-            <h2 className="text-[24px] font-semibold text-[#dae2fd] mb-3">Foundation of the Hegemony</h2>
-            <p className="text-[#bec8d2] max-w-xl mx-auto">Advanced cryptographic architecture designed for the world's most demanding financial institutions.</p>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-[#dae2fd] mb-4">Foundation of the Hegemony</h2>
+            <p className="text-lg text-[#bec8d2] max-w-2xl mx-auto">Advanced cryptographic architecture designed for the world's most demanding financial institutions.</p>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {howItWorks.map((step, i) => (
               <motion.div 
                 key={i}
@@ -301,7 +301,7 @@ export default function LandingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="glass-card p-5 rounded-lg hover:border-[#89ceff]/40 transition-colors"
+                className="glass-card p-8 rounded-xl hover:border-[#89ceff]/40 transition-all hover:scale-[1.02]"
               >
                 <div className="w-12 h-12 rounded-full bg-[#89ceff]/15 flex items-center justify-center text-[#89ceff] font-bold mb-3">
                   {step.step}
@@ -323,14 +323,14 @@ export default function LandingPage() {
       {/* Active Corridors */}
       <section id="rates" className="py-16 px-6 bg-[#131b2e]/50">
         <div className="max-w-[1440px] mx-auto">
-          <div className="text-center mb-10">
-            <h2 className="text-[24px] font-semibold text-[#dae2fd] mb-3">Active Corridors</h2>
-            <p className="text-[#bec8d2]">High-volume remittance routes we power daily</p>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-[#dae2fd] mb-4">Active Corridors</h2>
+            <p className="text-lg text-[#bec8d2]">High-volume remittance routes we power daily</p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {corridors.map((corridor, i) => (
-              <div key={i} className="glass-card p-5 rounded-lg hover:border-[#89ceff]/40 transition-all hover:bg-[#222a3d]/30">
+              <div key={i} className="glass-card p-8 rounded-xl hover:border-[#89ceff]/40 transition-all hover:bg-[#222a3d]/30 hover:scale-[1.02]">
                 <div className="flex items-center gap-2 mb-3">
                   <Globe2 className="w-4 h-4 text-[#89ceff]" />
                   <span className="text-[#dae2fd] font-medium">{corridor.from} → {corridor.to}</span>
@@ -390,11 +390,11 @@ export default function LandingPage() {
       {/* Testimonials */}
       <section className="py-16 px-6 bg-[#131b2e]/50">
         <div className="max-w-[1440px] mx-auto">
-          <h2 className="text-[24px] font-semibold text-[#dae2fd] text-center mb-10">Trusted by Thousands</h2>
+          <h2 className="text-3xl lg:text-4xl font-bold text-[#dae2fd] text-center mb-16">Trusted by Thousands</h2>
           
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {testimonials.map((testimonial, i) => (
-              <div key={i} className="glass-card p-5 rounded-lg hover:border-[#89ceff]/40 transition-all">
+              <div key={i} className="glass-card p-8 rounded-xl hover:border-[#89ceff]/40 transition-all hover:scale-[1.02]">
                 <div className="flex gap-1 mb-3">
                   {[...Array(testimonial.rating)].map((_, j) => (
                     <Star key={j} className="w-4 h-4 text-yellow-500 fill-current" />
@@ -419,18 +419,18 @@ export default function LandingPage() {
       {/* Security Section */}
       <section id="security" className="py-16 px-6">
         <div className="max-w-[1440px] mx-auto">
-          <div className="text-center mb-10">
-            <h2 className="text-[24px] font-semibold text-[#dae2fd] mb-3">Bank-Grade Security</h2>
-            <p className="text-[#bec8d2] max-w-xl mx-auto">Your money is protected by institutional-level security infrastructure</p>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-[#dae2fd] mb-4">Bank-Grade Security</h2>
+            <p className="text-lg text-[#bec8d2] max-w-2xl mx-auto">Your money is protected by institutional-level security infrastructure</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               { icon: Lock, title: 'SOC 2 Type II', desc: 'Independently audited security controls' },
               { icon: Shield, title: 'Regulated Partners', desc: 'Only work with licensed financial institutions' },
               { icon: Award, title: 'Insurance Coverage', desc: 'Funds protected up to required limits' },
             ].map((item, i) => (
-              <div key={i} className="glass-card p-5 rounded-lg text-center hover:border-[#89ceff]/40 transition-all hover:bg-[#222a3d]/30">
+              <div key={i} className="glass-card p-10 rounded-xl text-center hover:border-[#89ceff]/40 transition-all hover:bg-[#222a3d]/30 hover:scale-[1.02]">
                 <item.icon className="w-10 h-10 text-[#89ceff] mx-auto mb-3" />
                 <h3 className="text-base font-semibold text-[#dae2fd] mb-2">{item.title}</h3>
                 <p className="text-sm text-[#bec8d2]">{item.desc}</p>
