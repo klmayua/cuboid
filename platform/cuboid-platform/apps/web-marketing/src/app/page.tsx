@@ -36,17 +36,17 @@ export default function LandingPage() {
             <CuboidLogo variant="mark" width={32} height={32} />
             <span className="text-2xl font-semibold tracking-tight text-[#4fdbc8]">INSTITUTIONAL FX</span>
           </div>
-          <div className="hidden xl:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-8">
             <Link href="#rates" className="text-[#4fdbc8] border-b-2 border-[#4fdbc8] pb-1 transition-colors duration-200">Market Rates</Link>
             <Link href="#bdc" className="text-[#bbcac6] hover:text-[#4fdbc8] transition-colors duration-200">BDC Locator</Link>
             <Link href="#convert" className="text-[#bbcac6] hover:text-[#4fdbc8] transition-colors duration-200">Convert</Link>
             <Link href="#business" className="text-[#bbcac6] hover:text-[#4fdbc8] transition-colors duration-200">Corporate</Link>
           </div>
           <div className="flex items-center gap-4">
-            <button onClick={() => setMobileMenuOpen(true)} className="xl:hidden p-2 text-[#dbe2fd]">
+            <button onClick={() => setMobileMenuOpen(true)} className="lg:hidden p-2 text-[#dbe2fd]">
               <Menu className="w-6 h-6" />
             </button>
-            <Link href="/auth/signin" className="hidden xl:block text-[12px] font-semibold text-[#bbcac6] hover:text-[#e9c349] transition-colors opacity-80 hover:opacity-100">Login</Link>
+            <Link href="/auth/signin" className="hidden lg:block text-[12px] font-semibold text-[#bbcac6] hover:text-[#e9c349] transition-colors opacity-80 hover:opacity-100">Login</Link>
             <Link href="/auth/signup" className="bg-[#14b8a6] text-[#00423b] px-6 py-2 rounded-lg text-[12px] font-semibold scale-95 active:scale-90 transition-transform">Open Account</Link>
           </div>
         </div>
@@ -54,7 +54,7 @@ export default function LandingPage() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-[#0b1326] pt-24 px-8 xl:hidden">
+        <div className="fixed inset-0 z-40 bg-[#0b1326] pt-24 px-8 lg:hidden">
           <button onClick={() => setMobileMenuOpen(false)} className="absolute top-6 right-8 text-[#dbe2fd]">
             <X className="w-6 h-6" />
           </button>
@@ -75,8 +75,8 @@ export default function LandingPage() {
             <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-[#4fdbc8]/5 rounded-full blur-[120px]"></div>
             <div className="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-[#e9c349]/5 rounded-full blur-[100px]"></div>
           </div>
-          <div className="relative z-10 max-w-[1600px] mx-auto w-full grid grid-cols-1 xl:grid-cols-12 gap-12 items-center">
-            <div className="xl:col-span-7">
+          <div className="relative z-10 max-w-[1600px] mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-7">
               <span className="text-[#e9c349] text-[12px] font-semibold tracking-[0.2em] mb-4 block">TRUSTED BY INSTITUTIONS, BUILT FOR YOU</span>
               <h1 className="text-[48px] font-bold text-white mb-6 leading-tight">
                 Global Rates, <br/>
@@ -96,7 +96,7 @@ export default function LandingPage() {
             </div>
             
             {/* Quick Convert Widget - exact from design */}
-            <div id="convert" className="xl:col-span-5">
+            <div id="convert" className="lg:col-span-5">
               <div className="glass-panel p-8 rounded-xl border border-white/10 active-glow">
                 <h3 className="text-[24px] font-semibold mb-6 text-white flex items-center gap-2">
                   <svg className="w-6 h-6 text-[#e9c349]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.31-8.86c-1.77-.45-2.34-.94-2.34-1.67 0-.84.79-1.43 2.1-1.43 1.38 0 1.9.66 1.94 1.64.1 1.02-.08 1.92-.72 2.27-.57.32-1.23.57-1.76.63-.51.06-1.09.08-1.54.03-.45-.05-1.18-.18-1.18-.82v-.02c0-.72.6-1.22 1.72-1.22 1.07 0 1.7.62 1.77 1.56.07.93-.2 2.06-1.14 2.72-.74.52-1.9.86-1.9 1.83 0 .87.68 1.39 1.9 1.39 1.21 0 2.04-.6 2.11-1.48.01-.12-.01-.42-.14-.73-.12-.28-.37-.47-.68-.54-.52-.12-1.16-.17-1.54-.11-.51.09-.96.35-1.17.72-.21.36-.18.83.1 1.17.26.32.72.58 1.34.58.88 0 1.56-.58 1.56-1.51 0-.72-.42-1.21-1.25-1.51z"/></svg>
