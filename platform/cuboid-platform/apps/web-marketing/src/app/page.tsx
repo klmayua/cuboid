@@ -24,7 +24,10 @@ import {
   Award,
   Globe2,
   Mail,
-  Activity
+  Activity,
+  Network,
+  Banknote,
+  Zap
 } from 'lucide-react';
 
 const liveRates = [
@@ -84,38 +87,36 @@ export default function LandingPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#05070D]">
+    <div className="min-h-screen bg-[#0b1326]">
       {/* Navigation */}
-      <nav className="fixed top-5 left-0 right-0 z-50">
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
-          <div className="h-[72px] rounded-[20px] bg-[#0B1020]/80 backdrop-blur-md border border-white/10 px-4 md:px-6 flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-2">
-              <CuboidLogo variant="mark" width={32} height={32} />
-              <span className="text-xl font-semibold text-white">CUBOID</span>
+      <header className="fixed top-0 left-0 w-full z-50">
+        <div className="max-w-[1440px] mx-auto mt-5 h-16 px-6 rounded-lg bg-[#171f33]/40 backdrop-blur-xl border border-white/10 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-3">
+            <CuboidLogo variant="mark" width={32} height={32} />
+            <span className="text-xl font-semibold text-[#dae2fd] tracking-tight">CUBOID FX</span>
+          </Link>
+
+          <nav className="hidden lg:flex items-center gap-8">
+            {navItems.map((item) => (
+              <Link key={item.href} href={item.href} className="text-sm font-medium text-[#bec8d2] hover:text-[#89ceff] transition-colors">
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-4">
+            <Link href="/auth/signin" className="hidden sm:block text-sm text-[#bec8d2] hover:text-[#dae2fd] transition-colors">
+              Sign in
             </Link>
-
-            <div className="hidden md:flex items-center gap-8">
-              {navItems.map((item) => (
-                <Link key={item.href} href={item.href} className="text-sm text-[#7183A6] hover:text-white transition-colors">
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-
-            <div className="flex items-center gap-3">
-              <Link href="/auth/signin" className="hidden sm:block text-sm text-[#7183A6] hover:text-white transition-colors">
-                Sign in
-              </Link>
-              <Link href="/auth/signup" className="text-sm bg-gradient-to-br from-[#0A2A66] to-[#123E91] text-white px-4 py-2 rounded-xl font-medium hover:shadow-lg transition-shadow">
-                Get Started
-              </Link>
-              <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden p-2 text-white">
-                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-              </button>
-            </div>
+            <Link href="/auth/signup" className="h-11 px-6 rounded-lg bg-[#0ea5e9] text-[#00344d] font-semibold transition-all hover:brightness-110">
+              Get Started
+            </Link>
+            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden p-2 text-[#dae2fd]">
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
           </div>
         </div>
-      </nav>
+      </header>
 
       {/* Mobile Menu */}
       <AnimatePresence>
@@ -124,7 +125,7 @@ export default function LandingPage() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 bg-[#05070D] pt-24 px-4 md:px-6 md:hidden"
+            className="fixed inset-0 z-40 bg-[#0b1326] pt-24 px-6 lg:hidden"
           >
             <div className="space-y-4">
               {navItems.map((item) => (
@@ -132,12 +133,12 @@ export default function LandingPage() {
                   key={item.href} 
                   href={item.href} 
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block py-3 text-lg text-white border-b border-white/10"
+                  className="block py-3 text-lg text-[#dae2fd] border-b border-white/10"
                 >
                   {item.label}
                 </Link>
               ))}
-              <Link href="/auth/signin" onClick={() => setMobileMenuOpen(false)} className="block py-3 text-lg text-white border-b border-white/10">
+              <Link href="/auth/signin" onClick={() => setMobileMenuOpen(false)} className="block py-3 text-lg text-[#dae2fd] border-b border-white/10">
                 Sign in
               </Link>
             </div>
@@ -146,65 +147,65 @@ export default function LandingPage() {
       </AnimatePresence>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-12 md:pb-16 lg:py-20 px-4 md:px-6">
-        <div className="max-w-[1280px] mx-auto">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      <section className="relative pt-32 pb-20 overflow-hidden grid-pattern">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#171f33]/80 to-[#171f33]"></div>
+        <div className="relative z-10 max-w-[1440px] mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#5E8DFF]/20 border border-[#5E8DFF]/30 mb-4">
-                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-sm text-[#5E8DFF]">Trusted by 25,000+ users</span>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card gold-accent-border mb-6">
+                <span className="w-2 h-2 rounded-full bg-[#4edea3] shadow-[0_0_8px_#4edea3]" />
+                <span className="text-xs font-semibold text-[#4edea3] uppercase tracking-widest">Network Status: Operational</span>
               </div>
               
-              <h1 className="text-[36px] md:text-[44px] lg:text-[56px] font-bold text-white mb-4 leading-tight">
-                Move Money<br />
-                <span className="text-[#5E8DFF]">With Confidence</span>
+              <h1 className="text-[36px] md:text-[48px] font-bold leading-tight mb-6 text-[#dae2fd] tracking-tight">
+                The Future of <span className="text-[#89ceff]">Institutional Trust.</span>
               </h1>
               
-              <p className="text-base md:text-lg text-[#7183A6] mb-6 max-w-lg">
+              <p className="text-base text-[#bec8d2] max-w-xl mb-8 leading-relaxed">
                 Access verified currency exchange partners across Africa. 
                 Compare live rates, reserve your rate, and transact securely— 
                 all from your phone.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-3 mb-6">
-                <Link href="/nearest-bdc" className="flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-br from-[#0A2A66] to-[#123E91] text-white rounded-xl font-medium hover:shadow-xl transition-shadow">
+              <div className="flex flex-col sm:flex-row gap-4 mb-8">
+                <Link href="/nearest-bdc" className="flex items-center justify-center gap-2 px-8 py-4 rounded-lg font-bold transition-all bg-[#0ea5e9] text-[#00344d] hover:brightness-110">
                   <MapPin className="w-5 h-5" />
                   Find Nearest BDC
                 </Link>
-                <a href="https://wa.me/254700000000" className="flex items-center justify-center gap-2 px-5 py-3 bg-white/5 border border-white/10 rounded-xl font-medium text-white hover:bg-white/10 transition-colors">
+                <Link href="/auth/signup" className="flex items-center justify-center gap-2 px-8 py-4 rounded-lg font-bold transition-all glass-card border border-white/20 text-[#dae2fd] hover:bg-[#222a3d]/30">
                   <MessageCircle className="w-5 h-5" />
-                  Chat on WhatsApp
-                </a>
+                  Explore Ecosystem
+                </Link>
               </div>
 
-              <div className="flex flex-wrap items-center gap-4 text-sm text-[#7183A6]">
-                <span className="flex items-center gap-2"><Check className="w-4 h-4 text-green-500" /> SOC 2 Type II</span>
-                <span className="flex items-center gap-2"><Check className="w-4 h-4 text-green-500" /> Regulated Partners</span>
-                <span className="flex items-center gap-2"><Check className="w-4 h-4 text-green-500" /> 24/7 Support</span>
+              <div className="flex flex-wrap items-center gap-6 text-sm text-[#bec8d2]">
+                <span className="flex items-center gap-2"><Check className="w-4 h-4 text-[#89ceff]" /> SOC 2 Type II</span>
+                <span className="flex items-center gap-2"><Check className="w-4 h-4 text-[#89ceff]" /> Regulated Partners</span>
+                <span className="flex items-center gap-2"><Check className="w-4 h-4 text-[#89ceff]" /> 24/7 Support</span>
               </div>
             </motion.div>
 
             <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="space-y-4">
-              <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-white font-semibold flex items-center gap-2">
-                    <Activity className="w-4 h-4 text-[#5E8DFF]" />
+              <div className="relative rounded-2xl border border-white/10 bg-[#171f33] p-6 shadow-2xl">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-[#dae2fd] font-semibold flex items-center gap-2">
+                    <Activity className="w-4 h-4 text-[#89ceff]" />
                     Live Rates
                   </h3>
                   <div className="flex gap-1.5">
-                    <button onClick={() => setRateTab('buy')} className={`px-2.5 py-1 rounded-lg text-xs ${rateTab === 'buy' ? 'bg-[#5E8DFF] text-white' : 'text-[#7183A6]'}`}>Buy</button>
-                    <button onClick={() => setRateTab('sell')} className={`px-2.5 py-1 rounded-lg text-xs ${rateTab === 'sell' ? 'bg-[#5E8DFF] text-white' : 'text-[#7183A6]'}`}>Sell</button>
+                    <button onClick={() => setRateTab('buy')} className={`px-2.5 py-1 rounded text-xs ${rateTab === 'buy' ? 'bg-[#0ea5e9] text-[#00344d]' : 'text-[#bec8d2]'}`}>Buy</button>
+                    <button onClick={() => setRateTab('sell')} className={`px-2.5 py-1 rounded text-xs ${rateTab === 'sell' ? 'bg-[#0ea5e9] text-[#00344d]' : 'text-[#bec8d2]'}`}>Sell</button>
                   </div>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-3">
                   {liveRates.map((rate, i) => (
-                    <div key={i} className="flex items-center justify-between h-12 px-3 rounded-xl bg-white/5">
+                    <div key={i} className="h-14 px-4 rounded-lg border border-white/5 bg-white/[0.03] flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-lg bg-[#5E8DFF]/20 flex items-center justify-center text-[#5E8DFF] font-bold text-xs">{rate.pair.slice(0,3)}</div>
-                        <span className="text-white font-medium text-sm">{rate.pair}</span>
+                        <div className="w-10 h-10 rounded-lg bg-[#89ceff]/15 flex items-center justify-center text-[#89ceff] font-bold text-sm">{rate.pair.slice(0,3)}</div>
+                        <span className="text-[#dae2fd] font-semibold">{rate.pair}</span>
                       </div>
                       <div className="text-right">
-                        <p className="text-white font-semibold text-sm">KES {rateTab === 'buy' ? rate.buy : rate.sell}</p>
+                        <p className="text-[#89ceff] font-bold">KES {rateTab === 'buy' ? rate.buy : rate.sell}</p>
                         <span className={`text-xs ${rate.up ? 'text-green-500' : 'text-red-500'}`}>{rate.change}</span>
                       </div>
                     </div>
@@ -212,64 +213,71 @@ export default function LandingPage() {
                 </div>
               </div>
 
-              <div className="p-4 rounded-2xl bg-gradient-to-br from-[#5E8DFF]/20 to-[#0A2A66]/20 border border-[#5E8DFF]/30">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-white font-semibold flex items-center gap-2">
-                    <Building2 className="w-4 h-4 text-[#5E8DFF]" />
+              <div className="relative rounded-2xl border border-white/10 bg-[#171f33] p-6 shadow-2xl">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-[#dae2fd] font-semibold flex items-center gap-2">
+                    <Building2 className="w-4 h-4 text-[#89ceff]" />
                     Nearest Verified BDCs
                   </h3>
-                  <Link href="/nearest-bdc" className="text-xs text-[#5E8DFF] hover:underline">View all</Link>
+                  <Link href="/nearest-bdc" className="text-xs text-[#89ceff] hover:underline">View all</Link>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-3">
                   {nearestBDCs.map((bdc, i) => (
-                    <div key={i} className="flex items-center justify-between h-12 px-3 rounded-xl bg-white/5">
+                    <div key={i} className="h-14 px-4 rounded-lg border border-white/5 bg-white/[0.03] flex items-center justify-between">
                       <div>
-                        <p className="text-white font-medium text-sm">{bdc.name}</p>
-                        <p className="text-xs text-[#7183A6]">{bdc.distance} • {bdc.wait} wait</p>
+                        <p className="text-[#dae2fd] font-semibold">{bdc.name}</p>
+                        <p className="text-xs text-[#bec8d2]">{bdc.distance} • {bdc.wait} wait</p>
                       </div>
                       <div className="flex items-center gap-1 text-yellow-500">
-                        <Star className="w-3.5 h-3.5 fill-current" />
-                        <span className="text-white text-sm">{bdc.rating}</span>
+                        <Star className="w-4 h-4 fill-current" />
+                        <span className="text-[#dae2fd] text-sm">{bdc.rating}</span>
                       </div>
                     </div>
                   ))}
                 </div>
-                <Link href="/nearest-bdc" className="w-full mt-3 py-2.5 bg-[#5E8DFF] text-white rounded-xl font-medium text-sm text-center block hover:bg-[#4A7AE8] transition-colors">
+                <Link href="/nearest-bdc" className="w-full mt-4 py-3 bg-[#0ea5e9] text-[#00344d] rounded-lg font-semibold text-center block hover:brightness-110 transition-all">
                   Reserve Best Rate
                 </Link>
               </div>
             </motion.div>
           </div>
         </div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#89ceff]/5 blur-[120px] rounded-full -z-10"></div>
       </section>
 
       {/* Trust Metrics */}
-      <section className="py-10 md:py-12 lg:py-14 px-4 md:px-6 bg-white/5 border-y border-white/10">
-        <div className="max-w-[1280px] mx-auto">
+      <section className="py-16 px-6 bg-[#131b2e]/50 border-y border-white/10">
+        <div className="max-w-[1440px] mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { label: 'Users', value: '25,000+', icon: Users },
-              { label: 'BDC Partners', value: '2,200+', icon: Building2 },
-              { label: 'Transactions', value: '$850M+', icon: TrendingUp },
+              { label: 'Active Nodes', value: '1,204', icon: Network },
+              { label: 'Verified Assets', value: '$14.2B', icon: Banknote },
+              { label: 'Uptime', value: '99.999%', icon: Zap },
               { label: 'Countries', value: '10+', icon: Globe },
             ].map((stat, i) => (
-              <div key={i} className="text-center">
-                <stat.icon className="w-6 h-6 md:w-7 md:h-7 text-[#5E8DFF] mx-auto mb-2" />
-                <p className="text-2xl md:text-3xl font-bold text-white">{stat.value}</p>
-                <p className="text-[#7183A6] text-sm">{stat.label}</p>
+              <div key={i} className="glass-card p-6 rounded-lg flex flex-col justify-between group hover:bg-[#222a3d]/30 transition-all duration-500">
+                <div>
+                  <stat.icon className="w-8 h-8 text-[#89ceff] mb-3" />
+                  <span className="text-xs font-semibold text-[#bec8d2] uppercase mb-2 block">{stat.label}</span>
+                </div>
+                <div className="flex items-end justify-between">
+                  <span className="text-2xl font-bold text-[#89ceff]">{stat.value}</span>
+                  {i === 1 && <span className="text-xs text-[#4edea3] font-mono">AUDITED</span>}
+                  {i === 2 && <span className="text-xs text-[#bec8d2] font-mono">SLA GUARANTEED</span>}
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Supported Currencies Strip */}
-      <section className="py-6 md:py-8 px-4 md:px-6 border-b border-white/10 overflow-hidden">
-        <div className="max-w-[1280px] mx-auto">
-          <p className="text-center text-[#7183A6] text-xs md:text-sm mb-3 uppercase tracking-wider">Supported Currencies</p>
-          <div className="flex flex-wrap justify-center gap-2 md:gap-3">
+      {/* Supported Currencies */}
+      <section className="py-8 px-6 border-b border-white/10">
+        <div className="max-w-[1440px] mx-auto">
+          <p className="text-center text-xs font-semibold text-[#bec8d2] uppercase tracking-widest mb-4">Supported Currencies</p>
+          <div className="flex flex-wrap justify-center gap-3">
             {currencies.map((curr, i) => (
-              <span key={i} className="px-3 py-1.5 rounded-full bg-white/5 text-white text-xs md:text-sm border border-white/10">
+              <span key={i} className="px-4 py-2 rounded-lg bg-[#171f33] text-[#dae2fd] text-sm border border-white/10">
                 {curr}
               </span>
             ))}
@@ -278,14 +286,14 @@ export default function LandingPage() {
       </section>
 
       {/* How It Works */}
-      <section id="how-it-works" className="py-12 md:py-14 lg:py-16 px-4 md:px-6">
-        <div className="max-w-[1280px] mx-auto">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3">How It Works</h2>
-            <p className="text-[#7183A6] max-w-2xl mx-auto">Get the best exchange rates in four simple steps</p>
+      <section id="how-it-works" className="py-16 px-6">
+        <div className="max-w-[1440px] mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="text-[24px] font-semibold text-[#dae2fd] mb-3">Foundation of the Hegemony</h2>
+            <p className="text-[#bec8d2] max-w-xl mx-auto">Advanced cryptographic architecture designed for the world's most demanding financial institutions.</p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+          <div className="grid md:grid-cols-4 gap-6">
             {howItWorks.map((step, i) => (
               <motion.div 
                 key={i}
@@ -293,19 +301,19 @@ export default function LandingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="p-5 rounded-2xl bg-white/5 border border-white/10 text-center"
+                className="glass-card p-5 rounded-lg hover:border-[#89ceff]/40 transition-colors"
               >
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0A2A66] to-[#123E91] flex items-center justify-center text-white font-bold mx-auto mb-3 text-sm">
+                <div className="w-12 h-12 rounded-full bg-[#89ceff]/15 flex items-center justify-center text-[#89ceff] font-bold mb-3">
                   {step.step}
                 </div>
-                <h3 className="text-base font-semibold text-white mb-2">{step.title}</h3>
-                <p className="text-sm text-[#7183A6]">{step.description}</p>
+                <h3 className="text-base font-semibold text-[#dae2fd] mb-2">{step.title}</h3>
+                <p className="text-sm text-[#bec8d2]">{step.description}</p>
               </motion.div>
             ))}
           </div>
 
-          <div className="mt-8 text-center">
-            <Link href="/nearest-bdc" className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#5E8DFF] text-white rounded-xl font-medium hover:bg-[#4A7AE8] transition-colors">
+          <div className="mt-10 text-center">
+            <Link href="/nearest-bdc" className="inline-flex items-center gap-2 px-6 py-3 bg-[#0ea5e9] text-[#00344d] rounded-lg font-semibold hover:brightness-110 transition-all">
               Try It Now <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -313,26 +321,24 @@ export default function LandingPage() {
       </section>
 
       {/* Active Corridors */}
-      <section id="rates" className="py-12 md:py-14 lg:py-16 px-4 md:px-6 bg-white/5">
-        <div className="max-w-[1280px] mx-auto">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3">Active Corridors</h2>
-            <p className="text-[#7183A6]">High-volume remittance routes we power daily</p>
+      <section id="rates" className="py-16 px-6 bg-[#131b2e]/50">
+        <div className="max-w-[1440px] mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="text-[24px] font-semibold text-[#dae2fd] mb-3">Active Corridors</h2>
+            <p className="text-[#bec8d2]">High-volume remittance routes we power daily</p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {corridors.map((corridor, i) => (
-              <div key={i} className="h-[140px] md:h-[160px] p-4 rounded-2xl bg-[#0B1020] border border-white/10 flex flex-col justify-between">
-                <div className="flex items-center gap-2">
-                  <Globe2 className="w-4 h-4 text-[#5E8DFF]" />
-                  <span className="text-white font-medium text-sm">{corridor.from} → {corridor.to}</span>
+              <div key={i} className="glass-card p-5 rounded-lg hover:border-[#89ceff]/40 transition-all hover:bg-[#222a3d]/30">
+                <div className="flex items-center gap-2 mb-3">
+                  <Globe2 className="w-4 h-4 text-[#89ceff]" />
+                  <span className="text-[#dae2fd] font-medium">{corridor.from} → {corridor.to}</span>
                 </div>
-                <div>
-                  <p className="text-xl md:text-2xl font-bold text-white mb-1">{corridor.volume}</p>
-                  <span className="text-green-500 text-xs md:text-sm flex items-center gap-1">
-                    <TrendingUp className="w-3.5 h-3.5" /> {corridor.growth} YoY
-                  </span>
-                </div>
+                <p className="text-xl font-bold text-[#dae2fd] mb-1">{corridor.volume}</p>
+                <span className="text-green-500 text-sm flex items-center gap-1">
+                  <TrendingUp className="w-4 h-4" /> {corridor.growth} YoY
+                </span>
               </div>
             ))}
           </div>
@@ -340,11 +346,11 @@ export default function LandingPage() {
       </section>
 
       {/* Business Section */}
-      <section id="business" className="py-12 md:py-14 lg:py-16 px-4 md:px-6">
-        <div className="max-w-[1280px] mx-auto">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      <section id="business" className="py-16 px-6">
+        <div className="max-w-[1440px] mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 md:mb-6">Built for Business</h2>
+              <h2 className="text-[24px] font-semibold text-[#dae2fd] mb-5">Built for Business</h2>
               <div className="space-y-4">
                 {[
                   { icon: Send, title: 'Bulk Payments', desc: 'Pay thousands of beneficiaries in one batch' },
@@ -352,28 +358,28 @@ export default function LandingPage() {
                   { icon: Shield, title: 'Compliance Ready', desc: 'Built-in KYC, AML, and regulatory reporting' },
                   { icon: Building2, title: 'Partner Network', desc: 'Access verified BDCs, banks, and IMTOs' },
                 ].map((feature, i) => (
-                  <div key={i} className="flex gap-3">
-                    <div className="p-2.5 rounded-xl bg-[#5E8DFF]/20 text-[#5E8DFF] shrink-0">
+                  <div key={i} className="flex gap-4">
+                    <div className="w-12 h-12 rounded-lg bg-[#89ceff]/15 flex items-center justify-center text-[#89ceff] shrink-0">
                       <feature.icon className="w-5 h-5" />
                     </div>
                     <div>
-                      <h3 className="text-white font-semibold text-sm md:text-base">{feature.title}</h3>
-                      <p className="text-[#7183A6] text-xs md:text-sm">{feature.desc}</p>
+                      <h3 className="text-[#dae2fd] font-semibold">{feature.title}</h3>
+                      <p className="text-sm text-[#bec8d2]">{feature.desc}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="p-5 md:p-6 lg:p-8 rounded-3xl bg-gradient-to-br from-[#5E8DFF]/20 to-[#0A2A66]/20 border border-[#5E8DFF]/30">
-              <h3 className="text-lg md:text-xl font-bold text-white mb-4">Business Account Benefits</h3>
+            <div className="glass-card p-8 rounded-xl gold-accent-border">
+              <h3 className="text-lg font-semibold text-[#dae2fd] mb-5">Business Account Benefits</h3>
               <ul className="space-y-3">
                 {['Multi-user access with roles', 'Detailed analytics dashboard', 'API for seamless integration', 'Dedicated account manager', 'Priority support'].map((item, i) => (
-                  <li key={i} className="flex items-center gap-2.5 text-white text-sm">
-                    <Check className="w-4 h-4 text-green-500 shrink-0" /> {item}
+                  <li key={i} className="flex items-center gap-3 text-[#dae2fd]">
+                    <Check className="w-5 h-5 text-[#4edea3] shrink-0" /> {item}
                   </li>
                 ))}
               </ul>
-              <button className="w-full mt-5 md:mt-6 py-3 bg-[#5E8DFF] text-white rounded-xl font-medium text-sm hover:bg-[#4A7AE8] transition-colors">
+              <button className="w-full mt-6 h-11 bg-[#4edea3] text-[#003824] rounded-lg font-bold hover:brightness-110 transition-all">
                 Contact Sales
               </button>
             </div>
@@ -382,26 +388,26 @@ export default function LandingPage() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-12 md:py-14 lg:py-16 px-4 md:px-6 bg-white/5">
-        <div className="max-w-[1280px] mx-auto">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center mb-8">Trusted by Thousands</h2>
+      <section className="py-16 px-6 bg-[#131b2e]/50">
+        <div className="max-w-[1440px] mx-auto">
+          <h2 className="text-[24px] font-semibold text-[#dae2fd] text-center mb-10">Trusted by Thousands</h2>
           
-          <div className="grid md:grid-cols-3 gap-4 md:gap-6">
+          <div className="grid md:grid-cols-3 gap-6">
             {testimonials.map((testimonial, i) => (
-              <div key={i} className="p-4 md:p-5 rounded-2xl bg-[#0B1020] border border-white/10">
+              <div key={i} className="glass-card p-5 rounded-lg hover:border-[#89ceff]/40 transition-all">
                 <div className="flex gap-1 mb-3">
                   {[...Array(testimonial.rating)].map((_, j) => (
-                    <Star key={j} className="w-3.5 h-3.5 text-yellow-500 fill-current" />
+                    <Star key={j} className="w-4 h-4 text-yellow-500 fill-current" />
                   ))}
                 </div>
-                <p className="text-[#7183A6] text-sm mb-4">"{testimonial.text}"</p>
+                <p className="text-[#bec8d2] mb-5">"{testimonial.text}"</p>
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#0A2A66] to-[#123E91] flex items-center justify-center text-white text-xs font-bold">
+                  <div className="w-10 h-10 rounded-full bg-[#89ceff]/15 flex items-center justify-center text-[#89ceff] text-sm font-bold">
                     {testimonial.avatar}
                   </div>
                   <div>
-                    <p className="text-white font-medium text-sm">{testimonial.name}</p>
-                    <p className="text-[#7183A6] text-xs">{testimonial.role}</p>
+                    <p className="text-[#dae2fd] font-medium">{testimonial.name}</p>
+                    <p className="text-xs text-[#bec8d2]">{testimonial.role}</p>
                   </div>
                 </div>
               </div>
@@ -411,45 +417,43 @@ export default function LandingPage() {
       </section>
 
       {/* Security Section */}
-      <section id="security" className="py-12 md:py-14 lg:py-16 px-4 md:px-6">
-        <div className="max-w-[1280px] mx-auto">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3">Bank-Grade Security</h2>
-            <p className="text-[#7183A6] max-w-2xl mx-auto">Your money is protected by institutional-level security infrastructure</p>
+      <section id="security" className="py-16 px-6">
+        <div className="max-w-[1440px] mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="text-[24px] font-semibold text-[#dae2fd] mb-3">Bank-Grade Security</h2>
+            <p className="text-[#bec8d2] max-w-xl mx-auto">Your money is protected by institutional-level security infrastructure</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-4 md:gap-6">
+          <div className="grid md:grid-cols-3 gap-6">
             {[
               { icon: Lock, title: 'SOC 2 Type II', desc: 'Independently audited security controls' },
               { icon: Shield, title: 'Regulated Partners', desc: 'Only work with licensed financial institutions' },
               { icon: Award, title: 'Insurance Coverage', desc: 'Funds protected up to required limits' },
             ].map((item, i) => (
-              <div key={i} className="h-[180px] md:h-[200px] p-5 rounded-2xl bg-white/5 border border-white/10 text-center flex flex-col justify-between">
-                <div>
-                  <item.icon className="w-10 h-10 md:w-11 md:h-11 text-[#5E8DFF] mx-auto mb-3" />
-                  <h3 className="text-base font-semibold text-white mb-1.5">{item.title}</h3>
-                  <p className="text-[#7183A6] text-sm">{item.desc}</p>
-                </div>
+              <div key={i} className="glass-card p-5 rounded-lg text-center hover:border-[#89ceff]/40 transition-all hover:bg-[#222a3d]/30">
+                <item.icon className="w-10 h-10 text-[#89ceff] mx-auto mb-3" />
+                <h3 className="text-base font-semibold text-[#dae2fd] mb-2">{item.title}</h3>
+                <p className="text-sm text-[#bec8d2]">{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="py-12 md:py-14 lg:py-16 px-4 md:px-6 bg-white/5">
-        <div className="max-w-[1100px] mx-auto">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center mb-8">Frequently Asked Questions</h2>
+      {/* FAQ Section */}
+      <section className="py-16 px-6 bg-[#131b2e]/50">
+        <div className="max-w-[960px] mx-auto">
+          <h2 className="text-[24px] font-semibold text-[#dae2fd] text-center mb-10">Frequently Asked Questions</h2>
           
-          <div className="space-y-2.5">
+          <div className="space-y-3">
             {faqs.map((faq, i) => (
-              <div key={i} className="border border-white/10 rounded-xl overflow-hidden">
+              <div key={i} className="rounded-lg border border-white/10 bg-[#171f33] px-5 py-4">
                 <button 
                   onClick={() => setFaqOpen(faqOpen === i ? null : i)}
-                  className="w-full flex items-center justify-between p-3.5 md:p-4 text-left"
+                  className="w-full flex items-center justify-between text-left"
                 >
-                  <span className="text-white font-medium text-sm md:text-base pr-4">{faq.q}</span>
-                  <ChevronDown className={`w-5 h-5 text-[#7183A6] transition-transform shrink-0 ${faqOpen === i ? 'rotate-180' : ''}`} />
+                  <span className="text-[#dae2fd] font-medium pr-4">{faq.q}</span>
+                  <ChevronDown className={`w-5 h-5 text-[#bec8d2] transition-transform ${faqOpen === i ? 'rotate-180' : ''}`} />
                 </button>
                 <AnimatePresence>
                   {faqOpen === i && (
@@ -459,7 +463,7 @@ export default function LandingPage() {
                       exit={{ height: 0, opacity: 0 }}
                       className="overflow-hidden"
                     >
-                      <p className="px-3.5 md:px-4 pb-3.5 md:pb-4 text-[#7183A6] text-sm">{faq.a}</p>
+                      <p className="pt-4 text-[#bec8d2]">{faq.a}</p>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -470,75 +474,72 @@ export default function LandingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 md:py-14 lg:py-16 px-4 md:px-6">
-        <div className="max-w-[1100px] mx-auto text-center">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4">Ready to Move Money Better?</h2>
-          <p className="text-[#7183A6] mb-6">Join thousands of users who trust Cuboid for their cross-border payments</p>
-          
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href="/auth/signup" className="px-6 py-3 bg-gradient-to-br from-[#0A2A66] to-[#123E91] text-white rounded-xl font-medium hover:shadow-xl transition-shadow">
-              Create Free Account
+      <section className="py-16 px-6 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[#89ceff]/5 opacity-30"></div>
+        <div className="max-w-[960px] mx-auto text-center relative z-10">
+          <h2 className="text-[24px] font-semibold text-[#dae2fd] mb-5">Enter the Vanguard of Liquidity.</h2>
+          <div className="glass-card p-10 rounded-xl gold-accent-border">
+            <p className="text-[#bec8d2] mb-8">Limited institutional slots are available for the Q4 expansion. Secure your position in the future of the global ledger.</p>
+            <Link href="/auth/signup" className="inline-block px-10 py-4 bg-[#4edea3] text-[#003824] rounded-lg font-bold text-base shadow-[0_0_20px_rgba(78,222,163,0.3)] transition-all hover:scale-105">
+              Inquire for Onboarding
             </Link>
-            <a href="https://wa.me/254700000000" className="px-6 py-3 bg-white/5 border border-white/10 rounded-xl font-medium text-white hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
-              <MessageCircle className="w-5 h-5" /> Chat on WhatsApp
-            </a>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-[#0B1020] border-t border-white/10 py-8 md:py-10 lg:py-12 px-4 md:px-6">
-        <div className="max-w-[1280px] mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8 mb-8 md:mb-10">
+      <footer className="py-8 px-6 bg-[#060e20] border-t border-white/10">
+        <div className="max-w-[1440px] mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-10">
             <div className="col-span-2">
-              <Link href="/" className="flex items-center gap-2 mb-4">
+              <Link href="/" className="flex items-center gap-3 mb-4">
                 <CuboidLogo variant="mark" mode="light" width={28} height={28} />
-                <span className="text-lg font-semibold text-white">CUBOID</span>
+                <span className="text-lg font-bold text-[#89ceff] tracking-tight">CUBOID FX</span>
               </Link>
-              <p className="text-sm text-[#7183A6] max-w-xs">
+              <p className="text-sm text-[#bec8d2] max-w-xs">
                 Institutional economic infrastructure for Africa and beyond. Trusted, regulated, secure.
               </p>
             </div>
 
             <div>
-              <h4 className="text-sm font-semibold text-white mb-3 md:mb-4">Product</h4>
-              <ul className="space-y-2 text-sm text-[#7183A6]">
-                <li><Link href="/nearest-bdc" className="hover:text-white">Find BDC</Link></li>
-                <li><Link href="/escrow" className="hover:text-white">Escrow</Link></li>
-                <li><Link href="/business" className="hover:text-white">Business</Link></li>
-                <li><Link href="/api" className="hover:text-white">API</Link></li>
+              <h4 className="text-sm font-semibold text-[#dae2fd] mb-4">Product</h4>
+              <ul className="space-y-2 text-sm text-[#bec8d2]">
+                <li><Link href="/nearest-bdc" className="hover:text-[#4edea3]">Find BDC</Link></li>
+                <li><Link href="/escrow" className="hover:text-[#4edea3]">Escrow</Link></li>
+                <li><Link href="/business" className="hover:text-[#4edea3]">Business</Link></li>
+                <li><Link href="/api" className="hover:text-[#4edea3]">API</Link></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="text-sm font-semibold text-white mb-3 md:mb-4">Company</h4>
-              <ul className="space-y-2 text-sm text-[#7183A6]">
-                <li><Link href="/about" className="hover:text-white">About</Link></li>
-                <li><Link href="/careers" className="hover:text-white">Careers</Link></li>
-                <li><Link href="/press" className="hover:text-white">Press</Link></li>
-                <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
+              <h4 className="text-sm font-semibold text-[#dae2fd] mb-4">Company</h4>
+              <ul className="space-y-2 text-sm text-[#bec8d2]">
+                <li><Link href="/about" className="hover:text-[#4edea3]">About</Link></li>
+                <li><Link href="/careers" className="hover:text-[#4edea3]">Careers</Link></li>
+                <li><Link href="/press" className="hover:text-[#4edea3]">Press</Link></li>
+                <li><Link href="/contact" className="hover:text-[#4edea3]">Contact</Link></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="text-sm font-semibold text-white mb-3 md:mb-4">Legal</h4>
-              <ul className="space-y-2 text-sm text-[#7183A6]">
-                <li><Link href="/privacy" className="hover:text-white">Privacy</Link></li>
-                <li><Link href="/terms" className="hover:text-white">Terms</Link></li>
-                <li><Link href="/security" className="hover:text-white">Security</Link></li>
-                <li><Link href="/status" className="hover:text-white">Status</Link></li>
+              <h4 className="text-sm font-semibold text-[#dae2fd] mb-4">Legal</h4>
+              <ul className="space-y-2 text-sm text-[#bec8d2]">
+                <li><Link href="/privacy" className="hover:text-[#4edea3]">Privacy</Link></li>
+                <li><Link href="/terms" className="hover:text-[#4edea3]">Terms</Link></li>
+                <li><Link href="/security" className="hover:text-[#4edea3]">Security</Link></li>
+                <li><Link href="/status" className="hover:text-[#4edea3]">Status</Link></li>
               </ul>
             </div>
           </div>
 
           <div className="pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-[#7183A6]">© 2024 Cuboid Technologies. All rights reserved.</p>
-            <div className="flex items-center gap-3 md:gap-4">
-              <a href="https://wa.me/254700000000" className="p-2 rounded-lg bg-white/5 text-[#7183A6] hover:text-white">
-                <MessageCircle className="w-4 h-4 md:w-5 md:h-5" />
-              </a>
-              <a href="mailto:support@cuboid.africa" className="p-2 rounded-lg bg-white/5 text-[#7183A6] hover:text-white">
-                <Mail className="w-4 h-4 md:w-5 md:h-5" />
+            <p className="text-sm text-[#bec8d2]">© 2024 CUBOID FX NETWORK. INSTITUTIONAL GRADE LIQUIDITY.</p>
+            <div className="flex items-center gap-4">
+              <Link href="/status" className="p-2 rounded-lg bg-white/5 text-[#bec8d2] hover:text-[#89ceff]">
+                <MessageCircle className="w-5 h-5" />
+              </Link>
+              <a href="mailto:support@cuboid.africa" className="p-2 rounded-lg bg-white/5 text-[#bec8d2] hover:text-[#89ceff]">
+                <Mail className="w-5 h-5" />
               </a>
             </div>
           </div>
