@@ -29,13 +29,16 @@ export function DesktopNavbar() {
   return (
     <>
       {/* DESKTOP FLOATING NAV */}
-      <motion.header
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.1 }}
+      <header
         className="fixed left-1/2 -translate-x-1/2 z-[950] w-full max-w-[1240px] hidden lg:block"
         style={{ top: 66 }}
       >
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="w-full"
+        >
         <div
           className="h-[76px] transition-all duration-300"
           style={{
@@ -109,7 +112,8 @@ export function DesktopNavbar() {
             </div>
           </div>
         </div>
-      </motion.header>
+        </motion.div>
+      </header>
 
       {/* MOBILE FLOATING HEADER */}
       <header
