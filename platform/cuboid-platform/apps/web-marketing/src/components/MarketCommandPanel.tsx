@@ -35,7 +35,7 @@ export function MarketCommandPanel() {
       {/* Reserve Rate Card */}
       <div className="bg-white/[0.03] rounded-card p-5 border border-white/[0.06] mb-5">
         <div className="flex items-center justify-between mb-4">
-          <span className="text-[13px] font-semibold text-text_primary">Reserve this rate</span>
+          <span className="text-[13px] font-semibold text-text_primary">Live exchange quote</span>
           <span className="flex items-center gap-1.5 text-[11px] text-premium_green">
             <span className="w-1.5 h-1.5 rounded-full bg-premium_green animate-pulse" />
             Live
@@ -68,14 +68,14 @@ export function MarketCommandPanel() {
         </div>
         <a href="#whatsapp" className="btn btn-green h-[48px] w-full text-[15px]" style={{ borderRadius: 10 }}>
           <MessageCircle size={18} />
-          Reserve on WhatsApp
+          Start on WhatsApp
         </a>
       </div>
 
       {/* Market Snapshot */}
       <div className="bg-white/[0.03] rounded-card p-4 border border-white/[0.06]">
         <div className="flex items-center justify-between mb-3">
-          <span className="text-[11px] font-medium text-text_muted">Market snapshot</span>
+          <span className="text-[11px] font-medium text-text_muted">Live market overview</span>
           <span className="flex items-center gap-1 text-[11px] text-text_muted">
             <Activity size={11} />
             Updated now

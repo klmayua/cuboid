@@ -10,7 +10,7 @@ const navLinks = [
   { label: "For Buyers", href: "#buyers" },
   { label: "For Sellers", href: "#sellers" },
   { label: "Brokers", href: "#brokers" },
-  { label: "BDC Infrastructure", href: "#bdc" },
+  { label: "BDC onboarding", href: "#bdc" },
   { label: "Enterprise", href: "#enterprise" },
   { label: "Learn", href: "#learn" },
 ];

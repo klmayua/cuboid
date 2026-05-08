@@ -25,17 +25,17 @@ export function BrokerSection() {
           >
             <span className="text-[13px] font-medium text-gold mb-4 block">Broker enablement</span>
             <h2 className="font-section text-text_primary mb-5">
-              Infrastructure for modern brokers
+              Built for serious brokers
             </h2>
             <p className="text-body text-text_muted max-w-[480px] mb-8">
-              Win clients, execute deals, manage relationships, and earn through verified market access — all from one platform.
+              Grow deal flow, serve clients faster, and operate with institutional-grade tools.
             </p>
             <a
               href="#broker"
               className="btn btn-green h-[52px] px-7 text-[15px]"
               style={{ borderRadius: 10 }}
             >
-              Become a Broker Partner
+              Join Broker Network
               <ArrowRight size={16} />
             </a>
           </motion.div>

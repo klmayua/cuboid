@@ -19,7 +19,7 @@ export function FooterConversionStrip() {
               Start exchanging in under 60 seconds
             </h2>
             <p className="text-body text-text_muted max-w-[480px] mx-auto mb-8">
-              Join buyers, sellers, brokers, and licensed desks already trading on WhatsApp.
+              Join buyers, sellers, brokers, and verified desks already trading on WhatsApp.
             </p>
             <a
               href="#whatsapp"

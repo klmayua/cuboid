@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { MarketCommandPanel } from "../MarketCommandPanel";
-import { MessageCircle, ArrowRight, Shield, Zap, Lock, CheckCircle } from "lucide-react";
+import { MessageCircle, Building2, Shield, Zap, Lock, CheckCircle } from "lucide-react";
 
 export function HeroSection() {
   return (
@@ -18,11 +18,62 @@ export function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            {/* Eyebrow — quiet gold, sentence case */}
+            {/* Eyebrow */}
             <div className="mb-5">
               <span className="inline-flex items-center gap-2 text-[13px] font-medium text-gold">
                 <span className="w-1.5 h-1.5 rounded-full bg-gold" />
-                Trusted exchange infrastructure
+                Verified exchange network
+              </span>
+            </div>
+
+            {/* Headline — 8 words max, 2 lines */}
+            <h1 className="font-hero text-text_primary mb-6">
+              Africa&apos;s trusted<br />exchange network
+            </h1>
+
+            {/* Subheadline */}
+            <p className="text-subhead text-text_muted max-w-[620px] mb-8">
+              Access verified exchange offers on WhatsApp, grow your brokerage network, or onboard your BDC into Africa&apos;s premium exchange infrastructure.
+            </p>
+
+            {/* CTAs — 2 only: WhatsApp dominant, BDC secondary */}
+            <div className="flex flex-wrap gap-3 mb-10">
+              <a href="#whatsapp" className="btn btn-green h-[56px] px-7 text-[15px]" style={{ borderRadius: 10 }}>
+                <MessageCircle size={18} />
+                Start on WhatsApp
+              </a>
+              <a
+                href="#bdc"
+                className="btn h-[56px] px-7 text-[15px]"
+                style={{
+                  borderRadius: 10,
+                  background: "transparent",
+                  color: "#D4AF37",
+                  border: "1px solid rgba(212,175,55,0.35)",
+                }}
+              >
+                <Building2 size={18} />
+                Onboard Your BDC
+              </a>
+            </div>
+
+            {/* Trust row */}
+            <div className="flex flex-wrap items-center gap-6 text-[13px] text-text_muted">
+              <span className="flex items-center gap-2">
+                <Shield size={14} className="text-premium_green" />
+                Verified network
+              </span>
+              <span className="flex items-center gap-2">
+                <Zap size={14} className="text-premium_green" />
+                Instant matching
+              </span>
+              <span className="flex items-center gap-2">
+                <Lock size={14} className="text-premium_green" />
+                Secure settlement
+              </span>
+              <span className="flex items-center gap-2">
+                <CheckCircle size={14} className="text-premium_green" />
+                Compliance first
               </span>
             </div>
 

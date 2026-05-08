@@ -34,8 +34,8 @@ const cards = [
   {
     icon: Building2,
     title: "For BDC Operators",
-    copy: "License your desk on CUBOID, become verified, digitize operations, and access qualified flow.",
-    cta: "License Your BDC",
+    copy: "Onboard your desk on CUBOID, become verified, digitize operations, and access qualified flow.",
+    cta: "Onboard Your BDC",
     accent: "text-gold",
     borderHover: "hover:border-gold/30",
     weight: "highest",

@@ -4,12 +4,12 @@ import { motion } from "framer-motion";
 import { Building2, Shield, FileCheck, Globe, Droplets, LayoutDashboard, ArrowRight } from "lucide-react";
 
 const modules = [
-  { icon: Shield, title: "Verification stack", desc: "KYC, licensing checks, and physical desk validation." },
-  { icon: FileCheck, title: "Compliance rails", desc: "CBN-aligned reporting, threshold monitoring, and audit trails." },
-  { icon: Globe, title: "Digital storefront", desc: "Your verified profile with live rates, hours, and corridor focus." },
-  { icon: Droplets, title: "Customer acquisition", desc: "Qualified buyers and sellers routed to your desk." },
-  { icon: LayoutDashboard, title: "Operational dashboard", desc: "Daily volume, margins, settlements, and team performance." },
-  { icon: Building2, title: "Liquidity access", desc: "Connect to broker networks and institutional corridors." },
+  { icon: Shield, title: "Verification stack", desc: "KYC checks, document validation, and physical desk verification." },
+  { icon: FileCheck, title: "Compliance rails", desc: "Reporting workflows, operational controls, and audit readiness." },
+  { icon: Globe, title: "Digital storefront", desc: "Publish live rates, operating hours, and desk profile visibility." },
+  { icon: Droplets, title: "Qualified demand", desc: "Receive verified buyer, seller and broker enquiries." },
+  { icon: LayoutDashboard, title: "Operations dashboard", desc: "Manage margins, settlement activity, and desk performance." },
+  { icon: Building2, title: "Network liquidity", desc: "Connect with brokers, institutional desks, and corridor flow." },
 ];
 
 export function BDCSection() {
@@ -45,12 +45,12 @@ export function BDCSection() {
             transition={{ duration: 0.5 }}
             className="order-1 lg:order-2"
           >
-            <span className="text-[13px] font-medium text-gold mb-4 block">BDC licensing</span>
+            <span className="text-[13px] font-medium text-gold mb-4 block">BDC onboarding</span>
             <h2 className="font-section text-text_primary mb-5">
-              Licensed infrastructure for exchange desks
+              BDC onboarding infrastructure
             </h2>
             <p className="text-body text-text_muted max-w-[480px] mb-8">
-              License your desk on CUBOID, become verified, digitize operations, and access qualified flow from buyers and brokers.
+              Verify your desk, digitize operations, and access qualified demand across trusted exchange corridors.
             </p>
             <a
               href="#bdc"
@@ -62,7 +62,7 @@ export function BDCSection() {
                 border: "1px solid rgba(212,175,55,0.35)",
               }}
             >
-              Apply for BDC Licensing
+              Onboard Your BDC
               <ArrowRight size={16} />
             </a>
           </motion.div>
