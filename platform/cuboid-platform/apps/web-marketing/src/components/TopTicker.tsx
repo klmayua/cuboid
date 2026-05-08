@@ -6,11 +6,11 @@ const tickerItems = [
   { text: "Best seller 129.62", sentiment: "neutral" },
   { text: "GBP/KES 163.20 ↑ 0.3%", sentiment: "positive" },
   { text: "EUR/KES 141.80 ↓ 0.1%", sentiment: "negative" },
-  { text: "41 desks active in Nairobi", sentiment: "accent" },
+  { text: "41 verified desks active", sentiment: "accent" },
   { text: "USD/NGN 1,517.50 ↑ 0.12%", sentiment: "positive" },
-  { text: "238 WhatsApp quote requests this hour", sentiment: "accent" },
+  { text: "238 WhatsApp quotes this hour", sentiment: "accent" },
   { text: "GBP/NGN 1,923.80 ↑ 0.08%", sentiment: "positive" },
-  { text: "23 desks active in Lagos", sentiment: "accent" },
+  { text: "23 verified desks active in Lagos", sentiment: "accent" },
   { text: "EUR/NGN 1,645.25 ↓ 0.04%", sentiment: "negative" },
   { text: "98% settlement satisfaction", sentiment: "positive" },
 ];
@@ -34,7 +34,7 @@ export function TopTicker() {
 
   return (
     <div
-      className="fixed top-0 left-0 right-0 z-[999] h-ticker overflow-hidden"
+      className="fixed top-0 left-0 right-0 z-[900] h-ticker overflow-hidden"
       style={{
         background: "rgba(7,17,26,0.96)",
         borderBottom: "1px solid rgba(255,255,255,0.06)",

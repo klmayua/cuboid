@@ -24,7 +24,7 @@ export function Footer() {
             <ul className="space-y-2.5">
               <li><a href="#exchange" className="text-[14px] text-text_muted hover:text-text_primary transition-colors">Exchange</a></li>
               <li><a href="#brokers" className="text-[14px] text-text_muted hover:text-text_primary transition-colors">Brokers</a></li>
-              <li><a href="#nearby" className="text-[14px] text-text_muted hover:text-text_primary transition-colors">Nearby desks</a></li>
+              <li><a href="#bdc" className="text-[14px] text-text_muted hover:text-text_primary transition-colors">BDC Infrastructure</a></li>
             </ul>
           </div>
           <div>

@@ -31,12 +31,13 @@ export function MobileBottomNav() {
           </a>
         ))}
 
-        {/* Center Elevated WhatsApp Button */}
+        {/* Center WhatsApp Button — NOT a pill, standard shape */}
         <a href="#whatsapp" className="flex flex-col items-center justify-center -mt-4">
           <div
-            className="w-14 h-14 rounded-full flex items-center justify-center"
+            className="w-14 h-14 flex items-center justify-center"
             style={{
               background: "linear-gradient(135deg, #00A86B, #008f5a)",
+              borderRadius: 14,
               boxShadow: "0 4px 24px rgba(0,168,107,0.35), 0 0 0 4px rgba(7,17,26,0.96)",
             }}
           >

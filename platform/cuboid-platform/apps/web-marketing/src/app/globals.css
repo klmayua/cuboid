@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 :root {
-  /* STRATEGIC REFACTOR PALETTE */
+  /* STRATEGIC CORRECTION PALETTE */
   --bg: #07111A;
   --panel: #0E1824;
   --panel_soft: #122233;
@@ -30,25 +30,32 @@
   --premium_gold: #D4AF37;
   --trust_green: #00A86B;
   --danger_red: #EF4444;
+  --obsidian: #07111A;
+  --pure_white: #F8FAFC;
+  --silver_blue: #94A3B8;
+  --gold_primary: #D4AF37;
+  --gold_soft: #F2D27B;
+  --muted_slate: #64748B;
+  --emerald: #00A86B;
+  --institutional_green: #00A86B;
+  --amber: #F59E0B;
+  --executive_red: #EF4444;
 
   /* RADIUS */
-  --radius_btn: 12px;
-  --radius_btn_lg: 14px;
+  --radius_btn: 10px;
+  --radius_input: 12px;
   --radius_card: 20px;
   --radius_panel: 24px;
-  --radius_pill: 999px;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html {
-  scroll-behavior: auto;
-}
+html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Inter Tight', 'Geist', 'Satoshi', system-ui, sans-serif;
   font-size: 17px;
-  line-height: 1.65;
+  line-height: 1.6;
   background-color: var(--bg);
   color: var(--text_primary);
   -webkit-font-smoothing: antialiased;
@@ -81,8 +88,17 @@ body {
   backdrop-filter: blur(20px);
   border: 1px solid var(--border);
 }
+.obsidian_glass {
+  background: rgba(10, 18, 30, 0.72);
+  backdrop-filter: blur(28px);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.premium_panel {
+  background: linear-gradient(180deg, var(--panel_soft), var(--panel));
+  border: 1px solid rgba(255,255,255,0.08);
+}
 
-/* BUTTONS — premium, restrained radius */
+/* BUTTONS — 10px radius, no pills */
 .btn {
   height: 52px;
   padding-inline: 28px;
@@ -101,24 +117,22 @@ body {
 }
 .btn:hover { transform: translateY(-1px); }
 
-.btn-whatsapp {
+.btn-green {
   background: var(--premium_green);
   color: #07111A;
-  border-radius: var(--radius_pill);
-  box-shadow: 0 4px 24px var(--premium_green_glow);
-  font-weight: 700;
+  box-shadow: 0 4px 20px var(--premium_green_glow);
 }
-.btn-whatsapp:hover {
+.btn-green:hover {
   background: #00c27d;
-  box-shadow: 0 6px 32px rgba(0, 168, 107, 0.35);
+  box-shadow: 0 6px 28px rgba(0, 168, 107, 0.35);
 }
 
-.btn-outline-light {
+.btn-outline {
   background: transparent;
   color: var(--text_primary);
   border: 1px solid rgba(255, 255, 255, 0.14);
 }
-.btn-outline-light:hover {
+.btn-outline:hover {
   background: rgba(255, 255, 255, 0.05);
   border-color: rgba(255, 255, 255, 0.28);
 }
@@ -128,23 +142,71 @@ body {
   color: var(--text_muted);
   border: 1px solid transparent;
   height: 40px;
-  padding-inline: 16px;
+  padding-inline: 14px;
   font-size: 14px;
   font-weight: 500;
+  border-radius: var(--radius_btn);
 }
 .btn-ghost-nav:hover { color: var(--text_primary); }
 
-.btn-outline-green-nav {
-  background: transparent;
-  color: var(--premium_green);
-  border: 1px solid rgba(0, 168, 107, 0.45);
-  height: 40px;
-  padding-inline: 16px;
-  font-size: 14px;
-  font-weight: 500;
+/* LEGACY BUTTON COMPAT */
+.btn-primary {
+  height: 52px;
+  padding-inline: 28px;
+  border-radius: var(--radius_btn);
+  font-weight: 600;
+  font-size: 15px;
+  background: var(--premium_green);
+  color: #07111A;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
 }
-.btn-outline-green-nav:hover {
-  background: rgba(0, 168, 107, 0.08);
+.btn-primary:hover { transform: translateY(-1px); }
+.btn-secondary {
+  height: 52px;
+  padding-inline: 28px;
+  border-radius: var(--radius_btn);
+  font-weight: 600;
+  font-size: 15px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.14);
+  color: var(--text_primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+.btn-secondary:hover { background: rgba(255,255,255,0.05); }
+
+/* BADGES */
+.badge-premium {
+  background: rgba(212, 175, 55, 0.10);
+  color: var(--gold);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+.badge-verified {
+  background: rgba(0, 168, 107, 0.10);
+  color: var(--premium_green);
+  border: 1px solid rgba(0, 168, 107, 0.22);
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
 }
 
 /* TICKER */
@@ -162,9 +224,14 @@ body {
 /* HERO BACKGROUND */
 .hero-bg {
   background:
-    radial-gradient(ellipse 70% 50% at 15% 30%, rgba(0, 168, 107, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 50% at 15% 30%, rgba(0, 168, 107, 0.05) 0%, transparent 60%),
     radial-gradient(ellipse 50% 40% at 85% 20%, rgba(212, 175, 55, 0.04) 0%, transparent 60%),
     linear-gradient(180deg, var(--bg) 0%, var(--panel) 100%);
+}
+
+/* CHATBOT */
+.chatbot-glow {
+  box-shadow: 0 4px 24px rgba(0, 168, 107, 0.15), 0 0 0 1px rgba(255,255,255,0.06);
 }
 
 /* SCROLLBAR */

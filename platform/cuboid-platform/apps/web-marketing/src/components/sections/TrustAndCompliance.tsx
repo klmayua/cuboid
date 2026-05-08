@@ -7,7 +7,7 @@ const items = [
   {
     icon: Shield,
     title: "CBN licensed partners",
-    description: "Every BDC desk operates under valid Central Bank licenses.",
+    description: "Every desk operates under valid Central Bank licenses.",
   },
   {
     icon: Lock,
@@ -17,18 +17,18 @@ const items = [
   {
     icon: FileCheck,
     title: "Verified identities",
-    description: "Multi-factor KYC with government ID matching for every broker.",
+    description: "Multi-factor KYC with government ID matching.",
   },
   {
     icon: Server,
     title: "SOC 2 Type II audited",
-    description: "Independently verified security, availability, and integrity controls.",
+    description: "Independently verified security and integrity controls.",
   },
 ];
 
 export function TrustAndCompliance() {
   return (
-    <section className="relative py-[100px] bg-panel border-t border-white/[0.06]" id="business">
+    <section className="relative py-[100px] bg-panel border-t border-white/[0.06]" id="enterprise">
       <div className="max-w-content mx-auto px-gutter md:px-gutter-mob">
         <motion.div
           initial={{ opacity: 0, y: 16 }}

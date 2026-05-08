@@ -3,11 +3,13 @@ import {
   DesktopNavbar,
   MobileBottomNav,
   HeroSection,
-  MetricsStrip,
-  JourneySelector,
+  BusinessSplitBand,
+  BrokerSection,
+  BDCSection,
   TrustAndCompliance,
   FooterConversionStrip,
   Footer,
+  ChatBot,
 } from "@/components";
 
 export default function Home() {
@@ -16,11 +18,13 @@ export default function Home() {
       <TopTicker />
       <DesktopNavbar />
       <MobileBottomNav />
+      <ChatBot />
 
       <div className="pb-mob-nav xl:pb-0">
         <HeroSection />
-        <MetricsStrip />
-        <JourneySelector />
+        <BusinessSplitBand />
+        <BrokerSection />
+        <BDCSection />
         <TrustAndCompliance />
         <FooterConversionStrip />
         <Footer />

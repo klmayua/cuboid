@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { TrendingUp, TrendingDown, Activity, MapPin, Shield, MessageCircle } from "lucide-react";
+import { TrendingUp, TrendingDown, Activity, MessageCircle, ArrowRight, Shield, Zap, Lock, CheckCircle } from "lucide-react";
 
 export function MarketCommandPanel() {
   return (
@@ -44,7 +44,7 @@ export function MarketCommandPanel() {
         <div className="grid grid-cols-2 gap-3 mb-4">
           <div>
             <label className="text-[11px] text-text_muted mb-1.5 block">You pay</label>
-            <div className="bg-white/[0.04] border border-white/[0.08] rounded-btn px-3 py-2.5 flex items-center gap-2">
+            <div className="bg-white/[0.04] border border-white/[0.08] rounded-input px-3 py-2.5 flex items-center gap-2">
               <span className="text-gold font-bold text-[13px]">USD</span>
               <input
                 type="text"
@@ -55,7 +55,7 @@ export function MarketCommandPanel() {
           </div>
           <div>
             <label className="text-[11px] text-text_muted mb-1.5 block">You receive</label>
-            <div className="bg-white/[0.04] border border-white/[0.08] rounded-btn px-3 py-2.5 flex items-center gap-2">
+            <div className="bg-white/[0.04] border border-white/[0.08] rounded-input px-3 py-2.5 flex items-center gap-2">
               <span className="text-premium_green font-bold text-[13px]">KES</span>
               <input
                 type="text"
@@ -66,34 +66,16 @@ export function MarketCommandPanel() {
             </div>
           </div>
         </div>
-        <a href="#whatsapp" className="btn btn-whatsapp h-[48px] w-full text-[15px]">
+        <a href="#whatsapp" className="btn btn-green h-[48px] w-full text-[15px]" style={{ borderRadius: 10 }}>
           <MessageCircle size={18} />
           Reserve on WhatsApp
         </a>
       </div>
 
-      {/* Nearby Verified Desk */}
-      <div className="bg-white/[0.03] rounded-card p-4 border border-white/[0.06] mb-5">
-        <div className="flex items-center gap-2 mb-3">
-          <MapPin size={14} className="text-trust_blue" />
-          <span className="text-[13px] font-semibold text-text_primary">Nearby verified desk</span>
-        </div>
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="text-[14px] text-text_primary font-medium">Nairobi CBD Exchange</p>
-            <p className="text-[12px] text-text_muted">0.8 km · Open now</p>
-          </div>
-          <span className="flex items-center gap-1 text-[11px] text-premium_green">
-            <Shield size={12} />
-            Verified
-          </span>
-        </div>
-      </div>
-
-      {/* Live Market Snapshot */}
+      {/* Market Snapshot */}
       <div className="bg-white/[0.03] rounded-card p-4 border border-white/[0.06]">
         <div className="flex items-center justify-between mb-3">
-          <span className="text-[11px] font-medium text-text_muted">Live snapshot</span>
+          <span className="text-[11px] font-medium text-text_muted">Market snapshot</span>
           <span className="flex items-center gap-1 text-[11px] text-text_muted">
             <Activity size={11} />
             Updated now

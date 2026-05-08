@@ -7,8 +7,8 @@ import { MessageCircle, ArrowRight, Shield, Zap, Lock, CheckCircle } from "lucid
 export function HeroSection() {
   return (
     <section
-      className="relative min-h-[calc(100vh-148px)] pt-[48px] pb-[72px] overflow-hidden hero-bg"
-      style={{ marginTop: 148 }}
+      className="relative min-h-[86vh] pt-[48px] pb-[72px] overflow-hidden hero-bg"
+      style={{ marginTop: 180 }}
     >
       <div className="relative max-w-content mx-auto px-gutter md:px-gutter-mob">
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 xl:gap-16 items-start">
@@ -18,7 +18,7 @@ export function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            {/* Eyebrow */}
+            {/* Eyebrow — quiet gold, sentence case */}
             <div className="mb-5">
               <span className="inline-flex items-center gap-2 text-[13px] font-medium text-gold">
                 <span className="w-1.5 h-1.5 rounded-full bg-gold" />
@@ -26,34 +26,24 @@ export function HeroSection() {
               </span>
             </div>
 
-            {/* Headline — sentence case, no all-caps */}
+            {/* Headline — sentence case */}
             <h1 className="font-hero text-text_primary mb-6">
-              Africa&apos;s verified exchange network. Built for trust. Powered by WhatsApp.
+              Africa&apos;s verified exchange infrastructure for buyers, brokers and licensed exchange desks.
             </h1>
 
             {/* Subheadline */}
             <p className="text-subhead text-text_muted max-w-[580px] mb-8">
-              Compare live rates, connect with verified brokers, reserve exchange deals instantly, and settle confidently — all from WhatsApp.
+              Compare live rates, reserve deals instantly on WhatsApp, onboard as a broker, or license your BDC operations on CUBOID.
             </p>
 
-            {/* CTAs — max 2 */}
+            {/* CTAs — max 2, only one WhatsApp inside hero */}
             <div className="flex flex-wrap gap-3 mb-10">
-              <a href="#whatsapp" className="btn btn-whatsapp h-[56px] px-7 text-[15px]">
+              <a href="#whatsapp" className="btn btn-green h-[56px] px-7 text-[15px]" style={{ borderRadius: 10 }}>
                 <MessageCircle size={18} />
                 Start on WhatsApp
               </a>
-              <a href="#exchange" className="btn btn-outline-light h-[56px] px-7 text-[15px]">
+              <a href="#exchange" className="btn btn-outline h-[56px] px-7 text-[15px]" style={{ borderRadius: 10 }}>
                 View live rates
-              </a>
-            </div>
-
-            {/* Quiet links for secondary intents */}
-            <div className="flex flex-wrap gap-6 mb-10 text-[14px]">
-              <a href="#brokers" className="text-text_muted hover:text-gold transition-colors flex items-center gap-1">
-                For brokers <ArrowRight size={14} />
-              </a>
-              <a href="#bdc" className="text-text_muted hover:text-gold transition-colors flex items-center gap-1">
-                List your desk <ArrowRight size={14} />
               </a>
             </div>
 
@@ -61,7 +51,7 @@ export function HeroSection() {
             <div className="flex flex-wrap items-center gap-6 text-[13px] text-text_muted">
               <span className="flex items-center gap-2">
                 <Shield size={14} className="text-premium_green" />
-                Verified desks
+                Verified network
               </span>
               <span className="flex items-center gap-2">
                 <Zap size={14} className="text-premium_green" />
@@ -73,12 +63,12 @@ export function HeroSection() {
               </span>
               <span className="flex items-center gap-2">
                 <CheckCircle size={14} className="text-premium_green" />
-                Compliance-first
+                Compliance first
               </span>
             </div>
           </motion.div>
 
-          {/* RIGHT COLUMN — clean stack, reduced complexity */}
+          {/* RIGHT COLUMN */}
           <div className="xl:pt-4">
             <MarketCommandPanel />
           </div>

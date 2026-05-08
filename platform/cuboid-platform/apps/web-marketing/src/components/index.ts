@@ -5,13 +5,15 @@ export { MobileBottomNav } from "./MobileBottomNav";
 export { MarketCommandPanel } from "./MarketCommandPanel";
 export { Footer } from "./Footer";
 export { ScrollToTop } from "./ScrollToTop";
+export { ChatBot } from "./ChatBot";
 
 // Backward compatibility for existing pages
 export { Navigation } from "./Navigation";
 
 // Sections
 export { HeroSection } from "./sections/HeroSection";
-export { MetricsStrip } from "./sections/MetricsStrip";
-export { JourneySelector } from "./sections/JourneySelector";
+export { BusinessSplitBand } from "./sections/BusinessSplitBand";
+export { BrokerSection } from "./sections/BrokerSection";
+export { BDCSection } from "./sections/BDCSection";
 export { TrustAndCompliance } from "./sections/TrustAndCompliance";
 export { FooterConversionStrip } from "./sections/FooterConversionStrip";
