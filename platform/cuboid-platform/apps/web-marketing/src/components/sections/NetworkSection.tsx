@@ -38,7 +38,7 @@ const items = [
 
 export function NetworkSection() {
   return (
-    <section className="relative py-[100px] bg-bg border-t border-white/[0.06]" id="network">
+    <section className="relative py-[100px] bg-bg border-t border-white/[0.06] section-target" id="market-network">
       <div className="max-w-content mx-auto px-gutter md:px-gutter-mob">
         <motion.div
           initial={{ opacity: 0, y: 16 }}

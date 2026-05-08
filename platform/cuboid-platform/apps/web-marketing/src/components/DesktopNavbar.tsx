@@ -8,9 +8,9 @@ import { Menu, X } from "lucide-react";
 const navLinks = [
   { label: "Markets", href: "#markets" },
   { label: "Brokers", href: "#brokers" },
-  { label: "BDC Onboarding", href: "#bdc" },
+  { label: "BDC Onboarding", href: "#bdc-onboarding" },
   { label: "Treasury", href: "#treasury" },
-  { label: "Market Network", href: "#network" },
+  { label: "Market Network", href: "#market-network" },
   { label: "Learn", href: "#learn" },
 ];
 
@@ -29,48 +29,69 @@ export function DesktopNavbar() {
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.1 }}
-      className="fixed left-0 right-0 z-[800]"
-      style={{ top: 76, paddingLeft: 48, paddingRight: 48 }}
+      className="fixed left-1/2 -translate-x-1/2 z-[1000] w-full max-w-[1240px]"
+      style={{ top: 58, paddingLeft: 20, paddingRight: 20 }}
     >
       <div
-        className="h-[84px] transition-all duration-300"
+        className="h-[74px] transition-all duration-300"
         style={{
-          background: scrolled ? "rgba(10,18,30,0.88)" : "rgba(10,18,30,0.72)",
-          backdropFilter: "blur(28px)",
-          borderRadius: 24,
-          border: "1px solid rgba(255,255,255,0.08)",
-          boxShadow: "0 10px 40px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.04)",
+          background: scrolled
+            ? "linear-gradient(180deg, rgba(10,18,30,0.96), rgba(8,16,26,0.90))"
+            : "linear-gradient(180deg, rgba(10,18,30,0.94), rgba(8,16,26,0.88))",
+          backdropFilter: "blur(26px)",
+          borderRadius: 20,
+          border: "1px solid rgba(255,255,255,0.10)",
+          boxShadow:
+            "inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 24px rgba(0,0,0,0.30), 0 18px 50px rgba(0,0,0,0.22), 0 0 40px rgba(0,168,107,0.04)",
         }}
       >
-        <div className="h-full flex items-center justify-between px-6 xl:px-8">
+        <div className="h-full flex items-center pl-[26px] pr-[18px]">
           {/* Left: Logo */}
-          <a href="/" className="flex items-center gap-2.5 shrink-0">
-            <CuboidLogo width={30} height={30} />
-            <span className="text-text_primary font-bold text-lg tracking-tight hidden sm:block">CUBOID</span>
+          <a href="/" className="flex items-center gap-2.5 shrink-0" style={{ minWidth: 150 }}>
+            <CuboidLogo width={28} height={28} />
+            <span className="text-text_primary font-bold text-[16px] tracking-tight hidden sm:block">
+              CUBOID
+            </span>
           </a>
 
-          {/* Center: Navigation — single row, no wrap */}
-          <nav className="hidden 2xl:flex items-center gap-1">
+          {/* Center: Navigation */}
+          <nav className="hidden 2xl:flex items-center gap-[28px] mx-auto">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="px-3 py-2 text-text_muted text-[14px] font-medium hover:text-text_primary transition-colors rounded-btn hover:bg-white/[0.03] whitespace-nowrap"
+                className="text-[14px] font-medium transition-all duration-140 whitespace-nowrap hover:text-white"
+                style={{ color: "#D7E2EE" }}
+                onMouseEnter={(e) => {
+                  (e.target as HTMLElement).style.transform = "translateY(-1px)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.target as HTMLElement).style.transform = "translateY(0)";
+                }}
               >
                 {link.label}
               </a>
             ))}
           </nav>
 
-          {/* Right: Actions — single row, no wrap, no duplicate */}
-          <div className="hidden xl:flex items-center gap-2 shrink-0">
-            <a href="/login" className="btn-ghost-nav">
+          {/* Right: Actions */}
+          <div className="hidden xl:flex items-center gap-[16px] shrink-0">
+            <a
+              href="/login"
+              className="btn-ghost-nav"
+              style={{ height: 36, paddingInline: 12, fontSize: 13 }}
+            >
               Sign in
             </a>
             <a
               href="#whatsapp"
-              className="btn btn-green h-[40px] px-6 text-[14px]"
-              style={{ borderRadius: 10 }}
+              className="btn btn-green text-[14px] font-semibold"
+              style={{
+                height: 44,
+                paddingInline: 22,
+                borderRadius: 10,
+                boxShadow: "0 0 24px rgba(0,168,107,0.20)",
+              }}
             >
               Start on WhatsApp
             </a>
@@ -78,7 +99,7 @@ export function DesktopNavbar() {
 
           {/* Mobile Hamburger */}
           <button
-            className="xl:hidden p-2 text-text_muted hover:text-text_primary"
+            className="xl:hidden p-2 text-text_muted hover:text-text_primary ml-auto"
             onClick={() => setMobileOpen(!mobileOpen)}
           >
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
@@ -95,10 +116,11 @@ export function DesktopNavbar() {
             exit={{ opacity: 0, height: 0 }}
             className="xl:hidden overflow-hidden mt-3"
             style={{
-              background: "rgba(10,18,30,0.96)",
+              background: "linear-gradient(180deg, rgba(10,18,30,0.96), rgba(8,16,26,0.92))",
               backdropFilter: "blur(28px)",
               borderRadius: 20,
-              border: "1px solid rgba(255,255,255,0.08)",
+              border: "1px solid rgba(255,255,255,0.10)",
+              boxShadow: "0 18px 50px rgba(0,0,0,0.22)",
             }}
           >
             <div className="px-5 py-5 flex flex-col gap-1">
@@ -106,7 +128,8 @@ export function DesktopNavbar() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="px-4 py-3 text-text_muted text-[15px] font-medium hover:text-text_primary hover:bg-white/[0.03] rounded-btn transition-colors"
+                  className="px-4 py-3 text-[15px] font-medium hover:text-text_primary hover:bg-white/[0.03] rounded-btn transition-colors"
+                  style={{ color: "#D7E2EE" }}
                   onClick={() => setMobileOpen(false)}
                 >
                   {link.label}
@@ -114,7 +137,13 @@ export function DesktopNavbar() {
               ))}
               <div className="h-px bg-white/[0.06] my-3" />
               <a href="/login" className="btn btn-ghost-nav h-[44px] text-[14px]">Sign in</a>
-              <a href="#whatsapp" className="btn btn-green h-[44px] text-[14px]" style={{ borderRadius: 10 }}>Start on WhatsApp</a>
+              <a
+                href="#whatsapp"
+                className="btn btn-green h-[44px] text-[14px]"
+                style={{ borderRadius: 10, boxShadow: "0 0 24px rgba(0,168,107,0.20)" }}
+              >
+                Start on WhatsApp
+              </a>
             </div>
           </motion.div>
         )}

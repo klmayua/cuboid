@@ -5,7 +5,7 @@ import { ShoppingCart, TrendingDown, BarChart3, ArrowRight, MessageCircle } from
 
 export function MarketplaceSection() {
   return (
-    <section className="relative py-[100px] bg-panel border-t border-white/[0.06]" id="markets">
+    <section className="relative py-[100px] bg-panel border-t border-white/[0.06] section-target" id="markets">
       <div className="max-w-content mx-auto px-gutter md:px-gutter-mob">
         <motion.div
           initial={{ opacity: 0, y: 16 }}

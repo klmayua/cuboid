@@ -5,7 +5,7 @@ import { Building2, Wallet, Repeat, Shield, ArrowRight } from "lucide-react";
 
 export function BusinessSection() {
   return (
-    <section className="relative py-[100px] bg-panel border-t border-white/[0.06]" id="treasury">
+    <section className="relative py-[100px] bg-panel border-t border-white/[0.06] section-target" id="treasury">
       <div className="max-w-content mx-auto px-gutter md:px-gutter-mob">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Left: Headline + CTA */}

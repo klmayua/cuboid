@@ -239,6 +239,12 @@ body {
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--panel_soft); border-radius: 3px; }
 
+/* SECTION ANCHOR OFFSET */
+.section-target {
+  scroll-margin-top: 170px;
+  padding-top: 24px;
+}
+
 /* SAFE AREA */
 @supports (padding-bottom: env(safe-area-inset-bottom)) {
   .safe-area-pb { padding-bottom: env(safe-area-inset-bottom); }

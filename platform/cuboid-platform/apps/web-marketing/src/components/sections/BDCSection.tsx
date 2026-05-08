@@ -14,7 +14,7 @@ const modules = [
 
 export function BDCSection() {
   return (
-    <section className="relative py-[100px] bg-panel border-t border-white/[0.06]" id="bdc">
+    <section className="relative py-[100px] bg-panel border-t border-white/[0.06] section-target" id="bdc-onboarding">
       <div className="max-w-content mx-auto px-gutter md:px-gutter-mob">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Left: Modules */}

@@ -13,7 +13,7 @@ const modules = [
 
 export function BrokerSection() {
   return (
-    <section className="relative py-[100px] bg-bg border-t border-white/[0.06]" id="brokers">
+    <section className="relative py-[100px] bg-bg border-t border-white/[0.06] section-target" id="brokers">
       <div className="max-w-content mx-auto px-gutter md:px-gutter-mob">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Left: Headline + CTA */}
