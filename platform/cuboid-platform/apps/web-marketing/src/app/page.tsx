@@ -3,10 +3,11 @@ import {
   DesktopNavbar,
   MobileBottomNav,
   HeroSection,
-  BusinessSplitBand,
+  MarketplaceSection,
   BrokerSection,
   BDCSection,
-  TrustAndCompliance,
+  BusinessSection,
+  NetworkSection,
   FooterConversionStrip,
   Footer,
   ChatBot,
@@ -22,10 +23,11 @@ export default function Home() {
 
       <div className="pb-mob-nav xl:pb-0">
         <HeroSection />
-        <BusinessSplitBand />
+        <MarketplaceSection />
         <BrokerSection />
         <BDCSection />
-        <TrustAndCompliance />
+        <BusinessSection />
+        <NetworkSection />
         <FooterConversionStrip />
         <Footer />
       </div>

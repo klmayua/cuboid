@@ -12,8 +12,9 @@ export { Navigation } from "./Navigation";
 
 // Sections
 export { HeroSection } from "./sections/HeroSection";
-export { BusinessSplitBand } from "./sections/BusinessSplitBand";
+export { MarketplaceSection } from "./sections/MarketplaceSection";
 export { BrokerSection } from "./sections/BrokerSection";
 export { BDCSection } from "./sections/BDCSection";
-export { TrustAndCompliance } from "./sections/TrustAndCompliance";
+export { BusinessSection } from "./sections/BusinessSection";
+export { NetworkSection } from "./sections/NetworkSection";
 export { FooterConversionStrip } from "./sections/FooterConversionStrip";
