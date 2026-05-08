@@ -76,47 +76,6 @@ export function HeroSection() {
                 Compliance first
               </span>
             </div>
-
-            {/* Headline — sentence case */}
-            <h1 className="font-hero text-text_primary mb-6">
-              Africa&apos;s verified exchange infrastructure for buyers, brokers and licensed exchange desks.
-            </h1>
-
-            {/* Subheadline */}
-            <p className="text-subhead text-text_muted max-w-[580px] mb-8">
-              Compare live rates, reserve deals instantly on WhatsApp, onboard as a broker, or license your BDC operations on CUBOID.
-            </p>
-
-            {/* CTAs — max 2, only one WhatsApp inside hero */}
-            <div className="flex flex-wrap gap-3 mb-10">
-              <a href="#whatsapp" className="btn btn-green h-[56px] px-7 text-[15px]" style={{ borderRadius: 10 }}>
-                <MessageCircle size={18} />
-                Start on WhatsApp
-              </a>
-              <a href="#exchange" className="btn btn-outline h-[56px] px-7 text-[15px]" style={{ borderRadius: 10 }}>
-                View live rates
-              </a>
-            </div>
-
-            {/* Trust row — inline, sentence case */}
-            <div className="flex flex-wrap items-center gap-6 text-[13px] text-text_muted">
-              <span className="flex items-center gap-2">
-                <Shield size={14} className="text-premium_green" />
-                Verified network
-              </span>
-              <span className="flex items-center gap-2">
-                <Zap size={14} className="text-premium_green" />
-                Instant matching
-              </span>
-              <span className="flex items-center gap-2">
-                <Lock size={14} className="text-premium_green" />
-                Secure settlement
-              </span>
-              <span className="flex items-center gap-2">
-                <CheckCircle size={14} className="text-premium_green" />
-                Compliance first
-              </span>
-            </div>
           </motion.div>
 
           {/* RIGHT COLUMN */}
