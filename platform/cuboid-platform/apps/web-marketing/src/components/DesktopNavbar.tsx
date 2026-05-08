@@ -33,8 +33,8 @@ export function DesktopNavbar() {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
-        className="fixed left-1/2 -translate-x-1/2 z-[950] hidden lg:block"
-        style={{ top: 66, width: 1240, maxWidth: "calc(100vw - 64px)" }}
+        className="fixed left-1/2 -translate-x-1/2 z-[950] w-full max-w-[1240px] hidden lg:block"
+        style={{ top: 66, paddingLeft: 20, paddingRight: 20 }}
       >
         <div
           className="h-[76px] transition-all duration-300"
