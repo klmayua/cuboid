@@ -77,44 +77,16 @@ export function DesktopNavbar() {
             </a>
 
             {/* Center: Navigation */}
-            <nav className="flex items-center justify-center gap-[36px]" style={{ lineHeight: 1 }}>
+            <nav className="nav-group flex items-center justify-center gap-[36px]" style={{ lineHeight: 1 }}>
               {navLinks.map((link) => {
                 const isActive = activeHash === link.href;
                 return (
                   <a
                     key={link.href}
                     href={link.href}
-                    className="relative inline-flex items-center transition-all duration-220 whitespace-nowrap"
-                    style={{
-                      height: 48,
-                      fontSize: 15,
-                      fontWeight: isActive ? 600 : 520,
-                      color: isActive ? "#F8FAFC" : "#CBD5E1",
-                    }}
-                    onMouseEnter={(e) => {
-                      if (!isActive) e.currentTarget.style.color = "#F8FAFC";
-                      const u = e.currentTarget.querySelector(".nav-underline") as HTMLElement;
-                      if (u) u.style.width = "100%";
-                    }}
-                    onMouseLeave={(e) => {
-                      if (!isActive) e.currentTarget.style.color = "#CBD5E1";
-                      const u = e.currentTarget.querySelector(".nav-underline") as HTMLElement;
-                      if (u && !isActive) u.style.width = "0%";
-                    }}
+                    className={`nav-link${isActive ? " active" : ""}`}
                   >
                     {link.label}
-                    <span
-                      className="nav-underline absolute left-0"
-                      style={{
-                        bottom: 5,
-                        width: isActive ? "100%" : "0%",
-                        height: 2,
-                        borderRadius: 999,
-                        background: "#00A86B",
-                        opacity: 0.95,
-                        transition: "width 220ms ease",
-                      }}
-                    />
                   </a>
                 );
               })}

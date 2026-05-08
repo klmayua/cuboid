@@ -227,3 +227,90 @@ body {
 @supports (padding-bottom: env(safe-area-inset-bottom)) {
   .safe-area-pb { padding-bottom: env(safe-area-inset-bottom); }
 }
+
+/* ==========================================================
+   DESKTOP NAV LINK INTERACTION — Premium Micro Patch
+   ========================================================== */
+
+.nav-group:hover .nav-link:not(:hover) {
+  color: #94A3B8;
+  opacity: 0.82;
+  transition: color 180ms ease-out, opacity 180ms ease-out;
+}
+
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 48px;
+  font-size: 15px;
+  font-weight: 520;
+  color: #CBD5E1;
+  white-space: nowrap;
+  text-decoration: none;
+  outline: none;
+  transition: color 180ms ease-out, opacity 180ms ease-out, text-shadow 180ms ease-out;
+}
+
+/* Underline */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 5px;
+  width: 0%;
+  height: 2px;
+  border-radius: 999px;
+  background: #D4AF37;
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.18);
+  opacity: 0.95;
+  transition: width 220ms ease;
+}
+
+/* Hover */
+.nav-link:hover {
+  color: #D4AF37;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.12);
+  opacity: 1;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Active */
+.nav-link.active {
+  color: #F2D27B;
+  font-weight: 600;
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.08);
+  opacity: 1;
+}
+
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* Group: keep active link bright even when not hovered */
+.nav-group:hover .nav-link.active:not(:hover) {
+  color: #F2D27B;
+  opacity: 1;
+}
+
+/* Focus */
+.nav-link:focus-visible {
+  color: #F2D27B;
+}
+
+.nav-link:focus-visible::after {
+  width: 100%;
+}
+
+/* Pressed */
+.nav-link:active {
+  color: #C79A1B;
+  transition-duration: 80ms;
+}
+
+.nav-link:active::after {
+  width: 100%;
+}
