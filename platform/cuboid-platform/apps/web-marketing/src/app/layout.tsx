@@ -1,11 +1,19 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { ScrollToTop } from "@/components/ScrollToTop";
 
 export const metadata: Metadata = {
-  title: "CUBOID — Africa's verified exchange network",
+  title: "CUBOID — Nigeria's verified exchange network",
   description:
-    "Compare live rates, connect with verified brokers, reserve exchange deals instantly, and settle confidently — all from WhatsApp.",
+    "Compare live FX rates, connect with verified brokers, reserve exchange deals instantly, and settle confidently.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  viewportFit: "cover",
+  themeColor: "#07111A",
 };
 
 export default function RootLayout({
