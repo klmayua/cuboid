@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { MarketCommandPanel } from "../MarketCommandPanel";
-import { MessageCircle, Building2, Shield, Zap, Lock, CheckCircle } from "lucide-react";
+import { MessageCircle, Users, Shield, Zap, Lock, CheckCircle } from "lucide-react";
 
 export function HeroSection() {
   return (
@@ -22,28 +22,28 @@ export function HeroSection() {
             <div className="mb-5">
               <span className="inline-flex items-center gap-2 text-[13px] font-medium text-gold">
                 <span className="w-1.5 h-1.5 rounded-full bg-gold" />
-                Verified exchange network
+                Nigeria&apos;s verified FX network
               </span>
             </div>
 
-            {/* Headline — 8 words max, 2 lines */}
+            {/* Headline */}
             <h1 className="font-hero text-text_primary mb-6">
-              Africa&apos;s trusted<br />exchange network
+              Better FX rates.<br />Smarter market access.
             </h1>
 
             {/* Subheadline */}
             <p className="text-subhead text-text_muted max-w-[620px] mb-8">
-              Access verified exchange offers on WhatsApp, grow your brokerage network, or onboard your BDC into Africa&apos;s premium exchange infrastructure.
+              Daily market rates across Lagos, Abuja, broker desks, bank inflows and verified BDC channels—aggregated into one trusted exchange network.
             </p>
 
-            {/* CTAs — 2 only: WhatsApp dominant, BDC secondary */}
+            {/* CTAs — 2 only: WhatsApp + Broker Network */}
             <div className="flex flex-wrap gap-3 mb-10">
               <a href="#whatsapp" className="btn btn-green h-[56px] px-7 text-[15px]" style={{ borderRadius: 10 }}>
                 <MessageCircle size={18} />
                 Start on WhatsApp
               </a>
               <a
-                href="#bdc"
+                href="#brokers"
                 className="btn h-[56px] px-7 text-[15px]"
                 style={{
                   borderRadius: 10,
@@ -52,8 +52,8 @@ export function HeroSection() {
                   border: "1px solid rgba(212,175,55,0.35)",
                 }}
               >
-                <Building2 size={18} />
-                Onboard Your BDC
+                <Users size={18} />
+                Join Broker Network
               </a>
             </div>
 

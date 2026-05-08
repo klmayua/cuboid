@@ -1,7 +1,21 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { TrendingUp, TrendingDown, Activity, MessageCircle, ArrowRight, Shield, Zap, Lock, CheckCircle } from "lucide-react";
+import { TrendingUp, TrendingDown, Activity } from "lucide-react";
+
+const topPairs = [
+  { pair: "USD / NGN", subtitle: "Market midpoint", value: "₦1,392", delta: "+0.6%", up: true },
+  { pair: "GBP / NGN", subtitle: "Market midpoint", value: "₦1,885", delta: "+0.3%", up: true },
+  { pair: "EUR / NGN", subtitle: "Market midpoint", value: "₦1,620", delta: "-0.2%", up: false },
+];
+
+const deskRates = [
+  { source: "Lagos market", buy: "₦1,388", sell: "₦1,398" },
+  { source: "Abuja market", buy: "₦1,392", sell: "₦1,405" },
+  { source: "Bank inflow", buy: "₦1,360", sell: "₦1,372" },
+  { source: "Verified BDC desk", buy: "₦1,390", sell: "₦1,400" },
+  { source: "Broker reserve quote", buy: "₦1,394", sell: "₦1,407" },
+];
 
 export function MarketCommandPanel() {
   return (
@@ -12,88 +26,78 @@ export function MarketCommandPanel() {
       className="glass-panel rounded-panel p-6 xl:p-7"
       style={{ border: "1px solid rgba(255,255,255,0.08)" }}
     >
-      {/* Best Bid / Best Offer */}
-      <div className="grid grid-cols-2 gap-3 mb-5">
-        <div className="bg-white/[0.03] rounded-card p-4 border border-white/[0.06]">
-          <div className="flex items-center gap-2 mb-2">
-            <TrendingDown size={14} className="text-premium_green" />
-            <span className="text-[11px] font-medium text-text_muted">Best buyer</span>
-          </div>
-          <div className="text-[22px] font-bold text-text_primary font-mono">129.10</div>
-          <div className="text-[12px] text-premium_green mt-0.5">USD/KES</div>
+      {/* Header */}
+      <div className="flex items-center justify-between mb-5">
+        <div>
+          <h3 className="text-[15px] font-bold text-text_primary">Today&apos;s market rates</h3>
+          <p className="text-[12px] text-text_muted">Aggregated live from verified desks</p>
         </div>
-        <div className="bg-white/[0.03] rounded-card p-4 border border-white/[0.06]">
-          <div className="flex items-center gap-2 mb-2">
-            <TrendingUp size={14} className="text-gold" />
-            <span className="text-[11px] font-medium text-text_muted">Best seller</span>
-          </div>
-          <div className="text-[22px] font-bold text-text_primary font-mono">129.62</div>
-          <div className="text-[12px] text-gold mt-0.5">USD/KES</div>
-        </div>
+        <span className="flex items-center gap-1.5 text-[11px] text-premium_green">
+          <span className="w-1.5 h-1.5 rounded-full bg-premium_green animate-pulse" />
+          Live
+        </span>
       </div>
 
-      {/* Reserve Rate Card */}
-      <div className="bg-white/[0.03] rounded-card p-5 border border-white/[0.06] mb-5">
-        <div className="flex items-center justify-between mb-4">
-          <span className="text-[13px] font-semibold text-text_primary">Live exchange quote</span>
-          <span className="flex items-center gap-1.5 text-[11px] text-premium_green">
-            <span className="w-1.5 h-1.5 rounded-full bg-premium_green animate-pulse" />
-            Live
-          </span>
-        </div>
-        <div className="grid grid-cols-2 gap-3 mb-4">
-          <div>
-            <label className="text-[11px] text-text_muted mb-1.5 block">You pay</label>
-            <div className="bg-white/[0.04] border border-white/[0.08] rounded-input px-3 py-2.5 flex items-center gap-2">
-              <span className="text-gold font-bold text-[13px]">USD</span>
-              <input
-                type="text"
-                placeholder="10,000"
-                className="bg-transparent text-text_primary text-[15px] font-semibold w-full outline-none placeholder:text-text_muted/40"
-              />
+      {/* Top Pair Cards */}
+      <div className="grid grid-cols-3 gap-3 mb-5">
+        {topPairs.map((p) => (
+          <div key={p.pair} className="bg-white/[0.03] rounded-card p-4 border border-white/[0.06]">
+            <div className="text-[11px] font-medium text-text_muted mb-1">{p.pair}</div>
+            <div className="text-[20px] font-bold text-text_primary font-mono">{p.value}</div>
+            <div className="flex items-center gap-1 mt-1">
+              <span className={`text-[11px] font-semibold ${p.up ? "text-premium_green" : "text-danger_red"}`}>
+                {p.up ? <TrendingUp size={10} className="inline" /> : <TrendingDown size={10} className="inline" />}
+                {p.delta}
+              </span>
+              <span className="text-[10px] text-text_muted">{p.subtitle}</span>
             </div>
           </div>
-          <div>
-            <label className="text-[11px] text-text_muted mb-1.5 block">You receive</label>
-            <div className="bg-white/[0.04] border border-white/[0.08] rounded-input px-3 py-2.5 flex items-center gap-2">
-              <span className="text-premium_green font-bold text-[13px]">KES</span>
-              <input
-                type="text"
-                placeholder="1,294,500"
-                readOnly
-                className="bg-transparent text-text_primary text-[15px] font-semibold w-full outline-none placeholder:text-text_muted/40"
-              />
-            </div>
-          </div>
-        </div>
-        <a href="#whatsapp" className="btn btn-green h-[48px] w-full text-[15px]" style={{ borderRadius: 10 }}>
-          <MessageCircle size={18} />
-          Start on WhatsApp
-        </a>
+        ))}
       </div>
 
-      {/* Market Snapshot */}
-      <div className="bg-white/[0.03] rounded-card p-4 border border-white/[0.06]">
-        <div className="flex items-center justify-between mb-3">
-          <span className="text-[11px] font-medium text-text_muted">Live market overview</span>
+      {/* Daily Desk Rates Board */}
+      <div className="bg-white/[0.03] rounded-card border border-white/[0.06] mb-5 overflow-hidden">
+        <div className="px-4 py-3 bg-white/[0.02] border-b border-white/[0.06] flex items-center justify-between">
+          <span className="text-[12px] font-semibold text-text_primary">Daily desk rates</span>
           <span className="flex items-center gap-1 text-[11px] text-text_muted">
             <Activity size={11} />
             Updated now
           </span>
         </div>
-        <div className="space-y-2">
-          <div className="flex items-center justify-between text-[13px]">
-            <span className="text-text_muted">Spread</span>
-            <span className="text-text_primary font-mono font-medium">0.52 KES</span>
+        <div className="divide-y divide-white/[0.04]">
+          {/* Header row */}
+          <div className="grid grid-cols-3 gap-4 px-4 py-2.5 text-[11px] font-semibold text-text_muted uppercase tracking-wider">
+            <span>Source</span>
+            <span className="text-right">Buy</span>
+            <span className="text-right">Sell</span>
           </div>
-          <div className="flex items-center justify-between text-[13px]">
-            <span className="text-text_muted">24h volume</span>
-            <span className="text-text_primary font-mono font-medium">$4.2M</span>
-          </div>
-          <div className="flex items-center justify-between text-[13px]">
-            <span className="text-text_muted">Desks active</span>
-            <span className="text-text_primary font-mono font-medium">41</span>
-          </div>
+          {deskRates.map((row) => (
+            <div key={row.source} className="grid grid-cols-3 gap-4 px-4 py-3 hover:bg-white/[0.02] transition-colors">
+              <span className="text-[13px] text-text_primary font-medium">{row.source}</span>
+              <span className="text-[13px] text-premium_green font-mono text-right">{row.buy}</span>
+              <span className="text-[13px] text-gold font-mono text-right">{row.sell}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Footer Metrics */}
+      <div className="grid grid-cols-4 gap-3">
+        <div className="bg-white/[0.03] rounded-btn px-3 py-2.5 border border-white/[0.06]">
+          <div className="text-[10px] text-text_muted mb-0.5">Spread</div>
+          <div className="text-[14px] font-bold text-text_primary font-mono">₦12</div>
+        </div>
+        <div className="bg-white/[0.03] rounded-btn px-3 py-2.5 border border-white/[0.06]">
+          <div className="text-[10px] text-text_muted mb-0.5">Desks</div>
+          <div className="text-[14px] font-bold text-text_primary font-mono">247</div>
+        </div>
+        <div className="bg-white/[0.03] rounded-btn px-3 py-2.5 border border-white/[0.06]">
+          <div className="text-[10px] text-text_muted mb-0.5">Corridors</div>
+          <div className="text-[14px] font-bold text-text_primary font-mono">43</div>
+        </div>
+        <div className="bg-white/[0.03] rounded-btn px-3 py-2.5 border border-white/[0.06]">
+          <div className="text-[10px] text-text_muted mb-0.5">Refresh</div>
+          <div className="text-[14px] font-bold text-premium_green font-mono">Live</div>
         </div>
       </div>
     </motion.div>

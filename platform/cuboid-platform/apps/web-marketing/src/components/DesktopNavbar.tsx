@@ -6,11 +6,11 @@ import { CuboidLogo } from "./CuboidLogo";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { label: "Marketplace", href: "#marketplace" },
+  { label: "Markets", href: "#markets" },
   { label: "Brokers", href: "#brokers" },
   { label: "BDC Onboarding", href: "#bdc" },
-  { label: "Business", href: "#business" },
-  { label: "Network", href: "#network" },
+  { label: "Treasury", href: "#treasury" },
+  { label: "Market Network", href: "#network" },
   { label: "Learn", href: "#learn" },
 ];
 
