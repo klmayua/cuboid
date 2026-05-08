@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CuboidLogo } from "./CuboidLogo";
-import { Menu, X } from "lucide-react";
+import { Menu, X, MessageCircle, User } from "lucide-react";
 
 const navLinks = [
   { label: "Markets", href: "#markets" },
@@ -16,6 +16,14 @@ const navLinks = [
 
 export function DesktopNavbar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [activeHash, setActiveHash] = useState("");
+
+  useEffect(() => {
+    const updateHash = () => setActiveHash(window.location.hash);
+    updateHash();
+    window.addEventListener("hashchange", updateHash);
+    return () => window.removeEventListener("hashchange", updateHash);
+  }, []);
 
   useEffect(() => {
     if (drawerOpen) {
@@ -70,36 +78,76 @@ export function DesktopNavbar() {
 
             {/* Center: Navigation */}
             <nav className="flex items-center justify-center gap-[36px]" style={{ lineHeight: 1 }}>
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-[14px] font-medium transition-all duration-140 whitespace-nowrap hover:text-white"
-                  style={{ color: "#D7E2EE" }}
-                  onMouseEnter={(e) => {
-                    (e.target as HTMLElement).style.transform = "translateY(-1px)";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.target as HTMLElement).style.transform = "translateY(0)";
-                  }}
-                >
-                  {link.label}
-                </a>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = activeHash === link.href;
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="relative inline-flex items-center transition-all duration-220 whitespace-nowrap"
+                    style={{
+                      height: 48,
+                      fontSize: 15,
+                      fontWeight: isActive ? 600 : 520,
+                      color: isActive ? "#F8FAFC" : "#CBD5E1",
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!isActive) e.currentTarget.style.color = "#F8FAFC";
+                      const u = e.currentTarget.querySelector(".nav-underline") as HTMLElement;
+                      if (u) u.style.width = "100%";
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!isActive) e.currentTarget.style.color = "#CBD5E1";
+                      const u = e.currentTarget.querySelector(".nav-underline") as HTMLElement;
+                      if (u && !isActive) u.style.width = "0%";
+                    }}
+                  >
+                    {link.label}
+                    <span
+                      className="nav-underline absolute left-0"
+                      style={{
+                        bottom: 5,
+                        width: isActive ? "100%" : "0%",
+                        height: 2,
+                        borderRadius: 999,
+                        background: "#00A86B",
+                        opacity: 0.95,
+                        transition: "width 220ms ease",
+                      }}
+                    />
+                  </a>
+                );
+              })}
             </nav>
 
             {/* Right: Actions */}
             <div className="flex items-center gap-[14px]">
               <a
                 href="/login"
-                className="btn-ghost-nav"
-                style={{ height: 36, paddingInline: 12, fontSize: 13 }}
+                className="inline-flex items-center justify-center gap-[8px] transition-all duration-220"
+                style={{
+                  height: 42,
+                  paddingInline: 14,
+                  fontSize: 15,
+                  fontWeight: 500,
+                  color: "#CBD5E1",
+                  borderRadius: 10,
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = "#F8FAFC";
+                  e.currentTarget.style.background = "rgba(255,255,255,0.035)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = "#CBD5E1";
+                  e.currentTarget.style.background = "transparent";
+                }}
               >
+                <User size={15} strokeWidth={1.9} />
                 Sign in
               </a>
               <a
                 href="#whatsapp"
-                className="btn btn-green text-[14px] font-semibold"
+                className="btn btn-green text-[14px] font-semibold gap-[10px]"
                 style={{
                   height: 44,
                   paddingInline: 22,
@@ -107,6 +155,7 @@ export function DesktopNavbar() {
                   boxShadow: "0 0 24px rgba(0,168,107,0.20)",
                 }}
               >
+                <MessageCircle size={18} strokeWidth={1.9} />
                 Start on WhatsApp
               </a>
             </div>
