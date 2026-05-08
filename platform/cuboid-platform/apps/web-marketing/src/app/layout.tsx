@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'CUBOID — Institutional FX Infrastructure',
-  description: 'Premium institutional financial infrastructure for Africa.',
+  title: 'CUBOID — Verified African Exchange Network',
+  description: 'Compare rates, find brokers, and reserve confidently. The trusted exchange marketplace for African currencies on WhatsApp, Telegram, web and mobile.',
 };
 
 export default function RootLayout({
@@ -13,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="antialiased bg-obsidian text-platinum">{children}</body>
+      <body className="antialiased bg-bg_primary text-text_primary">{children}</body>
     </html>
   );
 }
