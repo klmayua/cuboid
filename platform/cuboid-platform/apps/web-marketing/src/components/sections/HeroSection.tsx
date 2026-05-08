@@ -7,8 +7,7 @@ import { MessageCircle, Users, Shield, Zap, Lock, CheckCircle } from "lucide-rea
 export function HeroSection() {
   return (
     <section
-      className="relative min-h-[86vh] pt-[48px] pb-[72px] overflow-hidden hero-bg"
-      style={{ marginTop: 180 }}
+      className="relative min-h-[86vh] mt-[48px] lg:mt-[180px] pt-[48px] pb-[72px] overflow-hidden hero-bg"
     >
       <div className="relative max-w-content mx-auto px-gutter md:px-gutter-mob">
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 xl:gap-16 items-start">

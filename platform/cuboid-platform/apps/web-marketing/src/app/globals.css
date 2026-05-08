@@ -193,6 +193,13 @@ body {
   animation: marquee 38s linear infinite;
 }
 .ticker-track:hover { animation-play-state: paused; }
+
+.ticker-track-mobile {
+  display: flex;
+  width: max-content;
+  animation: marquee 55s linear infinite;
+}
+.ticker-track-mobile:hover { animation-play-state: paused; }
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }

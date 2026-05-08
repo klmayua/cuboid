@@ -8,7 +8,7 @@ export function ChatBot() {
   const [open, setOpen] = useState(false);
 
   return (
-    <>
+    <div className="hidden xl:block">
       {/* Floating button */}
       <motion.button
         initial={{ opacity: 0, scale: 0.9 }}
@@ -72,6 +72,6 @@ export function ChatBot() {
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 }

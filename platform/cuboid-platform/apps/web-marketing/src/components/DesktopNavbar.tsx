@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { CuboidLogo } from "./CuboidLogo";
-import { Menu, X, MessageCircle, User } from "lucide-react";
+import { MessageCircle, User } from "lucide-react";
 
 const navLinks = [
   { label: "Markets", href: "#markets" },
@@ -15,7 +15,6 @@ const navLinks = [
 ];
 
 export function DesktopNavbar() {
-  const [drawerOpen, setDrawerOpen] = useState(false);
   const [activeHash, setActiveHash] = useState("");
 
   useEffect(() => {
@@ -24,15 +23,6 @@ export function DesktopNavbar() {
     window.addEventListener("hashchange", updateHash);
     return () => window.removeEventListener("hashchange", updateHash);
   }, []);
-
-  useEffect(() => {
-    if (drawerOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => { document.body.style.overflow = ""; };
-  }, [drawerOpen]);
 
   return (
     <>
@@ -136,160 +126,7 @@ export function DesktopNavbar() {
         </motion.div>
       </header>
 
-      {/* MOBILE FLOATING HEADER */}
-      <header
-        className="fixed z-[1000] lg:hidden"
-        style={{
-          top: 10,
-          left: 12,
-          right: 12,
-          height: 62,
-        }}
-      >
-        <div
-          className="h-full w-full"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "auto 1fr auto",
-            alignItems: "center",
-            columnGap: 12,
-            paddingLeft: 14,
-            paddingRight: 14,
-            borderRadius: 16,
-            background: "linear-gradient(180deg, rgba(10,18,30,0.94), rgba(8,16,26,0.88))",
-            backdropFilter: "blur(20px)",
-            WebkitBackdropFilter: "blur(20px)",
-            border: "1px solid rgba(255,255,255,0.08)",
-            boxShadow: "0 8px 20px rgba(0,0,0,0.22), inset 0 0 0 1px rgba(255,255,255,0.02)",
-          }}
-        >
-          {/* Logo */}
-          <a href="/" className="flex items-center gap-2 shrink-0">
-            <CuboidLogo width={24} height={24} />
-            <span className="text-text_primary font-bold text-[15px] tracking-tight">
-              CUBOID
-            </span>
-          </a>
 
-          {/* Center: empty / overflow hidden */}
-          <div style={{ minWidth: 0, overflow: "hidden" }} />
-
-          {/* Menu Button */}
-          <button
-            className="flex items-center justify-center text-text_muted hover:text-text_primary transition-colors"
-            style={{ width: 44, height: 44, borderRadius: 10, padding: 0 }}
-            onClick={() => setDrawerOpen(true)}
-            aria-label="Open menu"
-          >
-            <Menu size={22} />
-          </button>
-        </div>
-      </header>
-
-      {/* MOBILE DRAWER OVERLAY */}
-      <AnimatePresence>
-        {drawerOpen && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 z-[999] lg:hidden"
-              style={{ background: "rgba(0,0,0,0.48)", backdropFilter: "blur(6px)", WebkitBackdropFilter: "blur(6px)" }}
-              onClick={() => setDrawerOpen(false)}
-            />
-
-            {/* Panel */}
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-              className="fixed top-0 right-0 z-[1000] lg:hidden"
-              style={{
-                height: "100dvh",
-                width: "min(88vw, 380px)",
-                maxWidth: 380,
-                overflowY: "auto",
-                overscrollBehavior: "contain",
-                background: "linear-gradient(180deg, rgba(10,18,30,0.98), rgba(8,16,26,0.94))",
-                backdropFilter: "blur(28px)",
-                WebkitBackdropFilter: "blur(28px)",
-                borderLeft: "1px solid rgba(255,255,255,0.08)",
-                boxShadow: "-20px 0 60px rgba(0,0,0,0.35)",
-              }}
-            >
-              <div className="p-[18px]">
-                {/* Drawer Header */}
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-2">
-                    <CuboidLogo width={24} height={24} />
-                    <span className="text-text_primary font-bold text-[15px] tracking-tight">
-                      CUBOID
-                    </span>
-                  </div>
-                  <button
-                    className="flex items-center justify-center text-text_muted hover:text-text_primary transition-colors"
-                    style={{ width: 44, height: 44, borderRadius: 10, padding: 0 }}
-                    onClick={() => setDrawerOpen(false)}
-                    aria-label="Close menu"
-                  >
-                    <X size={22} />
-                  </button>
-                </div>
-
-                {/* Nav Items */}
-                <div className="flex flex-col" style={{ gap: 6 }}>
-                  {navLinks.map((link) => (
-                    <a
-                      key={link.href}
-                      href={link.href}
-                      className="flex items-center text-[15px] font-medium transition-colors rounded-btn"
-                      style={{
-                        minHeight: 52,
-                        paddingLeft: 16,
-                        paddingRight: 16,
-                        color: "#D7E2EE",
-                      }}
-                      onClick={() => setDrawerOpen(false)}
-                      onMouseEnter={(e) => {
-                        (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.04)";
-                        (e.currentTarget as HTMLElement).style.color = "#fff";
-                      }}
-                      onMouseLeave={(e) => {
-                        (e.currentTarget as HTMLElement).style.background = "transparent";
-                        (e.currentTarget as HTMLElement).style.color = "#D7E2EE";
-                      }}
-                    >
-                      {link.label}
-                    </a>
-                  ))}
-                </div>
-
-                <div className="h-px bg-white/[0.06] my-4" />
-
-                {/* Drawer CTAs */}
-                <a
-                  href="/login"
-                  className="btn btn-ghost-nav w-full h-[48px] text-[14px] mb-3"
-                >
-                  Sign in
-                </a>
-                <a
-                  href="#whatsapp"
-                  className="btn btn-green w-full h-[48px] text-[14px]"
-                  style={{ borderRadius: 10, boxShadow: "0 0 24px rgba(0,168,107,0.20)" }}
-                  onClick={() => setDrawerOpen(false)}
-                >
-                  Start on WhatsApp
-                </a>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
     </>
   );
 }
