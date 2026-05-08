@@ -3,12 +3,9 @@ import {
   DesktopNavbar,
   MobileBottomNav,
   HeroSection,
-  BrokerOperatingSystem,
-  PostRateMarketplace,
-  NearestBDCLocator,
-  LiveCorridorBoard,
+  MetricsStrip,
+  JourneySelector,
   TrustAndCompliance,
-  InstitutionalAccess,
   FooterConversionStrip,
   Footer,
 } from "@/components";
@@ -22,12 +19,9 @@ export default function Home() {
 
       <div className="pb-mob-nav xl:pb-0">
         <HeroSection />
-        <BrokerOperatingSystem />
-        <PostRateMarketplace />
-        <NearestBDCLocator />
-        <LiveCorridorBoard />
+        <MetricsStrip />
+        <JourneySelector />
         <TrustAndCompliance />
-        <InstitutionalAccess />
         <FooterConversionStrip />
         <Footer />
       </div>

@@ -2,110 +2,84 @@
 
 import { motion } from "framer-motion";
 import { MarketCommandPanel } from "../MarketCommandPanel";
-import { MessageCircle, TrendingUp, Users, Building2, ArrowRight } from "lucide-react";
+import { MessageCircle, ArrowRight, Shield, Zap, Lock, CheckCircle } from "lucide-react";
 
 export function HeroSection() {
   return (
     <section
-      className="relative min-h-[860px] pt-[170px] pb-[120px] xl:pt-[170px] xl:pb-[120px] pt-[120px] overflow-hidden hero-bg grid-overlay"
+      className="relative min-h-[calc(100vh-148px)] pt-[48px] pb-[72px] overflow-hidden hero-bg"
+      style={{ marginTop: 148 }}
     >
-      {/* Background Glows */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div
-          className="absolute top-[15%] left-[10%] w-[500px] h-[500px] rounded-full opacity-30"
-          style={{ background: "radial-gradient(circle, rgba(91,124,255,.15), transparent 70%)" }}
-        />
-        <div
-          className="absolute top-[5%] right-[15%] w-[400px] h-[400px] rounded-full opacity-20"
-          style={{ background: "radial-gradient(circle, rgba(245,185,65,.10), transparent 70%)" }}
-        />
-        <div
-          className="absolute bottom-[10%] left-[30%] w-[350px] h-[350px] rounded-full opacity-15"
-          style={{ background: "radial-gradient(circle, rgba(0,195,137,.10), transparent 70%)" }}
-        />
-      </div>
-
       <div className="relative max-w-content mx-auto px-gutter md:px-gutter-mob">
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 xl:gap-16 items-start">
           {/* LEFT COLUMN */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 0.6 }}
           >
-            {/* Kicker */}
-            <div className="mb-6">
-              <span className="inline-flex items-center gap-2 text-kicker text-premium_gold uppercase">
-                <span className="w-2 h-2 rounded-full bg-premium_gold animate-pulse" />
-                Verified African Exchange Network
+            {/* Eyebrow */}
+            <div className="mb-5">
+              <span className="inline-flex items-center gap-2 text-[13px] font-medium text-gold">
+                <span className="w-1.5 h-1.5 rounded-full bg-gold" />
+                Trusted exchange infrastructure
               </span>
             </div>
 
-            {/* Headline */}
+            {/* Headline — sentence case, no all-caps */}
             <h1 className="font-hero text-text_primary mb-6">
-              Compare rates.
-              <br />
-              Find brokers.
-              <br />
-              <span className="text-cuboid_blue">Reserve</span> confidently.
+              Africa&apos;s verified exchange network. Built for trust. Powered by WhatsApp.
             </h1>
 
-            {/* Subtitle */}
-            <p className="text-hero-sub text-text_secondary max-w-[720px] mb-10">
-              Buyers, sellers, brokers and verified BDCs—one trusted exchange marketplace on WhatsApp, Telegram, web and mobile.
+            {/* Subheadline */}
+            <p className="text-subhead text-text_muted max-w-[580px] mb-8">
+              Compare live rates, connect with verified brokers, reserve exchange deals instantly, and settle confidently — all from WhatsApp.
             </p>
 
-            {/* CTA Row */}
-            <div className="flex flex-wrap gap-3 mb-12">
-              <a
-                href="#whatsapp"
-                className="btn-premium btn-green h-[56px] px-7 text-[15px]"
-              >
+            {/* CTAs — max 2 */}
+            <div className="flex flex-wrap gap-3 mb-10">
+              <a href="#whatsapp" className="btn btn-whatsapp h-[56px] px-7 text-[15px]">
                 <MessageCircle size={18} />
                 Start on WhatsApp
               </a>
-              <a
-                href="#post-rate"
-                className="btn-premium btn-gold h-[56px] px-7 text-[15px]"
-              >
-                <TrendingUp size={18} />
-                Post Your Rate
-              </a>
-              <a
-                href="#broker"
-                className="btn-premium btn-blue h-[56px] px-7 text-[15px]"
-              >
-                <Users size={18} />
-                Join as Broker
-              </a>
-              <a
-                href="#bdc"
-                className="btn-premium btn-ghost h-[56px] px-7 text-[15px]"
-              >
-                <Building2 size={18} />
-                Register BDC
+              <a href="#exchange" className="btn btn-outline-light h-[56px] px-7 text-[15px]">
+                View live rates
               </a>
             </div>
 
-            {/* Trust Bar */}
+            {/* Quiet links for secondary intents */}
+            <div className="flex flex-wrap gap-6 mb-10 text-[14px]">
+              <a href="#brokers" className="text-text_muted hover:text-gold transition-colors flex items-center gap-1">
+                For brokers <ArrowRight size={14} />
+              </a>
+              <a href="#bdc" className="text-text_muted hover:text-gold transition-colors flex items-center gap-1">
+                List your desk <ArrowRight size={14} />
+              </a>
+            </div>
+
+            {/* Trust row — inline, sentence case */}
             <div className="flex flex-wrap items-center gap-6 text-[13px] text-text_muted">
               <span className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-trust_green" />
-                CBN Licensed Partners
+                <Shield size={14} className="text-premium_green" />
+                Verified desks
               </span>
               <span className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-cuboid_blue" />
-                End-to-End Encryption
+                <Zap size={14} className="text-premium_green" />
+                Instant matching
               </span>
               <span className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-premium_gold" />
-                99.9% Uptime SLA
+                <Lock size={14} className="text-premium_green" />
+                Secure settlement
+              </span>
+              <span className="flex items-center gap-2">
+                <CheckCircle size={14} className="text-premium_green" />
+                Compliance-first
               </span>
             </div>
           </motion.div>
 
-          {/* RIGHT COLUMN - Market Command Panel */}
-          <div className="xl:sticky xl:top-[160px]">
+          {/* RIGHT COLUMN — clean stack, reduced complexity */}
+          <div className="xl:pt-4">
             <MarketCommandPanel />
           </div>
         </div>

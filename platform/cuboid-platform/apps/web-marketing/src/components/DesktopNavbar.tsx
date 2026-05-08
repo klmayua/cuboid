@@ -7,11 +7,9 @@ import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { label: "Exchange", href: "#exchange" },
-  { label: "Find Nearby Desk", href: "#nearby" },
   { label: "Brokers", href: "#brokers" },
-  { label: "BDC Network", href: "#bdc" },
+  { label: "Nearby desks", href: "#nearby" },
   { label: "Business", href: "#business" },
-  { label: "Pricing", href: "#pricing" },
   { label: "Learn", href: "#learn" },
 ];
 
@@ -30,71 +28,59 @@ export function DesktopNavbar() {
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.1 }}
-      className="fixed left-0 right-0 z-[200]"
-      style={{ top: 44 }}
+      className="fixed left-0 right-0 z-[500]"
+      style={{ top: 60 }}
     >
       <div
         className="h-navbar transition-all duration-300"
         style={{
-          background: scrolled ? "rgba(2,6,23,.88)" : "rgba(2,6,23,.72)",
-          backdropFilter: "blur(18px)",
-          borderBottom: "1px solid rgba(255,255,255,.08)",
+          background: scrolled ? "rgba(7,17,26,0.92)" : "rgba(7,17,26,0.78)",
+          backdropFilter: "blur(20px)",
+          borderBottom: "1px solid rgba(255,255,255,0.06)",
         }}
       >
-        <div className="max-w-container mx-auto px-gutter md:px-gutter-mob h-full flex items-center justify-between">
+        <div className="max-w-content mx-auto px-gutter md:px-gutter-mob h-full flex items-center justify-between">
           {/* Left: Logo */}
-          <a href="/" className="flex items-center gap-3 shrink-0">
-            <CuboidLogo width={36} height={36} />
-            <span className="text-text_primary font-bold text-xl tracking-tight hidden sm:block">CUBOID</span>
+          <a href="/" className="flex items-center gap-2.5 shrink-0">
+            <CuboidLogo width={32} height={32} />
+            <span className="text-text_primary font-bold text-lg tracking-tight hidden sm:block">CUBOID</span>
           </a>
 
-          {/* Center: Navigation */}
+          {/* Center: Navigation — single row, no wrap */}
           <nav className="hidden xl:flex items-center gap-1">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="px-4 py-2 text-text_secondary text-[14px] font-medium hover:text-text_primary transition-colors rounded-lg hover:bg-white/[0.04]"
+                className="px-3 py-2 text-text_muted text-[14px] font-medium hover:text-text_primary transition-colors rounded-lg hover:bg-white/[0.03] whitespace-nowrap"
               >
                 {link.label}
               </a>
             ))}
           </nav>
 
-          {/* Right: Actions */}
-          <div className="hidden xl:flex items-center gap-3">
-            <a
-              href="/login"
-              className="btn-premium btn-ghost h-[44px] px-5 text-[14px]"
-            >
-              Sign In
+          {/* Right: Actions — single row, no wrap */}
+          <div className="hidden xl:flex items-center gap-2 shrink-0">
+            <a href="/login" className="btn-ghost-nav">
+              Sign in
             </a>
-            <a
-              href="#broker"
-              className="btn-premium btn-outline-green h-[44px] px-5 text-[14px]"
-            >
+            <a href="#broker" className="btn-outline-green-nav">
               Join as Broker
             </a>
             <a
-              href="#bdc"
-              className="btn-premium btn-outline-gold h-[44px] px-5 text-[14px]"
-            >
-              Register BDC
-            </a>
-            <a
               href="#whatsapp"
-              className="btn-premium btn-blue h-[44px] px-5 text-[14px]"
+              className="btn btn-whatsapp h-[40px] px-5 text-[14px]"
             >
-              Open WhatsApp
+              Start on WhatsApp
             </a>
           </div>
 
           {/* Mobile Hamburger */}
           <button
-            className="xl:hidden p-2 text-text_secondary hover:text-text_primary"
+            className="xl:hidden p-2 text-text_muted hover:text-text_primary"
             onClick={() => setMobileOpen(!mobileOpen)}
           >
-            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>
@@ -108,27 +94,26 @@ export function DesktopNavbar() {
             exit={{ opacity: 0, height: 0 }}
             className="xl:hidden overflow-hidden"
             style={{
-              background: "rgba(2,6,23,.96)",
+              background: "rgba(7,17,26,0.98)",
               backdropFilter: "blur(22px)",
-              borderBottom: "1px solid rgba(255,255,255,.08)",
+              borderBottom: "1px solid rgba(255,255,255,0.06)",
             }}
           >
-            <div className="px-gutter-mob py-6 flex flex-col gap-2">
+            <div className="px-gutter-mob py-6 flex flex-col gap-1">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="px-4 py-3 text-text_secondary text-[15px] font-medium hover:text-text_primary hover:bg-white/[0.04] rounded-lg transition-colors"
+                  className="px-4 py-3 text-text_muted text-[15px] font-medium hover:text-text_primary hover:bg-white/[0.03] rounded-lg transition-colors"
                   onClick={() => setMobileOpen(false)}
                 >
                   {link.label}
                 </a>
               ))}
-              <div className="h-px bg-white/[0.08] my-3" />
-              <a href="/login" className="btn-premium btn-ghost h-[48px] text-[14px]">Sign In</a>
-              <a href="#broker" className="btn-premium btn-outline-green h-[48px] text-[14px]">Join as Broker</a>
-              <a href="#bdc" className="btn-premium btn-outline-gold h-[48px] text-[14px]">Register BDC</a>
-              <a href="#whatsapp" className="btn-premium btn-blue h-[48px] text-[14px]">Open WhatsApp</a>
+              <div className="h-px bg-white/[0.06] my-3" />
+              <a href="/login" className="btn btn-ghost-nav h-[48px] text-[14px]">Sign in</a>
+              <a href="#broker" className="btn btn-outline-green-nav h-[48px] text-[14px]">Join as Broker</a>
+              <a href="#whatsapp" className="btn btn-whatsapp h-[48px] text-[14px]">Start on WhatsApp</a>
             </div>
           </motion.div>
         )}
