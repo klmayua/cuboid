@@ -1,0 +1,598 @@
+// CUBOID Platform — Canonical Database Schema
+// PostgreSQL + Prisma
+// Multi-tenant by organization_id
+// Soft delete on all business records
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  extensions = [uuid_ossp, pgcrypto, pg_trgm, btree_gin]
+}
+
+// ============================================================
+// ENUMS
+// ============================================================
+
+enum UserRole {
+  USER
+  BROKER
+  BDC_OPERATOR
+  TREASURY
+  COMPLIANCE
+  ADMIN
+  SUPER_ADMIN
+  REGULATOR
+}
+
+enum OrgType {
+  INDIVIDUAL
+  BROKER_DESK
+  LICENSED_BDC
+  BANK
+  PARTNER
+  REGULATOR
+}
+
+enum KycStatus {
+  DRAFT
+  PENDING
+  UNDER_REVIEW
+  APPROVED
+  REJECTED
+  SUSPENDED
+}
+
+enum QuoteStatus {
+  DRAFT
+  LIVE
+  RESERVED
+  MATCHED
+  EXPIRED
+  CANCELLED
+  SETTLED
+}
+
+enum TransactionStatus {
+  INITIATED
+  PENDING
+  PROCESSING
+  CLEARED
+  FAILED
+  REVERSED
+}
+
+enum EscrowStatus {
+  CREATED
+  FUNDED
+  LOCKED
+  RELEASED
+  DISPUTED
+  CANCELLED
+}
+
+enum ComplianceStatus {
+  OPEN
+  REVIEWING
+  CLEARED
+  FLAGGED
+  ESCALATED
+  CLOSED
+}
+
+enum NotificationChannel {
+  IN_APP
+  EMAIL
+  SMS
+  WHATSAPP
+  PUSH
+}
+
+enum SettlementChannel {
+  BANK_TRANSFER
+  MOBILE_MONEY
+  CASH
+  CRYPTO
+  INTERNAL
+}
+
+enum MarketRegion {
+  LAGOS
+  ABUJA
+  KANO
+  PORT_HARCOURT
+  INFLOW_BANK
+}
+
+enum RateSourceType {
+  BDC_DESK
+  BROKER
+  BANK_INFLOW
+  WHOLESALE
+  PLATFORM
+}
+
+enum QuoteSide {
+  BUY
+  SELL
+}
+
+enum IdType {
+  PASSPORT
+  DRIVERS_LICENSE
+  NATIONAL_ID
+  VOTERS_CARD
+  BVN
+  NIN
+}
+
+// ============================================================
+// IDENTITY
+// ============================================================
+
+model User {
+  id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email         String    @unique
+  phone         String?   @unique
+  passwordHash  String    @map("password_hash")
+  firstName     String    @map("first_name")
+  lastName      String    @map("last_name")
+  avatarUrl     String?   @map("avatar_url")
+  role          UserRole  @default(USER)
+  status        String    @default("ACTIVE")
+  lastLoginAt   DateTime? @map("last_login_at") @db.Timestamptz(6)
+  createdAt     DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt     DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt     DateTime? @map("deleted_at") @db.Timestamptz(6)
+
+  memberships   OrganizationMember[]
+  kycProfiles   KycProfile[]
+  quotes        Quote[]
+  notifications Notification[]
+  auditLogs     AuditLog[]
+
+  @@index([role])
+  @@index([deletedAt])
+  @@map("users")
+}
+
+model Organization {
+  id                  String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name                String
+  slug                String     @unique
+  type                OrgType    @default(INDIVIDUAL)
+  country             String?
+  city                String?
+  registrationNumber  String?    @map("registration_number")
+  taxNumber           String?    @map("tax_number")
+  verificationStatus  KycStatus  @default(DRAFT) @map("verification_status")
+  createdAt           DateTime   @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt           DateTime   @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt           DateTime?  @map("deleted_at") @db.Timestamptz(6)
+
+  members          OrganizationMember[]
+  kycProfiles      KycProfile[]
+  kybProfiles      KybProfile[]
+  fxRates          FxRate[]
+  rateSources      RateSource[]
+  quotes           Quote[]
+  wallets          Wallet[]
+  escrows          Escrow[]
+  transactions     Transaction[]
+  trustScores      TrustScore[]
+  bdcDesks         BdcDesk[]
+  brokerProfiles   BrokerProfile[]
+  notifications    Notification[]
+  auditLogs        AuditLog[]
+
+  @@index([type])
+  @@index([verificationStatus])
+  @@index([deletedAt])
+  @@map("organizations")
+}
+
+model OrganizationMember {
+  id              String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId  String   @map("organization_id") @db.Uuid
+  userId          String   @map("user_id") @db.Uuid
+  role            UserRole @default(USER)
+  isOwner         Boolean  @default(false) @map("is_owner")
+  createdAt       DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt       DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, userId])
+  @@index([organizationId])
+  @@index([userId])
+  @@map("organization_members")
+}
+
+// ============================================================
+// COMPLIANCE
+// ============================================================
+
+model KycProfile {
+  id              String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId  String    @map("organization_id") @db.Uuid
+  userId          String    @map("user_id") @db.Uuid
+  status          KycStatus @default(DRAFT)
+  idType          IdType?   @map("id_type")
+  idNumber        String?   @map("id_number")
+  idDocumentUrl   String?   @map("id_document_url")
+  selfieUrl       String?   @map("selfie_url")
+  reviewedBy      String?   @map("reviewed_by") @db.Uuid
+  reviewedAt      DateTime? @map("reviewed_at") @db.Timestamptz(6)
+  createdAt       DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt       DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId])
+  @@index([userId])
+  @@index([status])
+  @@map("kyc_profiles")
+}
+
+model KybProfile {
+  id                    String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId        String    @unique @map("organization_id") @db.Uuid
+  status                KycStatus @default(DRAFT)
+  incorporationDoc      String?   @map("incorporation_doc")
+  directorsJson         Json?     @map("directors_json")
+  beneficialOwnersJson  Json?     @map("beneficial_owners_json")
+  reviewedBy            String?   @map("reviewed_by") @db.Uuid
+  reviewedAt            DateTime? @map("reviewed_at") @db.Timestamptz(6)
+  createdAt             DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt             DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([status])
+  @@map("kyb_profiles")
+}
+
+// ============================================================
+// MARKET
+// ============================================================
+
+model CurrencyPair {
+  id            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  baseCurrency  String   @map("base_currency")
+  quoteCurrency String   @map("quote_currency")
+  symbol        String   @unique
+  isActive      Boolean  @default(true) @map("is_active")
+  createdAt     DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  fxRates          FxRate[]
+  marketSnapshots  MarketSnapshot[]
+  quotes           Quote[]
+
+  @@map("currency_pairs")
+}
+
+model RateSource {
+  id              String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId  String         @map("organization_id") @db.Uuid
+  type            RateSourceType
+  label           String
+  trustWeight     Decimal        @default(1.0) @map("trust_weight") @db.Decimal(4, 2)
+  active          Boolean        @default(true)
+  createdAt       DateTime       @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt       DateTime       @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  fxRates      FxRate[]
+
+  @@index([organizationId])
+  @@index([active])
+  @@map("rate_sources")
+}
+
+model FxRate {
+  id              String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId  String       @map("organization_id") @db.Uuid
+  pairId          String       @map("pair_id") @db.Uuid
+  region          MarketRegion @default(LAGOS)
+  buyRate         Decimal      @map("buy_rate") @db.Decimal(18, 6)
+  sellRate        Decimal      @map("sell_rate") @db.Decimal(18, 6)
+  spread          Decimal      @db.Decimal(18, 6)
+  sourceId        String?      @map("source_id") @db.Uuid
+  quotedAt        DateTime     @default(now()) @map("quoted_at") @db.Timestamptz(6)
+  createdAt       DateTime     @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  pair         CurrencyPair @relation(fields: [pairId], references: [id], onDelete: Cascade)
+  source       RateSource?  @relation(fields: [sourceId], references: [id])
+
+  @@index([pairId, region])
+  @@index([quotedAt])
+  @@index([organizationId])
+  @@map("fx_rates")
+}
+
+model MarketSnapshot {
+  id              String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  pairId          String   @map("pair_id") @db.Uuid
+  weightedBuy     Decimal  @map("weighted_buy") @db.Decimal(18, 6)
+  weightedSell    Decimal  @map("weighted_sell") @db.Decimal(18, 6)
+  midpoint        Decimal  @db.Decimal(18, 6)
+  volatility      Decimal  @db.Decimal(18, 6)
+  liquidityScore  Decimal  @map("liquidity_score") @db.Decimal(5, 2)
+  snapshotAt      DateTime @default(now()) @map("snapshot_at") @db.Timestamptz(6)
+
+  pair CurrencyPair @relation(fields: [pairId], references: [id], onDelete: Cascade)
+
+  @@index([pairId])
+  @@index([snapshotAt])
+  @@map("market_snapshots")
+}
+
+// ============================================================
+// QUOTES
+// ============================================================
+
+model Quote {
+  id              String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId  String      @map("organization_id") @db.Uuid
+  pairId          String      @map("pair_id") @db.Uuid
+  side            QuoteSide
+  amount          Decimal     @db.Decimal(18, 6)
+  quotedRate      Decimal     @map("quoted_rate") @db.Decimal(18, 6)
+  expiresAt       DateTime    @map("expires_at") @db.Timestamptz(6)
+  status          QuoteStatus @default(DRAFT)
+  createdBy       String      @map("created_by") @db.Uuid
+  createdAt       DateTime    @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt       DateTime    @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt       DateTime?   @map("deleted_at") @db.Timestamptz(6)
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  pair         CurrencyPair @relation(fields: [pairId], references: [id], onDelete: Cascade)
+  creator      User         @relation(fields: [createdBy], references: [id])
+
+  buyMatches  QuoteMatch[] @relation("BuyQuote")
+  sellMatches QuoteMatch[] @relation("SellQuote")
+
+  @@index([organizationId])
+  @@index([status])
+  @@index([expiresAt])
+  @@index([deletedAt])
+  @@map("quotes")
+}
+
+model QuoteMatch {
+  id              String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  buyQuoteId      String   @map("buy_quote_id") @db.Uuid
+  sellQuoteId     String   @map("sell_quote_id") @db.Uuid
+  matchedRate     Decimal  @map("matched_rate") @db.Decimal(18, 6)
+  matchedVolume   Decimal  @map("matched_volume") @db.Decimal(18, 6)
+  matchedAt       DateTime @default(now()) @map("matched_at") @db.Timestamptz(6)
+
+  buyQuote  Quote @relation("BuyQuote", fields: [buyQuoteId], references: [id], onDelete: Cascade)
+  sellQuote Quote @relation("SellQuote", fields: [sellQuoteId], references: [id], onDelete: Cascade)
+
+  escrow Escrow?
+
+  @@unique([buyQuoteId, sellQuoteId])
+  @@index([matchedAt])
+  @@map("quote_matches")
+}
+
+// ============================================================
+// WALLETS
+// ============================================================
+
+model Wallet {
+  id                String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId    String   @map("organization_id") @db.Uuid
+  currency          String
+  balance           Decimal  @default(0) @db.Decimal(18, 6)
+  availableBalance  Decimal  @default(0) @map("available_balance") @db.Decimal(18, 6)
+  reservedBalance   Decimal  @default(0) @map("reserved_balance") @db.Decimal(18, 6)
+  createdAt         DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt         DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt         DateTime? @map("deleted_at") @db.Timestamptz(6)
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  entries      WalletEntry[]
+
+  @@unique([organizationId, currency])
+  @@index([deletedAt])
+  @@map("wallets")
+}
+
+model WalletEntry {
+  id              String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  walletId        String    @map("wallet_id") @db.Uuid
+  debit           Decimal   @default(0) @db.Decimal(18, 6)
+  credit          Decimal   @default(0) @db.Decimal(18, 6)
+  runningBalance  Decimal   @map("running_balance") @db.Decimal(18, 6)
+  reference       String?
+  createdAt       DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  wallet Wallet @relation(fields: [walletId], references: [id], onDelete: Cascade)
+
+  @@index([walletId])
+  @@index([createdAt])
+  @@map("wallet_entries")
+}
+
+// ============================================================
+// ESCROW
+// ============================================================
+
+model Escrow {
+  id              String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId  String       @map("organization_id") @db.Uuid
+  quoteMatchId    String?      @unique @map("quote_match_id") @db.Uuid
+  amount          Decimal      @db.Decimal(18, 6)
+  currency        String
+  status          EscrowStatus @default(CREATED)
+  releaseAt       DateTime?    @map("release_at") @db.Timestamptz(6)
+  createdAt       DateTime     @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt       DateTime     @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt       DateTime?    @map("deleted_at") @db.Timestamptz(6)
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  quoteMatch   QuoteMatch?  @relation(fields: [quoteMatchId], references: [id])
+  transactions Transaction[]
+
+  @@index([organizationId])
+  @@index([status])
+  @@index([deletedAt])
+  @@map("escrows")
+}
+
+// ============================================================
+// SETTLEMENT
+// ============================================================
+
+model Transaction {
+  id              String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId  String             @map("organization_id") @db.Uuid
+  escrowId        String?            @map("escrow_id") @db.Uuid
+  reference       String             @unique
+  amount          Decimal            @db.Decimal(18, 6)
+  currency        String
+  status          TransactionStatus  @default(INITIATED)
+  createdAt       DateTime           @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt       DateTime           @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt       DateTime?          @map("deleted_at") @db.Timestamptz(6)
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  escrow       Escrow?      @relation(fields: [escrowId], references: [id])
+
+  settlement SettlementRecord?
+
+  @@index([organizationId])
+  @@index([status])
+  @@index([reference])
+  @@index([deletedAt])
+  @@map("transactions")
+}
+
+model SettlementRecord {
+  id              String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  transactionId   String            @unique @map("transaction_id") @db.Uuid
+  channel         SettlementChannel
+  clearedAt       DateTime?         @map("cleared_at") @db.Timestamptz(6)
+  metadataJson    Json?             @map("metadata_json")
+  createdAt       DateTime          @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  transaction Transaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+
+  @@map("settlement_records")
+}
+
+// ============================================================
+// TRUST
+// ============================================================
+
+model TrustScore {
+  id                String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId    String    @unique @map("organization_id") @db.Uuid
+  score             Decimal   @default(0) @db.Decimal(5, 2)
+  velocityScore     Decimal   @default(0) @map("velocity_score") @db.Decimal(5, 2)
+  settlementScore   Decimal   @default(0) @map("settlement_score") @db.Decimal(5, 2)
+  disputeScore      Decimal   @default(0) @map("dispute_score") @db.Decimal(5, 2)
+  complianceScore   Decimal   @default(0) @map("compliance_score") @db.Decimal(5, 2)
+  updatedAt         DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@map("trust_scores")
+}
+
+// ============================================================
+// OPERATIONS
+// ============================================================
+
+model BdcDesk {
+  id              String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId  String    @map("organization_id") @db.Uuid
+  location        String
+  city            String
+  latitude        Decimal?  @db.Decimal(10, 8)
+  longitude       Decimal?  @db.Decimal(11, 8)
+  operatingHours  String?   @map("operating_hours")
+  active          Boolean   @default(true)
+  createdAt       DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt       DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt       DateTime? @map("deleted_at") @db.Timestamptz(6)
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId])
+  @@index([active])
+  @@index([deletedAt])
+  @@map("bdc_desks")
+}
+
+model BrokerProfile {
+  id              String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId  String    @unique @map("organization_id") @db.Uuid
+  specialty       String?
+  commissionRate  Decimal   @default(0) @map("commission_rate") @db.Decimal(5, 4)
+  active          Boolean   @default(true)
+  createdAt       DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt       DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@map("broker_profiles")
+}
+
+// ============================================================
+// NOTIFICATIONS
+// ============================================================
+
+model Notification {
+  id              String              @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId  String              @map("organization_id") @db.Uuid
+  userId          String              @map("user_id") @db.Uuid
+  channel         NotificationChannel @default(IN_APP)
+  title           String
+  body            String
+  readAt          DateTime?           @map("read_at") @db.Timestamptz(6)
+  createdAt       DateTime            @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId])
+  @@index([userId])
+  @@index([readAt])
+  @@index([createdAt])
+  @@map("notifications")
+}
+
+// ============================================================
+// AUDIT
+// ============================================================
+
+model AuditLog {
+  id              String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  organizationId  String    @map("organization_id") @db.Uuid
+  actorId         String?   @map("actor_id") @db.Uuid
+  action          String
+  entityType      String    @map("entity_type")
+  entityId        String    @map("entity_id")
+  metadataJson    Json?     @map("metadata_json")
+  ip              String?
+  createdAt       DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  organization Organization? @relation(fields: [organizationId], references: [id], onDelete: SetNull)
+  actor        User?         @relation(fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId])
+  @@index([actorId])
+  @@index([entityType, entityId])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
