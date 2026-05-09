@@ -38,7 +38,14 @@ const items = [
 
 export function NetworkSection() {
   return (
-    <section className="section-shell bg-radial-emerald-right section-target" id="market-network">
+    <section
+      className="section-shell section-target"
+      id="market-network"
+      style={{
+        background:
+          "radial-gradient(circle at 12% 78%, rgba(0,220,130,.05), transparent 35%), radial-gradient(circle at 88% 24%, rgba(0,122,255,.05), transparent 35%), #07131F",
+      }}
+    >
       <div className="section-divider" />
       <div className="section-container" style={{ paddingTop: 136, paddingBottom: 136 }}>
         {/* Header */}

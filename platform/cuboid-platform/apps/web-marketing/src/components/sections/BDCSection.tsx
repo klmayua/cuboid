@@ -13,7 +13,14 @@ const steps = [
 
 export function BDCSection() {
   return (
-    <section className="section-shell bg-matte-midnight section-target" id="bdc-onboarding">
+    <section
+      className="section-shell section-target"
+      id="bdc-onboarding"
+      style={{
+        background:
+          "linear-gradient(135deg, rgba(212,175,55,.045), transparent 36%), radial-gradient(circle at 70% 65%, rgba(212,175,55,.025), transparent 38%), #08111C",
+      }}
+    >
       <div className="section-divider" />
       <div className="section-container" style={{ paddingTop: 136, paddingBottom: 136 }}>
         {/* Header */}

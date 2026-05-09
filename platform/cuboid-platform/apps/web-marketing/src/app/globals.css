@@ -190,14 +190,14 @@ body {
 .ticker-track {
   display: flex;
   width: max-content;
-  animation: marquee 38s linear infinite;
+  animation: marquee 48s linear infinite;
 }
 .ticker-track:hover { animation-play-state: paused; }
 
 .ticker-track-mobile {
   display: flex;
   width: max-content;
-  animation: marquee 55s linear infinite;
+  animation: marquee 68s linear infinite;
 }
 .ticker-track-mobile:hover { animation-play-state: paused; }
 @keyframes marquee {

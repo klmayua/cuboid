@@ -1,32 +1,84 @@
 "use client";
 
-const allItems = [
-  { text: "USD/NGN 1,517.50 ↑ 0.12%", sentiment: "positive" },
-  { text: "GBP/NGN 1,923.80 ↑ 0.08%", sentiment: "positive" },
-  { text: "EUR/NGN 1,645.25 ↓ 0.04%", sentiment: "negative" },
-  { text: "Lagos desks active", sentiment: "accent" },
-  { text: "98% settlement satisfaction", sentiment: "positive" },
-  { text: "Spread 0.38", sentiment: "neutral" },
+interface TickerPart {
+  text: string;
+  type: "pair" | "value" | "delta_positive" | "delta_negative" | "market_label" | "label";
+}
+
+interface TickerItem {
+  parts: TickerPart[];
+}
+
+const allItems: TickerItem[] = [
+  {
+    parts: [
+      { text: "USD/NGN", type: "pair" },
+      { text: "1,517.50", type: "value" },
+      { text: "↑ 0.12%", type: "delta_positive" },
+    ],
+  },
+  {
+    parts: [
+      { text: "GBP/NGN", type: "pair" },
+      { text: "1,923.80", type: "value" },
+      { text: "↑ 0.08%", type: "delta_positive" },
+    ],
+  },
+  {
+    parts: [
+      { text: "EUR/NGN", type: "pair" },
+      { text: "1,645.25", type: "value" },
+      { text: "↓ 0.04%", type: "delta_negative" },
+    ],
+  },
+  {
+    parts: [{ text: "Lagos desks active", type: "market_label" }],
+  },
+  {
+    parts: [
+      { text: "98%", type: "value" },
+      { text: "settlement satisfaction", type: "label" },
+    ],
+  },
+  {
+    parts: [
+      { text: "Spread", type: "label" },
+      { text: "0.38", type: "value" },
+    ],
+  },
 ];
 
 const mobileItems = allItems.slice(0, 5);
 
+function PartSpan({ part }: { part: TickerPart }) {
+  const styles: Record<string, React.CSSProperties> = {
+    pair: { color: "#C9D4E5", fontWeight: 500 },
+    value: { color: "#F7FAFC", fontWeight: 600 },
+    delta_positive: { color: "#00DC82", fontWeight: 600 },
+    delta_negative: { color: "#FF5A6B", fontWeight: 600 },
+    market_label: { color: "#D4AF37", fontWeight: 500 },
+    label: { color: "#8EA0B8", fontWeight: 500 },
+  };
+  return (
+    <span style={styles[part.type]} className="whitespace-nowrap text-xs lg:text-[13px]">
+      {part.text}
+    </span>
+  );
+}
+
 export function TopTicker() {
   const renderItems = (items: typeof allItems) =>
-    items.map((item, i) => {
-      let colorClass = "text-text_primary";
-      if (item.sentiment === "positive") colorClass = "text-premium_green";
-      if (item.sentiment === "negative") colorClass = "text-danger_red";
-      if (item.sentiment === "accent") colorClass = "text-gold";
-      return (
-        <div key={i} className="flex items-center gap-[24px] shrink-0">
-          <span className={`whitespace-nowrap ${colorClass} text-xs font-semibold lg:text-[13px] lg:font-medium`}>
-            {item.text}
-          </span>
-          <span className="w-[3px] h-[3px] rounded-full bg-white/15 shrink-0" />
-        </div>
-      );
-    });
+    items.map((item, i) => (
+      <div key={i} className="flex items-center shrink-0" style={{ gap: 8 }}>
+        {item.parts.map((part, pi) => (
+          <PartSpan key={pi} part={part} />
+        ))}
+        <span
+          className="w-[3px] h-[3px] rounded-full shrink-0"
+          style={{ background: "rgba(255,255,255,0.18)", marginLeft: 10 }}
+        />
+      </div>
+    ));
 
   return (
     <div
@@ -38,19 +90,19 @@ export function TopTicker() {
     >
       {/* Mobile track */}
       <div className="h-full flex items-center lg:hidden ticker-track-mobile px-4">
-        <div className="flex items-center gap-7 pr-6">
+        <div className="flex items-center pr-6" style={{ gap: 42 }}>
           {renderItems(mobileItems)}
         </div>
-        <div className="flex items-center gap-7 pr-6">
+        <div className="flex items-center pr-6" style={{ gap: 42 }}>
           {renderItems(mobileItems)}
         </div>
       </div>
       {/* Desktop track */}
       <div className="h-full hidden lg:flex items-center ticker-track px-7">
-        <div className="flex items-center gap-14 pr-6">
+        <div className="flex items-center pr-6" style={{ gap: 42 }}>
           {renderItems(allItems)}
         </div>
-        <div className="flex items-center gap-14 pr-6">
+        <div className="flex items-center pr-6" style={{ gap: 42 }}>
           {renderItems(allItems)}
         </div>
       </div>

@@ -5,7 +5,14 @@ import { ShoppingCart, TrendingDown, BarChart3, ArrowRight, ShieldCheck, Zap, Cl
 
 export function MarketplaceSection() {
   return (
-    <section className="section-shell bg-radial-blue-left section-target" id="markets">
+    <section
+      className="section-shell section-target"
+      id="markets"
+      style={{
+        background:
+          "radial-gradient(circle at 18% 22%, rgba(0,122,255,.08) 0%, transparent 42%), linear-gradient(180deg, rgba(255,255,255,.015), rgba(255,255,255,.005)), #06111F",
+      }}
+    >
       <div className="section-divider" />
       <div className="section-container" style={{ paddingTop: 136, paddingBottom: 136 }}>
         <div

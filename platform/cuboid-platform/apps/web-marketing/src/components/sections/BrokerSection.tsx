@@ -13,7 +13,14 @@ const modules = [
 
 export function BrokerSection() {
   return (
-    <section className="section-shell bg-solid-navy section-target" id="brokers">
+    <section
+      className="section-shell section-target"
+      id="brokers"
+      style={{
+        background:
+          "radial-gradient(circle at 82% 28%, rgba(0,220,130,.07) 0%, transparent 40%), linear-gradient(180deg, rgba(255,255,255,.012), rgba(255,255,255,.004)), #071626",
+      }}
+    >
       <div className="section-divider" />
       <div className="section-container" style={{ paddingTop: 136, paddingBottom: 136 }}>
         <div

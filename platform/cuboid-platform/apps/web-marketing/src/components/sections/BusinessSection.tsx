@@ -18,7 +18,14 @@ const supportItems = [
 
 export function BusinessSection() {
   return (
-    <section className="section-shell bg-dark-glass section-target" id="treasury">
+    <section
+      className="section-shell section-target"
+      id="treasury"
+      style={{
+        background:
+          "radial-gradient(circle at 50% 0%, rgba(0,90,180,.08), transparent 46%), linear-gradient(180deg, rgba(255,255,255,.01), rgba(255,255,255,.003)), #04101D",
+      }}
+    >
       <div className="section-divider" />
       <div className="section-container" style={{ paddingTop: 136, paddingBottom: 136 }}>
         {/* Centered Header */}
