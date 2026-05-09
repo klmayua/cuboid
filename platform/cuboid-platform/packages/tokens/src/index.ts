@@ -1,5 +1,3 @@
-import { type Config } from 'tailwindcss';
-
 export const cuboidTokens = {
   colors: {
     brand: {
@@ -81,6 +79,6 @@ export const cuboidTokens = {
     modal: '0 16px 48px rgba(0, 0, 0, 0.16)',
     focus: '0 0 0 3px rgba(94, 141, 255, 0.3)',
   },
-} satisfies Config['theme'];
+};
 
 export default cuboidTokens;

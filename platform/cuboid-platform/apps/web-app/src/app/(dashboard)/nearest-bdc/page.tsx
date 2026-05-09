@@ -17,7 +17,8 @@ import {
   CheckCircle,
   X,
   MapPinned,
-  DollarSign
+  DollarSign,
+  Users
 } from 'lucide-react';
 
 const mockBDCs = [
@@ -156,8 +157,8 @@ export default function NearestBDCPage() {
     .sort((a, b) => {
       if (sortBy === 'distance') return a.distanceKm - b.distanceKm;
       if (sortBy === 'rating') return b.rating - a.rating;
-      const aRate = parseFloat(a.sellRates[selectedCurrency] || '0');
-      const bRate = parseFloat(b.sellRates[selectedCurrency] || '0');
+      const aRate = parseFloat((a.sellRates as Record<string, string>)[selectedCurrency] || '0');
+      const bRate = parseFloat((b.sellRates as Record<string, string>)[selectedCurrency] || '0');
       return aRate - bRate;
     });
 
@@ -281,7 +282,7 @@ export default function NearestBDCPage() {
                   {currencies.slice(0, 4).map(curr => (
                     <div key={curr} className="text-center p-2 rounded-lg bg-white/5">
                       <div className="text-[#7183A6] text-xs mb-1">{curr}</div>
-                      <div className="text-white text-sm font-medium">{bdc.sellRates[curr] || '-'}</div>
+                      <div className="text-white text-sm font-medium">{(bdc.sellRates as Record<string, string>)[curr] || '-'}</div>
                     </div>
                   ))}
                 </div>
@@ -331,7 +332,7 @@ export default function NearestBDCPage() {
                           return (
                             <div key={curr} className="flex justify-between">
                               <span className="text-[#7183A6]">{curr}</span>
-                              <span className="text-white">Buy: {bdc.buyRates[curr] || '-'} | Sell: {bdc.sellRates[curr] || '-'}</span>
+                              <span className="text-white">Buy: {(bdc.buyRates as Record<string, string>)[curr] || '-'} | Sell: {(bdc.sellRates as Record<string, string>)[curr] || '-'}</span>
                             </div>
                           );
                         })}
@@ -471,8 +472,8 @@ export default function NearestBDCPage() {
                       <p className="text-sm text-[#7183A6] mb-1">Rate at {filteredBDCs.find(b => b.id === selectedBDC)?.tradingName}</p>
                       <p className="text-2xl font-bold text-[#5E8DFF]">
                         {reserveSide === 'BUY' 
-                          ? filteredBDCs.find(b => b.id === selectedBDC)?.buyRates[selectedCurrency]
-                          : filteredBDCs.find(b => b.id === selectedBDC)?.sellRates[selectedCurrency]
+                          ? (filteredBDCs.find(b => b.id === selectedBDC)?.buyRates as Record<string, string>)?.[selectedCurrency]
+                          : (filteredBDCs.find(b => b.id === selectedBDC)?.sellRates as Record<string, string>)?.[selectedCurrency]
                         } KES
                       </p>
                     </div>

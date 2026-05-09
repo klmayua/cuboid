@@ -8,7 +8,7 @@ import {
   MoreVertical,
   Phone,
   Mail,
-  Bank,
+  Landmark,
   Globe,
   Star,
   Clock,
@@ -155,7 +155,7 @@ export default function BeneficiariesPage() {
               <div className="space-y-3 mb-4">
                 {ben.bankAccount && (
                   <div className="flex items-center gap-2 text-sm">
-                    <Bank className="w-4 h-4 text-[#7183A6]" />
+                    <Landmark className="w-4 h-4 text-[#7183A6]" />
                     <span className="text-[#7183A6]">{ben.bankAccount.bankName}</span>
                     <span className="text-white ml-auto">{ben.bankAccount.accountNumber}</span>
                   </div>

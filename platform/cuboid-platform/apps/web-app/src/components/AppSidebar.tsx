@@ -15,7 +15,7 @@ import {
   Users,
   ArrowRightLeft,
   MapPin,
-  HandHeart,
+  HeartHandshake,
   Store,
   Bell,
   Activity
@@ -27,7 +27,7 @@ const navItems = [
   { icon: ArrowRightLeft, label: 'Convert', href: '/convert' },
   { icon: MapPin, label: 'Find BDC', href: '/nearest-bdc' },
   { icon: Wallet, label: 'Wallets', href: '/wallets' },
-  { icon: HandHeart, label: 'Escrow', href: '/escrow' },
+  { icon: HeartHandshake, label: 'Escrow', href: '/escrow' },
   { icon: Users, label: 'Beneficiaries', href: '/beneficiaries' },
   { icon: Store, label: 'Merchants', href: '/merchants' },
   { icon: Building2, label: 'Treasury', href: '/treasury' },

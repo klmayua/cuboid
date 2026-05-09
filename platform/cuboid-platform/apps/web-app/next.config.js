@@ -2,7 +2,7 @@
 const nextConfig = {
   transpilePackages: ['@cuboid/design-system', '@cuboid/tokens'],
   experimental: {
-    serverActions: true,
+    // Server Actions are enabled by default in Next.js 14
   },
   images: {
     domains: [],

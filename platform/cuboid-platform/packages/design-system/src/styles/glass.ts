@@ -1,4 +1,3 @@
-import { type Config } from 'tailwindcss';
 import { cuboidTokens } from '@cuboid/tokens';
 
 export const glassStyles = {
