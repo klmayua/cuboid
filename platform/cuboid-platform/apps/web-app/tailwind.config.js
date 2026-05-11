@@ -2,7 +2,7 @@
 module.exports = {
   content: [
     './src/**/*.{js,ts,jsx,tsx,mdx}',
-    '../../packages/design-system/src/**/*.{js,ts,jsx,tsx}',
+    '../../packages/*/src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {

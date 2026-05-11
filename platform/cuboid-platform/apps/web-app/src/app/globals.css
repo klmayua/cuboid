@@ -38,10 +38,16 @@ body {
 
 @layer utilities {
   .glass {
-    @apply bg-white/[0.06] backdrop-blur-xl border border-white/12;
+    background-color: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
   }
-  
+
   .glass-elevated {
-    @apply bg-white/[0.10] backdrop-blur-xl border border-white/14;
+    background-color: rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
   }
 }
