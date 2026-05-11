@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { pglite } from '@cuboid/db';
-import { auditLog, globalEventBus } from '@cuboid/domain-core';
+import { auditLog, globalEventBus, shouldUseMockData } from '@cuboid/domain-core';
+import { getMockSettlements } from '@cuboid/domain-core/mock';
 import { z } from 'zod';
 
 export async function GET(request: Request) {
@@ -43,6 +44,16 @@ export async function GET(request: Request) {
       timestamp: new Date().toISOString(),
     });
   } catch (err) {
+    if (shouldUseMockData()) {
+      return NextResponse.json({
+        success: true,
+        mock: true,
+        data: getMockSettlements(),
+        meta: { count: 0, limit, nextCursor: null, hasMore: false },
+        requestId: `req_${Date.now()}`,
+        timestamp: new Date().toISOString(),
+      });
+    }
     return NextResponse.json({
       success: false,
       errorCode: 'SETTLEMENTS_ERROR',

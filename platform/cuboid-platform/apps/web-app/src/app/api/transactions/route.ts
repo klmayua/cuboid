@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { pglite } from '@cuboid/db';
 import { auditLog } from '@cuboid/domain-core';
+import { shouldUseMockData } from '@cuboid/domain-core';
+import { getMockCustomerTransactions } from '@cuboid/domain-core/mock';
 import { z } from 'zod';
 
 export async function GET(request: Request) {
@@ -46,6 +48,16 @@ export async function GET(request: Request) {
       timestamp: new Date().toISOString(),
     });
   } catch (err) {
+    if (shouldUseMockData()) {
+      return NextResponse.json({
+        success: true,
+        mock: true,
+        data: getMockCustomerTransactions(),
+        meta: { count: 0, limit, nextCursor: null, hasMore: false },
+        requestId: `req_${Date.now()}`,
+        timestamp: new Date().toISOString(),
+      });
+    }
     return NextResponse.json({
       success: false,
       errorCode: 'TRANSACTIONS_ERROR',

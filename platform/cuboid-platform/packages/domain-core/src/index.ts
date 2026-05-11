@@ -7,6 +7,8 @@ export * from './repositories/index';
 export * from './errors/index';
 export * from './request-correlation';
 export * from './market';
+export * from './mock';
+export { isMockMode, shouldUseMockData } from './runtime/runtime-mode';
 
 export { Entity } from './entities/base-entity';
 export { User, type UserProps, type UserData } from './entities/user';

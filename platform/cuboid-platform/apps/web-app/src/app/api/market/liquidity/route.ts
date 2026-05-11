@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import { marketRepository } from '@cuboid/domain-core';
+import { marketRepository, shouldUseMockData } from '@cuboid/domain-core';
+import { getMockLiquidityDistribution } from '@cuboid/domain-core/mock';
 import { z } from 'zod';
 
 const LiquidityQuerySchema = z.object({
@@ -29,6 +30,16 @@ export async function GET(request: Request) {
       timestamp: new Date().toISOString(),
     });
   } catch (err) {
+    if (shouldUseMockData()) {
+      return NextResponse.json({
+        success: true,
+        mock: true,
+        data: getMockLiquidityDistribution(),
+        meta: { count: 0 },
+        requestId: `req_${Date.now()}`,
+        timestamp: new Date().toISOString(),
+      });
+    }
     return NextResponse.json({
       success: false,
       errorCode: 'LIQUIDITY_ERROR',

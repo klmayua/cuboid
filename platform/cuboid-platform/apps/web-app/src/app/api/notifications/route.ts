@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { listNotifications, markNotificationRead, markAllNotificationsRead, deleteNotification, createNotification } from '@cuboid/api-sdk';
-import { ValidationError } from '@cuboid/domain-core';
+import { ValidationError, shouldUseMockData } from '@cuboid/domain-core';
+import { getMockNotifications } from '@cuboid/domain-core/mock';
 import { z } from 'zod';
 
 export async function GET(req: Request) {
@@ -29,6 +30,16 @@ export async function GET(req: Request) {
       timestamp: new Date().toISOString() 
     });
   } catch (err) {
+    if (shouldUseMockData()) {
+      return NextResponse.json({ 
+        success: true, 
+        mock: true, 
+        data: getMockNotifications(), 
+        meta: { count: 0, limit, nextCursor: null, hasMore: false },
+        requestId: `req_${Date.now()}`, 
+        timestamp: new Date().toISOString() 
+      });
+    }
     return NextResponse.json({ success: false, errorCode: 'NOTIFICATION_ERROR', message: (err as Error).message, requestId: `req_${Date.now()}`, timestamp: new Date().toISOString() }, { status: 500 });
   }
 }
@@ -52,6 +63,9 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ success: false, errorCode: 'UNKNOWN_ACTION', message: 'Unknown action', requestId: `req_${Date.now()}`, timestamp: new Date().toISOString() }, { status: 400 });
   } catch (err) {
+    if (shouldUseMockData()) {
+      return NextResponse.json({ success: true, mock: true, data: getMockNotifications()[0] || { id: `mock_${Date.now()}` }, requestId: `req_${Date.now()}`, timestamp: new Date().toISOString() });
+    }
     if (err instanceof ValidationError || err instanceof z.ZodError) {
       return NextResponse.json({ success: false, errorCode: 'VALIDATION_ERROR', message: (err as Error).message, requestId: `req_${Date.now()}`, timestamp: new Date().toISOString() }, { status: 400 });
     }

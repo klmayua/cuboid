@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import { marketEngine } from '@cuboid/domain-core';
+import { marketEngine, shouldUseMockData } from '@cuboid/domain-core';
+import { getMockMarketMetrics } from '@cuboid/domain-core/mock';
 import { z } from 'zod';
 
 const MetricsResponseSchema = z.object({
@@ -22,6 +23,15 @@ export async function GET() {
       timestamp: new Date().toISOString(),
     });
   } catch (err) {
+    if (shouldUseMockData()) {
+      return NextResponse.json({
+        success: true,
+        mock: true,
+        data: getMockMarketMetrics(),
+        requestId: `req_${Date.now()}`,
+        timestamp: new Date().toISOString(),
+      });
+    }
     return NextResponse.json({
       success: false,
       errorCode: 'METRICS_ERROR',

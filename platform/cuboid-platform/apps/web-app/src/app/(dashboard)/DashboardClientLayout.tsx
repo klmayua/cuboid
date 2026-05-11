@@ -5,6 +5,11 @@ import { useRouter } from 'next/navigation';
 import { AppSidebar } from '@/components/AppSidebar';
 import { useAuthStore, selectIsAuthenticated, selectIsOnboardingComplete } from '@/features/auth';
 
+const isMockMode =
+  typeof window !== 'undefined' &&
+  (window.location.hostname === 'localhost' ||
+   document.cookie.includes('mock=true'));
+
 export function DashboardClientLayout({
   children,
 }: {
@@ -33,7 +38,16 @@ export function DashboardClientLayout({
   return (
     <div className="flex min-h-screen bg-[#05070D]">
       <AppSidebar />
-      <main className="flex-1 ml-64">{children}</main>
+      <main className="flex-1 ml-64 relative">
+        {isMockMode && (
+          <div className="absolute top-4 right-4 z-50">
+            <div className="px-3 py-1.5 rounded-[10px] bg-[#0B1020] border border-[#D4AF37]/40 text-[10px] font-medium tracking-wider text-[#D4AF37] uppercase">
+              Simulation Mode
+            </div>
+          </div>
+        )}
+        {children}
+      </main>
     </div>
   );
 }

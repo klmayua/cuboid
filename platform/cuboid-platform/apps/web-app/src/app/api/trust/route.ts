@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import { pglite } from '@cuboid/db';
+import { shouldUseMockData } from '@cuboid/domain-core';
+import { getMockTrustScores } from '@cuboid/domain-core/mock';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -22,6 +24,15 @@ export async function GET(request: Request) {
       timestamp: new Date().toISOString(),
     });
   } catch (err) {
+    if (shouldUseMockData()) {
+      return NextResponse.json({
+        success: true,
+        mock: true,
+        data: getMockTrustScores(),
+        requestId: `req_${Date.now()}`,
+        timestamp: new Date().toISOString(),
+      });
+    }
     return NextResponse.json({
       success: false,
       errorCode: 'TRUST_ERROR',

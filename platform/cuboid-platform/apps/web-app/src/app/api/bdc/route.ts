@@ -29,7 +29,8 @@ import {
   publishBdcRate,
   getBdcAnalytics,
 } from '@cuboid/api-sdk';
-import { ValidationError, idempotencyRepository } from '@cuboid/domain-core';
+import { ValidationError, idempotencyRepository, shouldUseMockData } from '@cuboid/domain-core';
+import { getMockBdcMetrics, getMockBdcDesks, getMockBdcInventory } from '@cuboid/domain-core/mock';
 import { z } from 'zod';
 
 export async function GET(req: Request) {
@@ -104,6 +105,15 @@ export async function GET(req: Request) {
     const result = await getBdcDashboard(orgId);
     return NextResponse.json({ success: true, data: result, requestId: `req_${Date.now()}`, timestamp: new Date().toISOString() });
   } catch (err) {
+    if (shouldUseMockData()) {
+      const { searchParams } = new URL(req.url);
+      const action = searchParams.get('action');
+      let data;
+      if (action === 'desks' || action === 'desk') data = getMockBdcDesks();
+      else if (action === 'inventory' || action === 'inventoryByDesk') data = getMockBdcInventory();
+      else data = getMockBdcMetrics();
+      return NextResponse.json({ success: true, mock: true, data, requestId: `req_${Date.now()}`, timestamp: new Date().toISOString() });
+    }
     return NextResponse.json({ success: false, errorCode: 'BDC_ERROR', message: (err as Error).message, requestId: `req_${Date.now()}`, timestamp: new Date().toISOString() }, { status: 500 });
   }
 }
@@ -227,6 +237,9 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ success: false, errorCode: 'UNKNOWN_ACTION', message: 'Unknown action', requestId: `req_${Date.now()}`, timestamp: new Date().toISOString() }, { status: 400 });
   } catch (err) {
+    if (shouldUseMockData()) {
+      return NextResponse.json({ success: true, mock: true, data: getMockBdcMetrics(), requestId: `req_${Date.now()}`, timestamp: new Date().toISOString() });
+    }
     if (err instanceof ValidationError || err instanceof z.ZodError) {
       return NextResponse.json({ success: false, errorCode: 'VALIDATION_ERROR', message: (err as Error).message, requestId: `req_${Date.now()}`, timestamp: new Date().toISOString() }, { status: 400 });
     }
