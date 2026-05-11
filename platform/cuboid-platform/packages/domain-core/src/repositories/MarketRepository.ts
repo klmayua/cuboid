@@ -196,7 +196,7 @@ export class MarketRepository extends BaseRepository {
       by: ['currency'],
       _sum: { available: true, reserved: true },
     });
-    return result.map(r => ({
+    return result.map((r: any) => ({
       currency: r.currency,
       available: r._sum.available ?? 0,
       reserved: r._sum.reserved ?? 0,
