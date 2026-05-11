@@ -68,7 +68,7 @@ export class AnalyticsRepository extends BaseRepository {
     const where: any = { active: true, deletedAt: null };
     if (organizationId) where.organizationId = organizationId;
     const desks = await this.db.bdcDesk.findMany({ where });
-    return desks.map((d) => ({
+    return desks.map((d: any) => ({
       id: d.id,
       location: d.location,
       city: d.city,
