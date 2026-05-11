@@ -23,7 +23,10 @@ export class AnalyticsRepository extends BaseRepository {
     }
 
     const txs = await this.db.transaction.findMany({ where });
-    const totalVolume = txs.reduce((sum, t) => sum + Number(t.amount), 0);
+    const totalVolume = txs.reduce(
+      (sum: number, t) => sum + Number(t.amount),
+      0
+    );
     const byCurrency: Record<string, number> = {};
     for (const t of txs) {
       byCurrency[t.currency] = (byCurrency[t.currency] || 0) + Number(t.amount);
