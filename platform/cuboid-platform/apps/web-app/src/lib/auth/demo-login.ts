@@ -22,4 +22,8 @@ export function performDemoLogin(demoUser: DemoUser): void {
   };
 
   store.login(user, tokens);
+
+  // Set cookie so middleware can validate demo sessions server-side
+  const expires = new Date(Date.now() + 24 * 60 * 60 * 1000).toUTCString();
+  document.cookie = `cuboid-demo-session=true; path=/; expires=${expires}; SameSite=Lax`;
 }

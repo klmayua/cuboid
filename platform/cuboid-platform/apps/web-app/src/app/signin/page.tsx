@@ -24,7 +24,7 @@ export default function SignInPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#05070D] px-4">
+    <div className="min-h-screen flex flex-col items-center bg-[#05070D] px-4 pt-16 md:pt-20 pb-10">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-3 mb-6">
@@ -99,7 +99,9 @@ export default function SignInPage() {
             Sign up
           </Link>
         </p>
+      </div>
 
+      <div className="w-full max-w-5xl mt-10">
         <DemoAccessCards />
       </div>
     </div>

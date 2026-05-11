@@ -4,6 +4,10 @@ import type { NextRequest } from 'next/server';
 const PUBLIC_ROUTES = ['/signin', '/signup', '/forgot-password', '/reset-password', '/verify'];
 const ONBOARDING_ROUTES = ['/welcome', '/kyc', '/kyb', '/organization', '/wallet-setup'];
 
+function isDemoAuthenticated(request: NextRequest): boolean {
+  return request.cookies.has('cuboid-demo-session');
+}
+
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
@@ -14,6 +18,11 @@ export function middleware(request: NextRequest) {
 
   // Check for auth token
   const token = request.cookies.get('cuboid-access-token')?.value;
+
+  // Allow demo sessions
+  if (isDemoAuthenticated(request)) {
+    return NextResponse.next();
+  }
 
   if (!token) {
     // Redirect to signin if not authenticated
@@ -30,6 +39,6 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!api|_next/static|_next/image|favicon.ico|.*\\.png$|.*\\.svg$).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico|.*\.png$|.*\.svg$).*)',
   ],
 };
