@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { NextResponse } from 'next/server';
 import { pglite } from '@cuboid/db';
 import { auditLog, globalEventBus, shouldUseMockData } from '@cuboid/domain-core';

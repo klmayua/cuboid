@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { NextResponse } from 'next/server';
 import { submitKyc, submitKyb, getComplianceCases, getComplianceCase, reviewComplianceCase } from '@cuboid/api-sdk';
 import { ValidationError } from '@cuboid/domain-core';

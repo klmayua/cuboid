@@ -1,3 +1,4 @@
+export * from './safe-mock-wrapper';
 export * from './market/mock-market';
 export * from './broker/mock-broker';
 export * from './bdc/mock-bdc';

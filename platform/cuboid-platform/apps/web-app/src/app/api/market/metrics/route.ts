@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { NextResponse } from 'next/server';
 import { marketEngine, shouldUseMockData } from '@cuboid/domain-core';
 import { getMockMarketMetrics } from '@cuboid/domain-core/mock';

@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { NextResponse } from 'next/server';
 import { listNotifications, markNotificationRead, markAllNotificationsRead, deleteNotification, createNotification } from '@cuboid/api-sdk';
 import { ValidationError, shouldUseMockData } from '@cuboid/domain-core';

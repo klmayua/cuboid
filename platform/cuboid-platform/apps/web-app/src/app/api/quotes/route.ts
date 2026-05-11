@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { NextResponse } from 'next/server';
 import { listLiveQuotes, createQuote } from '@cuboid/api-sdk';
 import { ValidationError } from '@cuboid/domain-core';
