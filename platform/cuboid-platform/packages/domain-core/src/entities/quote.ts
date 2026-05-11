@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { Entity } from './base-entity.js';
-import { EntityIdLike } from '../value-objects/entity-id.js';
-import { TimestampLike } from '../value-objects/timestamp.js';
+import { Entity } from './base-entity';
+import { EntityId } from '../value-objects/entity-id';
+import { TimestampLike } from '../value-objects/timestamp';
 
 export const QuoteStatusSchema = z.enum(['PENDING', 'LOCKED', 'ACCEPTED', 'EXPIRED', 'FAILED']);
 export type QuoteStatus = z.infer<typeof QuoteStatusSchema>;
@@ -52,7 +52,7 @@ export class Quote extends Entity<QuoteProps> {
   protected get entityType(): string { return 'quote'; }
 
   private constructor(
-    id: EntityIdLike,
+    id: EntityId,
     private _props: QuoteProps,
     createdAt?: TimestampLike,
     updatedAt?: TimestampLike,

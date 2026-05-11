@@ -1,8 +1,8 @@
 import { z } from 'zod';
-import { Entity } from './base-entity.js';
-import { EntityIdLike } from '../value-objects/entity-id.js';
-import { TimestampLike } from '../value-objects/timestamp.js';
-import { Currency, CurrencyLike } from '../value-objects/currency.js';
+import { Entity } from './base-entity';
+import { EntityId } from '../value-objects/entity-id';
+import { TimestampLike } from '../value-objects/timestamp';
+import { Currency, CurrencyLike } from '../value-objects/currency';
 
 export const LedgerTypeSchema = z.enum(['OPERATIONAL', 'ESCROW', 'RESERVE', 'SETTLEMENT']);
 export type LedgerType = z.infer<typeof LedgerTypeSchema>;
@@ -52,7 +52,7 @@ export class Wallet extends Entity<WalletProps> {
   }
 
   private constructor(
-    id: EntityIdLike,
+    id: EntityId,
     private _props: WalletProps,
     createdAt?: TimestampLike,
     updatedAt?: TimestampLike,

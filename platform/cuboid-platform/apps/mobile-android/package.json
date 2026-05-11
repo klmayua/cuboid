@@ -29,7 +29,8 @@
     "react-native-keychain": "^8.2.0",
     "react-native-biometrics": "^3.0.1",
     "date-fns": "^3.3.1",
-    "clsx": "^2.1.0"
+    "clsx": "^2.1.0",
+    "lucide-react": "^0.312.0"
   },
   "devDependencies": {
     "@babel/core": "^7.23.7",

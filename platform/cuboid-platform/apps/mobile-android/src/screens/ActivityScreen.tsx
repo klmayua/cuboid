@@ -3,7 +3,7 @@
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import { colors, spacing, borderRadius } from '../lib/theme';
 import { Card } from '../components/Card';
-import { ArrowDownLeft, ArrowUpRight, Shield, RefreshCw } from 'lucide-react-native';
+import { ArrowDownLeft, ArrowUpRight, Shield, RefreshCw } from 'lucide-react';
 
 const activities = [
   { id: '1', type: 'received', from: 'Acme Corp', amount: '$5,000.00', status: 'settled', time: '2 min ago' },

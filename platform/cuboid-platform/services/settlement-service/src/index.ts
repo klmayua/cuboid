@@ -53,6 +53,7 @@ export interface SettlementInstruction {
   confirmedAt?: string;
   settledAt?: string;
   failedAt?: string;
+  returnedAt?: string;
   failureReason?: string;
   returnReason?: string;
   onHoldReason?: string;

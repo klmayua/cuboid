@@ -3,14 +3,25 @@
   "version": "0.0.0",
   "private": true,
   "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./hooks": "./src/hooks/index.ts",
+    "./realtime": "./src/realtime/index.ts"
+  },
   "scripts": {
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@cuboid/domain-core": "workspace:*",
     "@cuboid/schemas": "workspace:*",
     "zod": "^3.22.4"
   },
+  "peerDependencies": {
+    "react": ">=18.0.0"
+  },
   "devDependencies": {
+    "@types/react": "^18.2.0",
     "typescript": "^5.4.0"
   }
 }

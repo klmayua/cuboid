@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { Entity } from './base-entity.js';
-import { EntityIdLike } from '../value-objects/entity-id.js';
-import { TimestampLike } from '../value-objects/timestamp.js';
+import { Entity } from './base-entity';
+import { EntityId } from '../value-objects/entity-id';
+import { TimestampLike } from '../value-objects/timestamp';
 
 export const OrganizationTypeSchema = z.enum(['RETAIL', 'BUSINESS', 'INSTITUTIONAL']);
 export type OrganizationType = z.infer<typeof OrganizationTypeSchema>;
@@ -56,7 +56,7 @@ export class Organization extends Entity<OrganizationProps> {
   }
 
   private constructor(
-    id: EntityIdLike,
+    id: EntityId,
     private _props: OrganizationProps,
     createdAt?: TimestampLike,
     updatedAt?: TimestampLike,

@@ -1,4 +1,4 @@
-import { DomainEvent, DomainEventProps, DomainEventType } from './base-event.js';
+import { DomainEvent, DomainEventProps, DomainEventType } from './base-event';
 
 export type EventHandler<T = unknown> = (event: DomainEvent<T>) => void | Promise<void>;
 

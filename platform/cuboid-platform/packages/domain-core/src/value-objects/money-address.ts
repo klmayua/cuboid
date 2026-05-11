@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { CountryCodeSchema, CountryCode } from './address.js';
+import { CountryCodeSchema, CountryCode } from './address';
 
 export const MoneyAddressTypeSchema = z.enum([
   'BANK_ACCOUNT',

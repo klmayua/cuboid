@@ -10,7 +10,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@cuboid/api-sdk": "workspace:*",
     "@cuboid/design-system": "workspace:*",
+    "@cuboid/domain-core": "workspace:*",
     "@cuboid/tokens": "workspace:*",
     "@tanstack/react-query": "^5.24.0",
     "clsx": "^2.1.0",

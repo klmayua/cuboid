@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { persist, createJSONStorage } from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface User {
   id: string;
@@ -26,23 +26,27 @@ interface AuthState {
   logout: () => void;
 }
 
-export const useAuthStore = create<AuthState>()(
-  persist(
-    (set) => ({
-      user: null,
-      isAuthenticated: false,
-      isLoading: true,
-      wallets: [],
+const storage = {
+  getItem: async (name: string): Promise<string | null> => {
+    return (await AsyncStorage.getItem(name)) ?? null;
+  },
+  setItem: async (name: string, value: string): Promise<void> => {
+    await AsyncStorage.setItem(name, value);
+  },
+  removeItem: async (name: string): Promise<void> => {
+    await AsyncStorage.removeItem(name);
+  },
+};
 
-      setUser: (user) => set({ user, isAuthenticated: !!user }),
-      
-      setWallets: (wallets) => set({ wallets }),
-      
-      logout: () => set({ user: null, isAuthenticated: false, wallets: [] }),
-    }),
-    {
-      name: 'cuboid-auth',
-      storage: createJSONStorage(() => AsyncStorage)),
-    }
-  )
-);
+export const useAuthStore = create<AuthState>((set) => ({
+  user: null,
+  isAuthenticated: false,
+  isLoading: true,
+  wallets: [],
+
+  setUser: (user: User | null) => set({ user, isAuthenticated: !!user }),
+  
+  setWallets: (wallets: Wallet[]) => set({ wallets }),
+  
+  logout: () => set({ user: null, isAuthenticated: false, wallets: [] }),
+}));

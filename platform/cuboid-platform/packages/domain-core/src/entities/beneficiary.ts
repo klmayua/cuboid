@@ -1,8 +1,8 @@
 import { z } from 'zod';
-import { Entity } from './base-entity.js';
-import { EntityIdLike } from '../value-objects/entity-id.js';
-import { TimestampLike } from '../value-objects/timestamp.js';
-import { MoneyAddress } from '../value-objects/money-address.js';
+import { Entity } from './base-entity';
+import { EntityId } from '../value-objects/entity-id';
+import { TimestampLike } from '../value-objects/timestamp';
+import { MoneyAddress } from '../value-objects/money-address';
 
 export const BeneficiaryTypeSchema = z.enum(['INDIVIDUAL', 'BUSINESS', 'INSTITUTIONAL']);
 export type BeneficiaryType = z.infer<typeof BeneficiaryTypeSchema>;
@@ -90,7 +90,7 @@ export class Beneficiary extends Entity<BeneficiaryProps> {
   protected get entityType(): string { return 'beneficiary'; }
 
   private constructor(
-    id: EntityIdLike,
+    id: EntityId,
     private _props: BeneficiaryProps,
     createdAt?: TimestampLike,
     updatedAt?: TimestampLike,

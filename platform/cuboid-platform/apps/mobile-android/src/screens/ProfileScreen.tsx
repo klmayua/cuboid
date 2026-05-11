@@ -3,7 +3,7 @@
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { colors, spacing, borderRadius } from '../lib/theme';
 import { Card } from '../components/Card';
-import { User, Shield, Bell, Key, HelpCircle, LogOut, ChevronRight } from 'lucide-react-native';
+import { User, Shield, Bell, Key, HelpCircle, LogOut, ChevronRight } from 'lucide-react';
 
 export function ProfileScreen({ navigation }: any) {
   const menuItems = [

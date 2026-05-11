@@ -1,2 +1,2 @@
-export * from './transaction-aggregate.js';
-export { TransactionAggregate, type TransactionAggregateState } from './transaction-aggregate.js';
+export * from './transaction-aggregate';
+export { TransactionAggregate, type TransactionAggregateState } from './transaction-aggregate';

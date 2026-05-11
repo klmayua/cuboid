@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { Entity } from './base-entity.js';
-import { EntityIdLike } from '../value-objects/entity-id.js';
-import { TimestampLike } from '../value-objects/timestamp.js';
+import { Entity } from './base-entity';
+import { EntityId } from '../value-objects/entity-id';
+import { TimestampLike } from '../value-objects/timestamp';
 
 export const TransactionTypeSchema = z.enum([
   'PAYOUT', 'COLLECTION', 'TRANSFER', 'EXCHANGE', 'REFUND', 'REVERSAL'
@@ -96,7 +96,7 @@ export class Transaction extends Entity<TransactionProps> {
   }
 
   private constructor(
-    id: EntityIdLike,
+    id: EntityId,
     private _props: TransactionProps,
     createdAt?: TimestampLike,
     updatedAt?: TimestampLike,

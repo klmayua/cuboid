@@ -130,7 +130,7 @@ class MockPartnerAdapter implements PartnerAdapter {
 
   async quote(request: QuoteRequest): Promise<PartnerQuote> {
     const rate = '0.85';
-    const targetAmount = (BigInt(request.sourceAmount) * BigInt(Math.round(Number(rate) * 1000)) / 1000n;
+    const targetAmount = BigInt(request.sourceAmount) * BigInt(Math.round(Number(rate) * 1000)) / 1000n;
     return {
       partnerId: this.partnerId,
       sourceCurrency: request.sourceCurrency,

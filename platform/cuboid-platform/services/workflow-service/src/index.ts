@@ -283,7 +283,7 @@ export class WorkflowService {
         if (handler) {
           const context = this.createContext(execution, currentStep);
           const output = await handler(context);
-          execution.state = { ...execution.state, ...(output as Record<string, unknown>?) };
+          execution.state = { ...execution.state, ...(output as Record<string, unknown> | undefined) };
           execution.steps[stepIndex].output = output;
         }
 

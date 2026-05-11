@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { Entity } from './base-entity.js';
-import { EntityIdLike } from '../value-objects/entity-id.js';
-import { TimestampLike } from '../value-objects/timestamp.js';
+import { Entity } from './base-entity';
+import { EntityId } from '../value-objects/entity-id';
+import { TimestampLike } from '../value-objects/timestamp';
 
 export const PartnerTypeSchema = z.enum(['BANK', 'IMTO', 'BDC', 'SWITCH', 'PAYMENT_PROCESSOR', 'CORRESPONDENT']);
 export type PartnerType = z.infer<typeof PartnerTypeSchema>;
@@ -62,7 +62,7 @@ export class Partner extends Entity<PartnerProps> {
   protected get entityType(): string { return 'partner'; }
 
   private constructor(
-    id: EntityIdLike,
+    id: EntityId,
     private _props: PartnerProps,
     createdAt?: TimestampLike,
     updatedAt?: TimestampLike,

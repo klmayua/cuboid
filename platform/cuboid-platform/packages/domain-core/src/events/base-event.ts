@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { EntityId, Timestamp } from '../value-objects/index.js';
+import { EntityId, Timestamp } from '../value-objects/index';
 
 export const DomainEventTypeSchema = z.enum([
   'USER_CREATED',
@@ -53,6 +53,78 @@ export const DomainEventTypeSchema = z.enum([
   'TRUST_SCORE_UPDATED',
   'RISK_SIGNAL_GENERATED',
   'AUDIT_EVENT',
+  'COMPLIANCE_SUBMITTED',
+  'COMPLIANCE_APPROVED',
+  'COMPLIANCE_REJECTED',
+  'ESCROW_FUNDED',
+  'QUOTE_CREATED',
+  'QUOTE_RESERVED',
+  'SETTLEMENT_COMPLETED',
+  'SETTLEMENT_VERIFIED',
+  'SETTLEMENT_CLEARED',
+  'SETTLEMENT_FAILED',
+  'SETTLEMENT_REVERSED',
+  'RATE_PUBLISHED',
+  'MARKET_SNAPSHOT_CREATED',
+  'QUOTE_MATCHED',
+  'LIQUIDITY_UPDATED',
+  'FLOW_STARTED',
+  'FLOW_STEP_COMPLETED',
+  'FLOW_COMPLETED',
+  'FLOW_FAILED',
+  'FLOW_RETRY',
+  'FLOW_COMPENSATED',
+  'WHATSAPP_CONVERSATION_STARTED',
+  'WHATSAPP_MESSAGE_SENT',
+  'WORKFLOW_STARTED',
+  'WORKFLOW_COMPLETED',
+  'WORKFLOW_FAILED',
+  'SETTLEMENT_INITIATED',
+  'WALLET_DEBITED',
+  'ESCROW_LOCKED',
+  'BDC_ASSIGNED',
+  'BROKER_LEAD_ASSIGNED',
+  'NOTIFICATION_SENT',
+  'NOTIFICATION_READ',
+  'BDC_DESK_CREATED',
+  'BDC_DESK_STATUS_CHANGED',
+  'BDC_RATE_PUBLISHED',
+  'BDC_LIQUIDITY_UPDATED',
+  'BDC_STAFF_ADDED',
+  'BDC_STAFF_UPDATED',
+  'BDC_STAFF_REMOVED',
+  'BDC_INVENTORY_CREATED',
+  'BDC_INVENTORY_ADDED',
+  'BDC_INVENTORY_RESERVED',
+  'BDC_INVENTORY_RELEASED',
+  'BDC_DEAL_CREATED',
+  'BDC_DEAL_ADVANCED',
+  'BDC_DEAL_CLOSED',
+  'BDC_DEAL_FAILED',
+  'COMPLIANCE_DOC_CREATED',
+  'BROKER_LEAD_CREATED',
+  'BROKER_LEAD_CLAIMED',
+  'BROKER_LEAD_RELEASED',
+  'BROKER_LEAD_CONVERTED',
+  'BROKER_LEAD_ARCHIVED',
+  'BROKER_PROFILE_UPDATED',
+  'BROKER_DEAL_CREATED',
+  'BROKER_DEAL_ADVANCED',
+  'BROKER_DEAL_ROLLBACK',
+  'BROKER_DEAL_ESCALATED',
+  'BROKER_DEAL_SETTLED',
+  'BROKER_DEAL_DISPUTED',
+  'BROKER_DEAL_CLOSED',
+  'COMMISSION_ACCRUED',
+  'COMMISSION_RELEASED',
+  'COMMISSION_HELD',
+  'COMMISSION_REVERSED',
+  'BROKER_CLIENT_CREATED',
+  'BROKER_CLIENT_UPDATED',
+  'BROKER_CLIENT_ARCHIVED',
+  'WALLET_TRANSFERRED',
+  'WHATSAPP_MESSAGE_RECEIVED',
+  'MARKET_INTERVENTION',
 ]);
 
 export type DomainEventType = z.infer<typeof DomainEventTypeSchema>;
@@ -136,8 +208,8 @@ export function createDomainEvent<T>(
   payload: T,
   metadata?: Record<string, unknown>,
   version: number = 1
-): DomainEventProps<T> {
-  return {
+): DomainEvent<T> {
+  return new class extends DomainEvent<T> {}({
     id: `evt_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`,
     type,
     aggregateId,
@@ -146,5 +218,5 @@ export function createDomainEvent<T>(
     metadata,
     occurredAt: new Date().toISOString(),
     version,
-  };
+  });
 }

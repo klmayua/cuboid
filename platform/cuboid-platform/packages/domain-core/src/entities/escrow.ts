@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { Entity } from './base-entity.js';
-import { EntityIdLike } from '../value-objects/entity-id.js';
-import { TimestampLike } from '../value-objects/timestamp.js';
+import { Entity } from './base-entity';
+import { EntityId } from '../value-objects/entity-id';
+import { TimestampLike } from '../value-objects/timestamp';
 
 export const EscrowStatusSchema = z.enum(['PENDING', 'ACTIVE', 'COMPLETED', 'RELEASED', 'RETURNED', 'DISPUTED', 'CANCELLED']);
 export type EscrowStatus = z.infer<typeof EscrowStatusSchema>;
@@ -65,7 +65,7 @@ export class Escrow extends Entity<EscrowProps> {
   protected get entityType(): string { return 'escrow'; }
 
   private constructor(
-    id: EntityIdLike,
+    id: EntityId,
     private _props: EscrowProps,
     createdAt?: TimestampLike,
     updatedAt?: TimestampLike,

@@ -1,4 +1,7 @@
 import { z } from 'zod';
+export { SettlementModeSchema } from '../entities/transaction';
+export type { SettlementMode } from '../entities/transaction';
+import type { SettlementMode } from '../entities/transaction';
 
 export const SettlementStatusSchema = z.enum([
   'PENDING',
@@ -14,9 +17,6 @@ export const SettlementStatusSchema = z.enum([
   'ON_HOLD',
 ]);
 export type SettlementStatus = z.infer<typeof SettlementStatusSchema>;
-
-export const SettlementModeSchema = z.enum(['IMMEDIATE', 'SCHEDULED', 'BATCH', 'ESCROW']);
-export type SettlementMode = z.infer<typeof SettlementModeSchema>;
 
 export const SettlementTypeSchema = z.enum(['PUSH', 'PULL', 'INTERNAL', 'CROSS_CURRENCY', 'CROSS_BORDER']);
 export type SettlementType = z.infer<typeof SettlementTypeSchema>;
@@ -44,6 +44,7 @@ export interface SettlementInstruction {
   failedAt?: string;
   failureReason?: string;
   returnReason?: string;
+  returnedAt?: string;
   onHoldReason?: string;
   retryCount: number;
   maxRetries: number;

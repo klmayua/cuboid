@@ -1,105 +1,151 @@
-import { z } from 'zod';
+export {
+  signup,
+  signin,
+  verify,
+  refresh,
+  getUser,
+} from './modules/auth';
 
-const APIResponseSchema = z.object({
-  success: z.boolean(),
-  data: z.unknown().optional(),
-  error: z.object({
-    code: z.string(),
-    message: z.string(),
-  }).optional(),
-});
+export {
+  getTicker,
+  getLiveRates,
+  getRatesByRegion,
+  getSnapshots,
+  publishRate,
+} from './modules/markets';
 
-export class CuboidAPI {
-  private baseUrl: string;
-  private apiKey: string;
+export {
+  createQuote,
+  reserveQuote,
+  cancelQuote,
+  matchQuotes,
+  listLiveQuotes,
+  listMyQuotes,
+} from './modules/quotes';
 
-  constructor(config: { baseUrl: string; apiKey: string }) {
-    this.baseUrl = config.baseUrl;
-    this.apiKey = config.apiKey;
-  }
+export {
+  getBalances,
+  reserveFunds,
+  releaseFunds,
+  transfer,
+} from './modules/wallets';
 
-  private async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
-    const response = await fetch(`${this.baseUrl}${endpoint}`, {
-      ...options,
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.apiKey}`,
-        ...options.headers,
-      },
-    });
+export {
+  createEscrow,
+  fundEscrow,
+  lockEscrow,
+  releaseEscrow,
+  disputeEscrow,
+  cancelEscrow,
+  getEscrow,
+  listMyEscrows,
+} from './modules/escrow';
 
-    const json = await response.json();
-    const parsed = APIResponseSchema.parse(json);
-    
-    if (!parsed.success) {
-      throw new Error(parsed.error?.message ?? 'API request failed');
-    }
-    
-    return parsed.data as T;
-  }
+export {
+  initiateSettlement,
+  verifySettlement,
+  clearSettlement,
+  failSettlement,
+  reverseSettlement,
+  getSettlement,
+  listMySettlements,
+} from './modules/settlements';
 
-  async getQuote(params: {
-    sourceCurrency: string;
-    targetCurrency: string;
-    sourceAmount: string;
-  }) {
-    return this.request('/v1/quotes', {
-      method: 'POST',
-      body: JSON.stringify(params),
-    });
-  }
+export {
+  getBrokerDashboard,
+  getBrokerLeads,
+  updateBrokerProfile,
+  getBrokerPerformance,
+} from './modules/broker';
 
-  async createTransaction(params: {
-    quoteId: string;
-    sourceWalletId: string;
-    destinationCorridor: string;
-    destinationAccount: {
-      bankName: string;
-      accountNumber: string;
-      routingNumber?: string;
-    };
-  }) {
-    return this.request('/v1/transactions', {
-      method: 'POST',
-      body: JSON.stringify(params),
-    });
-  }
+export {
+  createBrokerLead,
+  listClaimableLeads,
+  listBrokerLeads,
+  claimBrokerLead,
+  releaseBrokerLead,
+  convertBrokerLead,
+  archiveBrokerLead,
+  createBrokerDeal,
+  listBrokerDeals,
+  advanceBrokerDeal,
+  rollbackBrokerDeal,
+  settleBrokerDeal,
+  disputeBrokerDeal,
+  closeBrokerDeal,
+  computeBrokerCommission,
+  listBrokerCommissions,
+  releaseBrokerCommission,
+  holdBrokerCommission,
+  reverseBrokerCommission,
+  getBrokerCommissionSummary,
+  createBrokerClient,
+  listBrokerClients,
+  archiveBrokerClient,
+} from './modules/broker-ops';
 
-  async getTransaction(id: string) {
-    return this.request(`/v1/transactions/${id}`);
-  }
+export {
+  getBdcDashboard,
+  getBdcDesks,
+  getBdcDesk,
+  createBdcDesk,
+  updateBdcDesk,
+  setBdcDeskStatus,
+  addBdcStaff,
+  listBdcStaff,
+  listBdcStaffByDesk,
+  updateBdcStaff,
+  removeBdcStaff,
+  createBdcInventory,
+  listBdcInventory,
+  listBdcInventoryByDesk,
+  addBdcStock,
+  reserveBdcStock,
+  releaseBdcStock,
+  createBdcDeal,
+  listBdcDeals,
+  listBdcDealsByDesk,
+  advanceBdcDeal,
+  closeBdcDeal,
+  failBdcDeal,
+  createComplianceDoc,
+  listComplianceDocs,
+  listExpiringComplianceDocs,
+  publishBdcRate,
+  getBdcAnalytics,
+  getBdcLiquidity,
+  getBdcStaff,
+  getBdcReports,
+} from './modules/bdc';
 
-  async getWallets(params?: { currency?: string; status?: string }) {
-    const query = new URLSearchParams(params as Record<string, string>).toString();
-    return this.request(`/v1/wallets?${query}`);
-  }
+export {
+  submitKyc,
+  submitKyb,
+  getComplianceCases,
+  getComplianceCase,
+  reviewComplianceCase,
+} from './modules/compliance';
 
-  async getCounterparties(params?: { type?: string; country?: string }) {
-    const query = new URLSearchParams(params as Record<string, string>).toString();
-    return this.request(`/v1/counterparties?${query}`);
-  }
+export {
+  listNotifications,
+  markNotificationRead,
+  markAllNotificationsRead,
+  deleteNotification,
+  createNotification,
+} from './modules/notifications';
 
-  async createEscrow(params: {
-    walletId: string;
-    amount: string;
-    currency: string;
-    releaseConditions: Array<{
-      type: 'MILESTONE' | 'DATE' | 'MANUAL' | 'AUTO';
-      description: string;
-    }>;
-  }) {
-    return this.request('/v1/escrow', {
-      method: 'POST',
-      body: JSON.stringify(params),
-    });
-  }
+export {
+  getTrustScore,
+  getTrustBreakdown,
+  getTrustHistory,
+} from './modules/trust';
 
-  async releaseEscrow(id: string, params?: { conditionId?: string }) {
-    return this.request(`/v1/escrow/${id}/release`, {
-      method: 'POST',
-      body: JSON.stringify(params ?? {}),
-    });
-  }
-}
-
-export default CuboidAPI;
+export {
+  getAnalyticsOverview,
+  getAnalyticsVolume,
+  getAnalyticsCorridors,
+  getAnalyticsLiquidity,
+  getAnalyticsPerformance,
+  getBrokerMetrics,
+  getBrokerRanking,
+} from './modules/analytics';

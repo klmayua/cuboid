@@ -1,54 +1,80 @@
 "use client";
 
+import { useRealtimeMarket, type PublishedRate } from "@cuboid/api-sdk/hooks";
+
 interface TickerPart {
   text: string;
-  type: "pair" | "value" | "delta_positive" | "delta_negative" | "market_label" | "label";
+  type: "pair" | "value" | "delta_positive" | "delta_negative" | "market_label" | "label" | "loading";
 }
 
 interface TickerItem {
   parts: TickerPart[];
 }
 
-const allItems: TickerItem[] = [
-  {
+function formatRate(n: number): string {
+  return n.toLocaleString("en-NG", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function formatPercent(n: number): string {
+  const sign = n >= 0 ? "↑" : "↓";
+  return `${sign} ${Math.abs(n).toFixed(2)}%`;
+}
+
+function buildItems(rates: PublishedRate[]): TickerItem[] {
+  const items: TickerItem[] = [];
+
+  for (const rate of rates.slice(0, 4)) {
+    const deltaType = rate.trend === "UP" ? "delta_positive" : rate.trend === "DOWN" ? "delta_negative" : "delta_positive";
+    items.push({
+      parts: [
+        { text: rate.symbol.replace("_", "/"), type: "pair" },
+        { text: formatRate(rate.cuboidMidpoint), type: "value" },
+        { text: formatPercent(rate.changePercent), type: deltaType },
+      ],
+    });
+  }
+
+  // Market health indicators
+  const avgConfidence = rates.length > 0
+    ? rates.reduce((s, r) => s + r.confidence, 0) / rates.length
+    : 0;
+
+  const avgSpread = rates.length > 0
+    ? rates.reduce((s, r) => s + r.spread, 0) / rates.length
+    : 0;
+
+  const totalSources = rates.reduce((s, r) => s + r.sourceCount, 0);
+
+  items.push({
     parts: [
-      { text: "USD/NGN", type: "pair" },
-      { text: "1,517.50", type: "value" },
-      { text: "↑ 0.12%", type: "delta_positive" },
+      { text: `${totalSources} active sources`, type: "market_label" },
     ],
-  },
-  {
+  });
+
+  items.push({
     parts: [
-      { text: "GBP/NGN", type: "pair" },
-      { text: "1,923.80", type: "value" },
-      { text: "↑ 0.08%", type: "delta_positive" },
+      { text: `${Math.round(avgConfidence)}%`, type: "value" },
+      { text: "market confidence", type: "label" },
     ],
-  },
-  {
-    parts: [
-      { text: "EUR/NGN", type: "pair" },
-      { text: "1,645.25", type: "value" },
-      { text: "↓ 0.04%", type: "delta_negative" },
-    ],
-  },
-  {
-    parts: [{ text: "Lagos desks active", type: "market_label" }],
-  },
-  {
-    parts: [
-      { text: "98%", type: "value" },
-      { text: "settlement satisfaction", type: "label" },
-    ],
-  },
-  {
+  });
+
+  items.push({
     parts: [
       { text: "Spread", type: "label" },
-      { text: "0.38", type: "value" },
+      { text: avgSpread.toFixed(2), type: "value" },
     ],
-  },
-];
+  });
 
-const mobileItems = allItems.slice(0, 5);
+  return items;
+}
+
+function buildLoadingItems(): TickerItem[] {
+  return [
+    { parts: [{ text: "Loading market data...", type: "loading" }] },
+    { parts: [{ text: "Loading market data...", type: "loading" }] },
+    { parts: [{ text: "Loading market data...", type: "loading" }] },
+  ];
+}
 
 function PartSpan({ part }: { part: TickerPart }) {
   const styles: Record<string, React.CSSProperties> = {
@@ -58,6 +84,7 @@ function PartSpan({ part }: { part: TickerPart }) {
     delta_negative: { color: "#FF5A6B", fontWeight: 600 },
     market_label: { color: "#D4AF37", fontWeight: 500 },
     label: { color: "#8EA0B8", fontWeight: 500 },
+    loading: { color: "#8EA0B8", fontWeight: 400, fontStyle: "italic" },
   };
   return (
     <span style={styles[part.type]} className="whitespace-nowrap text-xs lg:text-[13px]">
@@ -67,6 +94,11 @@ function PartSpan({ part }: { part: TickerPart }) {
 }
 
 export function TopTicker() {
+  const { rates, loading } = useRealtimeMarket("/api/market/ticker");
+
+  const allItems = loading && rates.length === 0 ? buildLoadingItems() : buildItems(rates);
+  const mobileItems = allItems.slice(0, Math.min(5, allItems.length));
+
   const renderItems = (items: typeof allItems) =>
     items.map((item, i) => (
       <div key={i} className="flex items-center shrink-0" style={{ gap: 8 }}>

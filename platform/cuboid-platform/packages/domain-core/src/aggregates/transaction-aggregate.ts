@@ -1,11 +1,11 @@
-import { Transaction, TransactionProps, TransactionStatus, TransactionType, TransactionDirection } from '../entities/transaction.js';
-import { Quote } from '../entities/quote.js';
-import { Wallet } from '../entities/wallet.js';
-import { DomainEvent, createDomainEvent } from '../events/base-event.js';
+import { Transaction, TransactionProps, TransactionStatus, TransactionType, TransactionDirection } from '../entities/transaction';
+import { Quote, QuoteProps } from '../entities/quote';
+import { Wallet } from '../entities/wallet';
+import { DomainEvent, createDomainEvent } from '../events/base-event';
 
 export interface TransactionAggregateState {
   transaction: TransactionProps;
-  quote?: Quote['props'];
+  quote?: QuoteProps;
   ledgerEntries: { id: string; type: string; amount: string }[];
   settlementId?: string;
   escrowId?: string;

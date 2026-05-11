@@ -1,5 +1,5 @@
-import { EntityId, EntityIdLike, generateEntityId } from '../value-objects/entity-id.js';
-import { Timestamp, TimestampLike } from '../value-objects/timestamp.js';
+import { EntityId, EntityIdLike, generateEntityId } from '../value-objects/entity-id';
+import { Timestamp, TimestampLike } from '../value-objects/timestamp';
 
 export interface DomainEvent {
   type: string;
@@ -16,17 +16,17 @@ export abstract class Entity<T> {
   protected _version: number;
 
   constructor(
-    id: EntityIdLike,
+    id: EntityId,
     createdAt?: TimestampLike,
     updatedAt?: TimestampLike,
     version: number = 1
   ) {
-    this._id = id instanceof EntityId ? id : EntityId.create(this.entityType, id instanceof string ? id : undefined);
-    this._createdAt = createdAt instanceof Timestamp 
-      ? createdAt 
+    this._id = id;
+    this._createdAt = createdAt instanceof Timestamp
+      ? createdAt
       : Timestamp.fromISO(String(createdAt ?? new Date().toISOString()));
-    this._updatedAt = updatedAt instanceof Timestamp 
-      ? updatedAt 
+    this._updatedAt = updatedAt instanceof Timestamp
+      ? updatedAt
       : Timestamp.fromISO(String(updatedAt ?? new Date().toISOString()));
     this._version = version;
   }

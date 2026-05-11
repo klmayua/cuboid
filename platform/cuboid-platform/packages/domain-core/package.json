@@ -10,12 +10,19 @@
     "./entities": "./src/entities/index.ts",
     "./aggregates": "./src/aggregates/index.ts",
     "./services": "./src/services/index.ts",
-    "./events": "./src/events/index.ts"
+    "./events": "./src/events/index.ts",
+    "./repositories": "./src/repositories/index.ts",
+    "./errors": "./src/errors/index.ts"
   },
   "dependencies": {
+    "@cuboid/database": "workspace:*",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.3",
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.10",
     "typescript": "^5.4.0"
   }
 }

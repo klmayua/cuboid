@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { Currency, CurrencyLike, CurrencySchema } from './currency.js';
+import { Currency, CurrencyLike, CurrencySchema } from './currency';
 
 export const DECIMAL_PLACES: Record<string, number> = {
   USD: 2, EUR: 2, GBP: 2, JPY: 0, CHF: 2,

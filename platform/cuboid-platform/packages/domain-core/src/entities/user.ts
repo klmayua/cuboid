@@ -1,8 +1,8 @@
 import { z } from 'zod';
-import { Entity, DomainEvent } from './base-entity.js';
-import { EntityIdLike } from '../value-objects/entity-id.js';
-import { TimestampLike } from '../value-objects/timestamp.js';
-import { AddressValue, Address } from '../value-objects/address.js';
+import { Entity, DomainEvent } from './base-entity';
+import { EntityId } from '../value-objects/entity-id';
+import { TimestampLike } from '../value-objects/timestamp';
+import { AddressValue, Address } from '../value-objects/address';
 
 export const UserVerificationTierSchema = z.enum(['NONE', 'BASIC', 'ENHANCED', 'FULL']);
 export type UserVerificationTier = z.infer<typeof UserVerificationTierSchema>;
@@ -54,7 +54,7 @@ export class User extends Entity<UserProps> {
   }
 
   private constructor(
-    id: EntityIdLike,
+    id: EntityId,
     private _props: UserProps,
     createdAt?: TimestampLike,
     updatedAt?: TimestampLike,

@@ -1,16 +1,16 @@
-export * from './currency.js';
-export * from './amount.js';
-export * from './entity-id.js';
-export * from './timestamp.js';
-export * from './address.js';
-export * from './money-address.js';
-export * from './corridor.js';
+export * from './currency';
+export * from './amount';
+export * from './entity-id';
+export * from './timestamp';
+export * from './address';
+export * from './money-address';
+export * from './corridor';
 
-export { Amount, type AmountLike } from './amount.js';
-export { Currency, type CurrencyLike, type SupportedCurrency } from './currency.js';
-export { EntityId, type EntityIdLike } from './entity-id.js';
-export { Timestamp, type TimestampLike } from './timestamp.js';
-export { AddressValue, type Address, type CountryCode } from './address.js';
+export { Amount, type AmountLike } from './amount';
+export { Currency, type CurrencyLike, type SupportedCurrency } from './currency';
+export { EntityId, type EntityIdLike } from './entity-id';
+export { Timestamp, type TimestampLike } from './timestamp';
+export { AddressValue, type Address, type CountryCode } from './address';
 export { 
   MoneyAddressValue, 
   type MoneyAddress, 
@@ -20,5 +20,5 @@ export {
   type WalletAddress,
   type CardAddress,
   type CryptoWalletAddress,
-} from './money-address.js';
-export { CorridorValue, type Corridor, type CorridorLike } from './corridor.js';
+} from './money-address';
+export { CorridorValue, type Corridor, type CorridorLike } from './corridor';

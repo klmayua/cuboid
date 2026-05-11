@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { Entity } from './base-entity.js';
-import { EntityIdLike } from '../value-objects/entity-id.js';
-import { TimestampLike } from '../value-objects/timestamp.js';
+import { Entity } from './base-entity';
+import { EntityId } from '../value-objects/entity-id';
+import { TimestampLike } from '../value-objects/timestamp';
 
 export const ComplianceCaseTypeSchema = z.enum(['KYC', 'KYB', 'AML', 'SAR', 'FRAUD', 'DISPUTE', 'SANCTIONS', 'PEP']);
 export type ComplianceCaseType = z.infer<typeof ComplianceCaseTypeSchema>;
@@ -57,7 +57,7 @@ export class ComplianceCase extends Entity<ComplianceCaseProps> {
   protected get entityType(): string { return 'compliance_case'; }
 
   private constructor(
-    id: EntityIdLike,
+    id: EntityId,
     private _props: ComplianceCaseProps,
     createdAt?: TimestampLike,
     updatedAt?: TimestampLike,

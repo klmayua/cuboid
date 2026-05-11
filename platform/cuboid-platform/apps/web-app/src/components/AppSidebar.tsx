@@ -13,24 +13,30 @@ import {
   HelpCircle, 
   Settings,
   Users,
-  ArrowRightLeft,
+  ArrowLeftRight,
   MapPin,
   HeartHandshake,
   Store,
   Bell,
-  Activity
+  Activity,
+  Briefcase,
+  Building
 } from 'lucide-react';
 
 const navItems = [
   { icon: LayoutDashboard, label: 'Dashboard', href: '/dashboard' },
+  { icon: Briefcase, label: 'Broker OS', href: '/broker' },
+  { icon: Building, label: 'BDC OS', href: '/bdc' },
   { icon: Send, label: 'Move Value', href: '/transfer' },
-  { icon: ArrowRightLeft, label: 'Convert', href: '/convert' },
+  { icon: ArrowLeftRight, label: 'Convert', href: '/convert' },
   { icon: MapPin, label: 'Find BDC', href: '/nearest-bdc' },
   { icon: Wallet, label: 'Wallets', href: '/wallets' },
   { icon: HeartHandshake, label: 'Escrow', href: '/escrow' },
   { icon: Users, label: 'Beneficiaries', href: '/beneficiaries' },
   { icon: Store, label: 'Merchants', href: '/merchants' },
   { icon: Building2, label: 'Treasury', href: '/treasury' },
+  { icon: Users, label: 'Customer App', href: '/app' },
+  { icon: Activity, label: 'Ops', href: '/ops' },
   { icon: LineChart, label: 'Analytics', href: '/analytics' },
   { icon: Activity, label: 'Activity', href: '/activity' },
 ];

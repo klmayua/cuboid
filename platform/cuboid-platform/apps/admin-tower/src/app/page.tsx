@@ -1,4 +1,4 @@
-import { ControlTowerSidebar } from '@/components/Sideby';
+import { ControlTowerSidebar } from '@/components/Sidebar';
 import { Card } from '@cuboid/design-system';
 import { 
   Activity, Users, DollarSign, AlertTriangle, CheckCircle, XCircle, 

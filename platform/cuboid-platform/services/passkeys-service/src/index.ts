@@ -123,7 +123,7 @@ export class PasskeyService {
     await this.store.saveCredential(userId, {
       userId,
       credentialId: newCredId,
-      publicKey: credential.response attestationObject,
+      publicKey: credential.response.attestationObject,
       counter: 0,
       deviceType: 'singleDevice',
       transports: ['internal'],

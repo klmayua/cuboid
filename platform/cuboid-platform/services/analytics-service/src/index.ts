@@ -26,7 +26,7 @@ class AnalyticsStore {
     this.events.set(e.id, e); return e;
   }
 
-  async query(params: { eventType?: string; from?: string; to?: string; groupBy?: string }): Promise<Record<string, unknown>[] {
+  async query(params: { eventType?: string; from?: string; to?: string; groupBy?: string }): Promise<Record<string, unknown>[]> {
     let events = Array.from(this.events.values());
     if (params.eventType) events = events.filter(e => e.eventType === params.eventType);
     return [{ count: events.length, events }];
