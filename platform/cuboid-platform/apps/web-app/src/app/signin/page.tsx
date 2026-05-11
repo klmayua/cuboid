@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { CuboidLogo } from '@cuboid/design-system';
 import { Eye, EyeOff, Mail, Lock, ArrowRight } from 'lucide-react';
 import { useAuth } from '@/features/auth';
+import { DemoAccessCards } from '@/components/auth/DemoAccessCards';
 
 export default function SignInPage() {
   const router = useRouter();
@@ -98,6 +99,8 @@ export default function SignInPage() {
             Sign up
           </Link>
         </p>
+
+        <DemoAccessCards />
       </div>
     </div>
   );
