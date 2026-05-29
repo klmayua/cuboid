@@ -74,6 +74,7 @@ export const EscrowSchema = z.object({
   currency: z.string().length(3).toUpperCase(),
   status: z.enum(['PENDING', 'ACTIVE', 'RELEASED', 'RETURNED', 'DISPUTED', 'CANCELLED']),
   releaseConditions: z.array(z.object({
+    id: z.string(),
     type: z.enum(['MILESTONE', 'DATE', 'MANUAL', 'AUTO']),
     description: z.string(),
     fulfilled: z.boolean(),

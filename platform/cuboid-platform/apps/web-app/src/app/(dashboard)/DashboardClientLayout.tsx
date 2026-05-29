@@ -1,14 +1,17 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { AppSidebar } from '@/components/AppSidebar';
-import { useAuthStore, selectIsAuthenticated, selectIsOnboardingComplete } from '@/features/auth';
+import { useAuthStore, selectIsAuthenticated, selectIsOnboardingComplete, selectUserRole } from '@/features/auth';
+import { isRouteAllowed, getRoleDefaultRedirect } from '@/config/rbac';
+import type { UserRole } from '@/features/auth';
 
 const isMockMode =
   typeof window !== 'undefined' &&
   (window.location.hostname === 'localhost' ||
-   document.cookie.includes('mock=true'));
+   document.cookie.includes('mock=true') ||
+   document.cookie.includes('cuboid-demo-session'));
 
 export function DashboardClientLayout({
   children,
@@ -16,16 +19,28 @@ export function DashboardClientLayout({
   children: React.ReactNode;
 }) {
   const router = useRouter();
+  const pathname = usePathname();
   const isAuthenticated = useAuthStore(selectIsAuthenticated);
   const isOnboardingComplete = useAuthStore(selectIsOnboardingComplete);
+  const role = useAuthStore(selectUserRole);
 
   useEffect(() => {
     if (!isAuthenticated) {
       router.push('/signin');
-    } else if (!isOnboardingComplete) {
-      router.push('/welcome');
+      return;
     }
-  }, [isAuthenticated, isOnboardingComplete, router]);
+
+    if (!isOnboardingComplete) {
+      router.push('/welcome');
+      return;
+    }
+
+    // RBAC: Check if current route is allowed for this role
+    if (pathname && !isRouteAllowed(role as UserRole, pathname)) {
+      const redirectTo = getRoleDefaultRedirect(role as UserRole);
+      router.push(redirectTo);
+    }
+  }, [isAuthenticated, isOnboardingComplete, role, pathname, router]);
 
   if (!isAuthenticated || !isOnboardingComplete) {
     return (

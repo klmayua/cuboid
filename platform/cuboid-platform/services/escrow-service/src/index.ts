@@ -11,6 +11,7 @@ export interface EscrowMilestone {
 }
 
 export interface EscrowCondition {
+  id: string;
   type: 'MILESTONE' | 'DATE' | 'MANUAL' | 'AUTO';
   description: string;
   fulfilled: boolean;

@@ -48,15 +48,15 @@ export class RiskService {
 
     for (const rule of this.rules.values()) {
       if (!rule.enabled) continue;
-      let triggered = false;
+      let isTriggered = false;
       
       if (rule.type === 'AMOUNT' && data.context.amount) {
         const amount = Number(data.context.amount);
         const threshold = rule.conditions.threshold as number;
-        if (amount >= threshold) triggered = true;
+        if (amount >= threshold) isTriggered = true;
       }
 
-      if (triggered) {
+      if (isTriggered) {
         triggered.push(rule.id);
         const contribution = rule.severity === 'CRITICAL' ? 80 : rule.severity === 'HIGH' ? 50 : rule.severity === 'MEDIUM' ? 25 : 10;
         totalScore += contribution;

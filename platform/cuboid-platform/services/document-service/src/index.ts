@@ -44,9 +44,9 @@ export class DocumentService {
   private store: DocumentStore;
   constructor() { this.store = new DocumentStore(); }
 
-  async upload(data: { ownerId: string; ownerType: Document['ownerType']; type: Document['type']; name: string; mimeType: string; size: number; base64?: string }): Promise<Document> {
+  async upload(data: { ownerId: string; ownerType: Document['ownerType']; type: Document['type']; name: string; mimeType: string; size: number; base64?: string; metadata?: Record<string, unknown> }): Promise<Document> {
     const url = `https://documents.cuboid.io/${uuidv4()}`;
-    return this.store.create({ ...data, url, status: 'UPLOADING' });
+    return this.store.create({ ...data, url, status: 'UPLOADING', metadata: data.metadata ?? {} });
   }
 
   async processDocument(documentId: string): Promise<Document> {

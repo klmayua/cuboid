@@ -9,6 +9,7 @@ export interface Subscription {
   currentPeriodStart: string;
   currentPeriodEnd: string;
   cancelAtPeriodEnd: boolean;
+  metadata?: Record<string, string>;
   plan: SubscriptionPlan;
   createdAt: string;
   updatedAt: string;

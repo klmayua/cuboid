@@ -549,12 +549,20 @@ importers:
         version: 5.9.3
 
   packages/event-contracts:
+    dependencies:
+      zod:
+        specifier: ^3.22.4
+        version: 3.25.76
     devDependencies:
       typescript:
         specifier: ^5.4.0
         version: 5.9.3
 
   packages/observability-kit:
+    dependencies:
+      zod:
+        specifier: ^3.22.4
+        version: 3.25.76
     devDependencies:
       typescript:
         specifier: ^5.4.0

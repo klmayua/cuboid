@@ -250,7 +250,7 @@ class SlackProvider {
     const colors: Record<string, string> = { low: '#36a64f', medium: '#ff9800', high: '#f44336' };
     return this.send({
       event: title,
-      data: { message, severity, timestamp: payload.timestamp },
+      data: { message, severity, timestamp: new Date().toISOString() },
     } as any);
   }
 }

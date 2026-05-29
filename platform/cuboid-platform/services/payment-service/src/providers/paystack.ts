@@ -100,7 +100,7 @@ export class PaystackProviderImpl implements PaystackProvider {
       body: body ? JSON.stringify(body) : undefined,
     });
 
-    const data = await response.json();
+    const data: any = await response.json();
     if (!response.ok) {
       throw new Error(data.message || 'Paystack API error');
     }
@@ -151,7 +151,7 @@ export class PaystackProviderImpl implements PaystackProvider {
     const response = await fetch(`${this.baseUrl}/bank?country=nigeria`, {
       headers: { Authorization: `Bearer ${this.secretKey}` },
     });
-    const data = await response.json();
+    const data: any = await response.json();
     return data.data;
   }
 

@@ -92,7 +92,7 @@ export class FlutterwaveProviderImpl implements FlutterwaveProvider {
       body: body ? JSON.stringify(body) : undefined,
     });
 
-    const data = await response.json();
+    const data: any = await response.json();
     if (data.status !== 'success') {
       throw new Error(data.message || 'Flutterwave API error');
     }

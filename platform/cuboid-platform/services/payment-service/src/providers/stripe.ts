@@ -91,7 +91,7 @@ export class StripeProvider implements PaymentProvider {
       amount: Math.round(amount * 100),
       currency: currency.toLowerCase(),
       metadata,
-      automaticPaymentMethods: { enabled: true },
+      automatic_payment_methods: { enabled: true },
     });
 
     return {
@@ -100,8 +100,8 @@ export class StripeProvider implements PaymentProvider {
       amount: intent.amount / 100,
       currency: intent.currency,
       status: intent.status as any,
-      clientSecret: intent.client_secret,
-      metadata: intent.metadata,
+      clientSecret: intent.client_secret ?? undefined,
+      metadata: intent.metadata ?? undefined,
       createdAt: new Date(intent.created * 1000).toISOString(),
     };
   }
@@ -116,7 +116,6 @@ export class StripeProvider implements PaymentProvider {
           currency: item.currency.toLowerCase(),
           product_data: {
             name: item.name,
-            description: item.description,
             images: item.images,
           },
           unit_amount: Math.round(item.amount * 100),
@@ -132,7 +131,7 @@ export class StripeProvider implements PaymentProvider {
       id: session.id,
       url: session.url!,
       status: session.status as any,
-      metadata: session.metadata,
+      metadata: session.metadata ?? undefined,
     };
   }
 
@@ -144,7 +143,6 @@ export class StripeProvider implements PaymentProvider {
           unit_amount: Math.round(item.amount * 100),
           product_data: {
             name: item.name,
-            description: item.description,
           },
         });
         return { price: price.id, quantity: item.quantity };
@@ -154,15 +152,14 @@ export class StripeProvider implements PaymentProvider {
     const link = await this.client.paymentLinks.create({
       line_items: lineItems,
       metadata: params.metadata,
-      active: params.active ?? true,
-      payment_intent_data: params.paymentIntentData,
+      payment_intent_data: params.paymentIntentData as any,
     });
 
     return {
       id: link.id,
       url: link.url,
       active: link.active,
-      metadata: link.metadata,
+      metadata: link.metadata ?? undefined,
     };
   }
 
@@ -174,10 +171,10 @@ export class StripeProvider implements PaymentProvider {
     });
 
     return {
-      id: customer.id,
-      email: customer.email,
+      id: customer.id ?? '',
+      email: customer.email ?? '',
       name: customer.name ?? undefined,
-      metadata: customer.metadata,
+      metadata: customer.metadata ?? undefined,
     };
   }
 
@@ -198,7 +195,7 @@ export class StripeProvider implements PaymentProvider {
 
     return {
       id: refund.id,
-      paymentIntentId: refund.payment_intent!,
+      paymentIntentId: typeof refund.payment_intent === 'string' ? refund.payment_intent : refund.payment_intent!.id,
       amount: refund.amount / 100,
       status: refund.status as any,
     };
@@ -213,8 +210,8 @@ export class StripeProvider implements PaymentProvider {
         amount: intent.amount / 100,
         currency: intent.currency,
         status: intent.status as any,
-        clientSecret: intent.client_secret,
-        metadata: intent.metadata,
+        clientSecret: intent.client_secret ?? undefined,
+        metadata: intent.metadata ?? undefined,
         createdAt: new Date(intent.created * 1000).toISOString(),
       };
     } catch {

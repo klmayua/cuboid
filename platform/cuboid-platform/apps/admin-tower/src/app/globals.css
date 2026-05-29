@@ -20,6 +20,6 @@ body {
 
 @layer utilities {
   .glass {
-    @apply bg-white/[0.06] backdrop-blur-xl border border-white/12;
+    @apply bg-white/[0.06] backdrop-blur-xl border border-white/10;
   }
 }

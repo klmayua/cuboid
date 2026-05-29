@@ -268,7 +268,7 @@ export class PartnerAdapterService {
     targetCurrency: string;
     requiredCapabilities: (keyof PartnerCapabilities)[];
   }): Promise<PartnerAdapter | null> {
-    let adapters = this.adapters.values();
+    let adapters: PartnerAdapter[] = Array.from(this.adapters.values());
 
     for (const capability of params.requiredCapabilities) {
       adapters = adapters.filter(a => a.capabilities[capability]);

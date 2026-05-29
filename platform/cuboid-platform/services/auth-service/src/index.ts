@@ -58,7 +58,7 @@ export class AuthService {
         ...metadata,
       },
       this.config.jwtSecret,
-      { expiresIn: this.config.accessTokenExpiry }
+      { expiresIn: this.config.accessTokenExpiry } as jwt.SignOptions
     );
   }
 
@@ -66,7 +66,7 @@ export class AuthService {
     return jwt.sign(
       { sub: userId, sid: sessionId, type: 'refresh' },
       this.config.jwtSecret,
-      { expiresIn: this.config.refreshTokenExpiry }
+      { expiresIn: this.config.refreshTokenExpiry } as jwt.SignOptions
     );
   }
 

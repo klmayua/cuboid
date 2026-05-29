@@ -72,7 +72,7 @@ export class PasskeyService {
   private rpName: string;
 
   constructor(rpId: string = 'cuboid.io', rpName: string = 'Cuboid') {
-    this.store = PasskeyStore;
+    this.store = new PasskeyStore();
     this.rpId = rpId;
     this.rpName = rpName;
   }
