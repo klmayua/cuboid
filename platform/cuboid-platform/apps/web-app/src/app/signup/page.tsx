@@ -4,23 +4,30 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { CuboidLogo } from '@cuboid/design-system';
-import { Eye, EyeOff, Mail, Lock, User, ArrowRight } from 'lucide-react';
+import { Eye, EyeOff, Mail, Lock, User, ArrowRight, Loader2 } from 'lucide-react';
 import { useAuth } from '@/features/auth';
 
 export default function SignUpPage() {
   const router = useRouter();
-  const { signUp, isLoading, error } = useAuth();
+  const { signUp, error } = useAuth();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const result = await signUp({ email, password, firstName, lastName });
-    if (result.success) {
-      router.push('/welcome');
+    if (submitting) return;
+    setSubmitting(true);
+    try {
+      const result = await signUp({ email, password, firstName, lastName });
+      if (result.success) {
+        router.push('/welcome');
+      }
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -52,7 +59,8 @@ export default function SignUpPage() {
                 onChange={(e) => setFirstName(e.target.value)}
                 placeholder="First name"
                 required
-                className="w-full pl-12 pr-4 py-3.5 bg-white/[0.04] border border-white/10 rounded-xl text-white placeholder-[#7183A6] focus:outline-none focus:border-[#5E8DFF]/50 transition-colors"
+                disabled={submitting}
+                className="w-full pl-12 pr-4 py-3.5 bg-white/[0.04] border border-white/10 rounded-xl text-white placeholder-[#7183A6] focus:outline-none focus:border-[#5E8DFF]/50 transition-colors disabled:opacity-50"
               />
             </div>
             <div className="relative">
@@ -63,7 +71,8 @@ export default function SignUpPage() {
                 onChange={(e) => setLastName(e.target.value)}
                 placeholder="Last name"
                 required
-                className="w-full pl-12 pr-4 py-3.5 bg-white/[0.04] border border-white/10 rounded-xl text-white placeholder-[#7183A6] focus:outline-none focus:border-[#5E8DFF]/50 transition-colors"
+                disabled={submitting}
+                className="w-full pl-12 pr-4 py-3.5 bg-white/[0.04] border border-white/10 rounded-xl text-white placeholder-[#7183A6] focus:outline-none focus:border-[#5E8DFF]/50 transition-colors disabled:opacity-50"
               />
             </div>
           </div>
@@ -76,7 +85,8 @@ export default function SignUpPage() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email address"
               required
-              className="w-full pl-12 pr-4 py-3.5 bg-white/[0.04] border border-white/10 rounded-xl text-white placeholder-[#7183A6] focus:outline-none focus:border-[#5E8DFF]/50 transition-colors"
+              disabled={submitting}
+              className="w-full pl-12 pr-4 py-3.5 bg-white/[0.04] border border-white/10 rounded-xl text-white placeholder-[#7183A6] focus:outline-none focus:border-[#5E8DFF]/50 transition-colors disabled:opacity-50"
             />
           </div>
 
@@ -88,7 +98,8 @@ export default function SignUpPage() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
               required
-              className="w-full pl-12 pr-12 py-3.5 bg-white/[0.04] border border-white/10 rounded-xl text-white placeholder-[#7183A6] focus:outline-none focus:border-[#5E8DFF]/50 transition-colors"
+              disabled={submitting}
+              className="w-full pl-12 pr-12 py-3.5 bg-white/[0.04] border border-white/10 rounded-xl text-white placeholder-[#7183A6] focus:outline-none focus:border-[#5E8DFF]/50 transition-colors disabled:opacity-50"
             />
             <button
               type="button"
@@ -101,11 +112,20 @@ export default function SignUpPage() {
 
           <button
             type="submit"
-            disabled={isLoading}
+            disabled={submitting}
             className="w-full py-3.5 bg-gradient-to-r from-[#0A2A66] to-[#123E91] text-white font-medium rounded-xl hover:shadow-lg hover:shadow-[#5E8DFF]/20 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
           >
-            {isLoading ? 'Creating account...' : 'Create account'}
-            {!isLoading && <ArrowRight className="w-4 h-4" />}
+            {submitting ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin" />
+                Creating account...
+              </>
+            ) : (
+              <>
+                Create account
+                <ArrowRight className="w-4 h-4" />
+              </>
+            )}
           </button>
         </form>
 

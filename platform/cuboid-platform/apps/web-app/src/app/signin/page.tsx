@@ -4,22 +4,29 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { CuboidLogo } from '@cuboid/design-system';
-import { Eye, EyeOff, Mail, Lock, ArrowRight } from 'lucide-react';
+import { Eye, EyeOff, Mail, Lock, ArrowRight, Loader2 } from 'lucide-react';
 import { useAuth } from '@/features/auth';
 import { DemoAccessCards } from '@/components/auth/DemoAccessCards';
 
 export default function SignInPage() {
   const router = useRouter();
-  const { signIn, isLoading, error } = useAuth();
+  const { signIn, error } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const result = await signIn(email, password);
-    if (result.success) {
-      router.push('/dashboard');
+    if (submitting) return;
+    setSubmitting(true);
+    try {
+      const result = await signIn(email, password);
+      if (result.success) {
+        router.push('/dashboard');
+      }
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -50,7 +57,8 @@ export default function SignInPage() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email address"
               required
-              className="w-full pl-12 pr-4 py-3.5 bg-white/[0.04] border border-white/10 rounded-xl text-white placeholder-[#7183A6] focus:outline-none focus:border-[#5E8DFF]/50 focus:ring-1 focus:ring-[#5E8DFF]/20 transition-colors"
+              disabled={submitting}
+              className="w-full pl-12 pr-4 py-3.5 bg-white/[0.04] border border-white/10 rounded-xl text-white placeholder-[#7183A6] focus:outline-none focus:border-[#5E8DFF]/50 focus:ring-1 focus:ring-[#5E8DFF]/20 transition-colors disabled:opacity-50"
             />
           </div>
 
@@ -62,7 +70,8 @@ export default function SignInPage() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
               required
-              className="w-full pl-12 pr-12 py-3.5 bg-white/[0.04] border border-white/10 rounded-xl text-white placeholder-[#7183A6] focus:outline-none focus:border-[#5E8DFF]/50 focus:ring-1 focus:ring-[#5E8DFF]/20 transition-colors"
+              disabled={submitting}
+              className="w-full pl-12 pr-12 py-3.5 bg-white/[0.04] border border-white/10 rounded-xl text-white placeholder-[#7183A6] focus:outline-none focus:border-[#5E8DFF]/50 focus:ring-1 focus:ring-[#5E8DFF]/20 transition-colors disabled:opacity-50"
             />
             <button
               type="button"
@@ -85,11 +94,20 @@ export default function SignInPage() {
 
           <button
             type="submit"
-            disabled={isLoading}
-            className="w-full py-3.5 bg-gradient-to-r from-[#0A2A66] to-[#123E91] text-white font-medium rounded-xl hover:shadow-lg hover:shadow-[#5E8DFF]/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            disabled={submitting}
+            className="w-full py-3.5 bg-gradient-to-r from-[#0A2A66] to-[#123E91] text-white font-medium rounded-xl hover:shadow-lg hover:shadow-[#5E8DFF]/20 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
           >
-            {isLoading ? 'Signing in...' : 'Sign in'}
-            {!isLoading && <ArrowRight className="w-4 h-4" />}
+            {submitting ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin" />
+                Signing in...
+              </>
+            ) : (
+              <>
+                Sign in
+                <ArrowRight className="w-4 h-4" />
+              </>
+            )}
           </button>
         </form>
 
