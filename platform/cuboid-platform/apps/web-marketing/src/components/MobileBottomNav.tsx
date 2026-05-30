@@ -8,7 +8,7 @@ import { WHATSAPP_URL } from "@/lib/constants";
 const navItems = [
   { icon: Home, label: "Home", href: "/" },
   { icon: LayoutGrid, label: "Features", href: "#markets" },
-  { icon: LayoutDashboard, label: "Demo", href: "/login" },
+  { icon: LayoutDashboard, label: "Demo", href: "/signin" },
   { icon: MessageCircle, label: "WhatsApp", href: WHATSAPP_URL, external: true, accent: true },
   { icon: User, label: "Contact", href: "/contact" },
 ];
@@ -211,7 +211,7 @@ export function MobileBottomNav() {
                     </div>
                   </a>
                   <a
-                    href="/login"
+                    href="/signin"
                     className="flex items-center gap-3 p-4 rounded-2xl"
                     style={{
                       background: "rgba(212,175,55,0.08)",

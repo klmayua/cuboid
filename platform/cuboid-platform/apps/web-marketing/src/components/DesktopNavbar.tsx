@@ -86,7 +86,7 @@ export function DesktopNavbar() {
             {/* Right: Actions */}
             <div className="flex items-center gap-[14px]">
               <a
-                href="/login"
+                href="/signin"
                 className="inline-flex items-center justify-center gap-[8px] transition-all duration-220"
                 style={{
                   height: 42,
