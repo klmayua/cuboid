@@ -110,6 +110,6 @@ export const DEMO_USERS: DemoUser[] = [
     redirectTo: '/broker',
     accent: '#10B981',
     description: 'Partner network access, deal pipeline, commission tracking',
-    icon: 'Handshake',
+    icon: 'HeartHandshake',
   },
 ];

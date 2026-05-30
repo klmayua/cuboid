@@ -2,20 +2,24 @@
 
 import { useState, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { Briefcase, Building2, Landmark, Wallet, ShieldCheck, Loader2 } from 'lucide-react';
+import { Briefcase, Building2, Landmark, Wallet, ShieldCheck, Loader2, Crown, Users, BarChart3, HeartHandshake } from 'lucide-react';
 import { DEMO_USERS } from '@/lib/demo-users';
 import { performDemoLogin } from '@/lib/auth/demo-login';
 import type { DemoUser } from '@/lib/demo-users';
 
-const iconMap: Record<string, React.ComponentType<{ className?: string; style?: React.CSSProperties }>> = {
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Briefcase,
   Building2,
   Landmark,
   Wallet,
   ShieldCheck,
+  Crown,
+  Users,
+  BarChart3,
+  HeartHandshake,
 };
 
-const DEMO_TIMEOUT_MS = 1500;
+const DEMO_TIMEOUT_MS = 2000;
 
 export function DemoAccessCards() {
   const router = useRouter();
@@ -31,33 +35,24 @@ export function DemoAccessCards() {
 
   const handleDemoLogin = useCallback(
     (demoUser: DemoUser) => {
-      if (loadingRole) return;
       setLoadingRole(demoUser.id);
 
-      // Safety timeout: auto-clear loading if redirect never fires
+      clearSafeguard();
       timeoutRef.current = setTimeout(() => {
         setLoadingRole(null);
       }, DEMO_TIMEOUT_MS);
 
       try {
         performDemoLogin(demoUser);
-        router.push(demoUser.redirectTo);
-      } catch {
+        setTimeout(() => {
+          router.push(demoUser.redirectTo);
+        }, 50);
+      } catch (err) {
         clearSafeguard();
         setLoadingRole(null);
       }
     },
-    [loadingRole, router, clearSafeguard]
-  );
-
-  const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent, demoUser: DemoUser) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        handleDemoLogin(demoUser);
-      }
-    },
-    [handleDemoLogin]
+    [router, clearSafeguard]
   );
 
   return (
@@ -67,26 +62,25 @@ export function DemoAccessCards() {
           Demo Access
         </h2>
         <p className="text-xs text-[#7183A6] mt-1">
-          Preview operational workspaces instantly.
+          Click any role to preview instantly. No password required.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
         {DEMO_USERS.map((demoUser) => {
           const Icon = iconMap[demoUser.icon];
           const isLoading = loadingRole === demoUser.id;
 
           return (
-            <div
+            <button
               key={demoUser.id}
-              role="button"
-              tabIndex={0}
-              aria-label={`Demo sign in as ${demoUser.title}`}
+              type="button"
+              disabled={loadingRole !== null}
               onClick={() => handleDemoLogin(demoUser)}
-              onKeyDown={(e) => handleKeyDown(e, demoUser)}
+              aria-label={`Demo sign in as ${demoUser.title}`}
               className={`
                 relative flex flex-col items-center text-center
-                p-4 rounded-[18px] cursor-pointer
+                p-4 rounded-[18px]
                 min-h-[220px] overflow-hidden
                 bg-[#0A0E1E]/[0.92] backdrop-blur-md
                 border border-[#D4AF37]/[0.18]
@@ -95,7 +89,8 @@ export function DemoAccessCards() {
                 hover:-translate-y-[2px]
                 hover:shadow-[0_4px_24px_rgba(212,175,55,0.08)]
                 focus:outline-none focus:ring-2 focus:ring-[#5E8DFF]/30 focus:ring-offset-2 focus:ring-offset-[#05070D]
-                ${isLoading ? 'opacity-70 pointer-events-none' : ''}
+                disabled:opacity-60 disabled:pointer-events-none disabled:cursor-not-allowed
+                ${isLoading ? 'border-[#D4AF37]/[0.45] shadow-[0_0_24px_rgba(212,175,55,0.15)] animate-pulse' : 'cursor-pointer'}
               `}
             >
               <span
@@ -109,7 +104,9 @@ export function DemoAccessCards() {
                   <Loader2 className="w-5 h-5 animate-spin" />
                 ) : Icon ? (
                   <Icon className="w-5 h-5" />
-                ) : null}
+                ) : (
+                  <span className="text-xs font-bold">{demoUser.title.charAt(0)}</span>
+                )}
               </span>
 
               <span className="text-xs font-semibold text-white tracking-tight">
@@ -124,13 +121,24 @@ export function DemoAccessCards() {
                 {demoUser.email}
               </span>
 
-              <span className="mt-auto inline-block px-2 py-0.5 rounded-[6px] bg-[#D4AF37]/[0.12] text-[#D4AF37] text-[10px] font-semibold tracking-[0.08em] uppercase">
-                {isLoading ? 'Entering...' : 'Demo View'}
+              <span className="mt-auto inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[6px] bg-[#D4AF37]/[0.12] text-[#D4AF37] text-[10px] font-semibold tracking-[0.08em] uppercase">
+                {isLoading ? (
+                  <>
+                    <Loader2 className="w-3 h-3 animate-spin" />
+                    Entering...
+                  </>
+                ) : (
+                  'Demo View'
+                )}
               </span>
-            </div>
+            </button>
           );
         })}
       </div>
+
+      <p className="text-center text-[10px] text-[#51617D] mt-4">
+        Password for all demo accounts: Cuboid@2026
+      </p>
     </div>
   );
 }
