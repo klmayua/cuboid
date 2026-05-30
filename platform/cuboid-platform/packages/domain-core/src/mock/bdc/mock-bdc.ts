@@ -1,10 +1,28 @@
 export function getMockBdcDesks() {
   return [
-    { id: 'desk_1', name: 'Wuse Zone 4 Desk', location: 'ABUJA', status: 'OPEN', staffCount: 4, inventoryCount: 3 },
-    { id: 'desk_2', name: 'Allen Avenue Desk', location: 'LAGOS', status: 'OPEN', staffCount: 6, inventoryCount: 5 },
-    { id: 'desk_3', name: 'Trans Amadi Desk', location: 'PORT_HARCOURT', status: 'CLOSED', staffCount: 2, inventoryCount: 2 },
-    { id: 'desk_4', name: 'Sabon Gari Desk', location: 'KANO', status: 'OPEN', staffCount: 3, inventoryCount: 3 },
+    { id: 'desk_1', name: 'Wuse Zone 4 Desk', city: 'Abuja', location: 'ABUJA', status: 'OPEN', activeDeals: 12, dailyVolume: 45000000, staffCount: 4, inventoryCount: 3 },
+    { id: 'desk_2', name: 'Allen Avenue Desk', city: 'Lagos', location: 'LAGOS', status: 'OPEN', activeDeals: 18, dailyVolume: 82000000, staffCount: 6, inventoryCount: 5 },
+    { id: 'desk_3', name: 'Trans Amadi Desk', city: 'Port Harcourt', location: 'PORT_HARCOURT', status: 'CLOSED', activeDeals: 0, dailyVolume: 0, staffCount: 2, inventoryCount: 2 },
+    { id: 'desk_4', name: 'Sabon Gari Desk', city: 'Kano', location: 'KANO', status: 'OPEN', activeDeals: 8, dailyVolume: 28500000, staffCount: 3, inventoryCount: 3 },
   ];
+}
+
+export function getMockBdcDeskStats() {
+  return [
+    { id: 'desk_1', name: 'Wuse Zone 4 Desk', city: 'Abuja', status: 'OPEN', activeDeals: 12, dailyVolume: 45000000 },
+    { id: 'desk_2', name: 'Allen Avenue Desk', city: 'Lagos', status: 'OPEN', activeDeals: 18, dailyVolume: 82000000 },
+    { id: 'desk_3', name: 'Trans Amadi Desk', city: 'Port Harcourt', status: 'CLOSED', activeDeals: 0, dailyVolume: 0 },
+    { id: 'desk_4', name: 'Sabon Gari Desk', city: 'Kano', status: 'OPEN', activeDeals: 8, dailyVolume: 28500000 },
+  ];
+}
+
+export function getMockBdcDailyStats() {
+  return {
+    totalDeals: 38,
+    totalVolume: 155500000,
+    pendingSettlements: 4,
+    activeDesks: 3,
+  };
 }
 
 export function getMockBdcInventory() {

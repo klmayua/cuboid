@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X } from "lucide-react";
+import { WHATSAPP_URL } from "@/lib/constants";
 
 export function ChatBot() {
   const [open, setOpen] = useState(false);
@@ -62,7 +63,9 @@ export function ChatBot() {
               Need rates, broker access, or BDC onboarding?
             </p>
             <a
-              href="#whatsapp"
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn btn-green h-[44px] w-full text-[14px]"
               style={{ borderRadius: 10 }}
             >

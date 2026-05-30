@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ShoppingCart, TrendingDown, BarChart3, ArrowRight, ShieldCheck, Zap, Clock } from "lucide-react";
+import { WHATSAPP_URL } from "@/lib/constants";
 
 export function MarketplaceSection() {
   return (
@@ -53,7 +54,9 @@ export function MarketplaceSection() {
             {/* CTA Strip */}
             <div className="mt-10">
               <a
-                href="#whatsapp"
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn btn-green text-[15px]"
                 style={{ borderRadius: 10, height: 52, paddingInline: 28 }}
               >

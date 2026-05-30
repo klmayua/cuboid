@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { CuboidLogo } from "./CuboidLogo";
 import { MessageCircle, User } from "lucide-react";
+import { WHATSAPP_URL } from "@/lib/constants";
 
 const navLinks = [
   { label: "Markets", href: "#markets" },
@@ -11,7 +12,7 @@ const navLinks = [
   { label: "BDC Onboarding", href: "#bdc-onboarding" },
   { label: "Treasury", href: "#treasury" },
   { label: "Market Network", href: "#market-network" },
-  { label: "Learn", href: "#learn" },
+  { label: "Learn", href: "#bdc-onboarding" },
 ];
 
 export function DesktopNavbar() {
@@ -108,7 +109,9 @@ export function DesktopNavbar() {
                 Sign in
               </a>
               <a
-                href="#whatsapp"
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn btn-green text-[14px] font-semibold gap-[10px]"
                 style={{
                   height: 44,

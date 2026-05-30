@@ -17,6 +17,9 @@ export const ROLE_ROUTE_ACCESS: Record<UserRole, string[]> = {
   ADMIN: ['/ops', '/ops/orchestration', '/ops/whatsapp', '/dashboard', '/trust', '/notifications', '/support', '/settings', '/activity', '/analytics'],
   SUPER_ADMIN: ['/admin', '/dashboard', '/trust', '/notifications', '/support', '/settings', '/activity'],
   REGULATOR: ['/regulator', '/dashboard', '/trust', '/notifications', '/support', '/settings', '/activity'],
+  MANAGER: ['/ops', '/dashboard', '/trust', '/notifications', '/support', '/settings', '/activity'],
+  ANALYST: ['/treasury', '/dashboard', '/trust', '/notifications', '/support', '/settings', '/activity'],
+  PARTNER: ['/broker', '/dashboard', '/trust', '/notifications', '/support', '/settings', '/activity'],
 };
 
 export const ROLE_DEFAULT_REDIRECT: Record<UserRole, string> = {
@@ -29,6 +32,9 @@ export const ROLE_DEFAULT_REDIRECT: Record<UserRole, string> = {
   ADMIN: '/ops',
   SUPER_ADMIN: '/admin',
   REGULATOR: '/regulator',
+  MANAGER: '/ops',
+  ANALYST: '/treasury',
+  PARTNER: '/broker',
 };
 
 export interface SidebarItem {
@@ -39,8 +45,8 @@ export interface SidebarItem {
 }
 
 export const SIDEBAR_NAV_ITEMS: SidebarItem[] = [
-  { icon: 'LayoutDashboard', label: 'Dashboard', href: '/dashboard', roles: ['USER', 'BROKER', 'BDC_OPERATOR', 'TREASURY', 'COMPLIANCE', 'ADMIN', 'SUPER_ADMIN', 'REGULATOR'] },
-  { icon: 'Briefcase', label: 'Broker OS', href: '/broker', roles: ['BROKER'] },
+  { icon: 'LayoutDashboard', label: 'Dashboard', href: '/dashboard', roles: ['USER', 'BROKER', 'BDC_OPERATOR', 'TREASURY', 'COMPLIANCE', 'ADMIN', 'SUPER_ADMIN', 'REGULATOR', 'MANAGER', 'ANALYST', 'PARTNER'] },
+  { icon: 'Briefcase', label: 'Broker OS', href: '/broker', roles: ['BROKER', 'PARTNER'] },
   { icon: 'Building', label: 'BDC OS', href: '/bdc', roles: ['BDC_OPERATOR'] },
   { icon: 'Send', label: 'Move Value', href: '/transfer', roles: ['USER'] },
   { icon: 'ArrowLeftRight', label: 'Convert', href: '/convert', roles: ['USER', 'BROKER', 'BDC_OPERATOR'] },

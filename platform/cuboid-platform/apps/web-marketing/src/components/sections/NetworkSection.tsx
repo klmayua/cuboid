@@ -223,7 +223,7 @@ export function NetworkSection() {
           className="text-center mt-14"
         >
           <a
-            href="#network"
+            href="#market-network"
             className="btn btn-outline text-[15px]"
             style={{ borderRadius: 10, height: 52, paddingInline: 32 }}
           >

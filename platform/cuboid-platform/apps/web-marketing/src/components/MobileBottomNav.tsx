@@ -3,13 +3,14 @@
 import { useState } from "react";
 import { Home, BarChart3, MessageCircle, Users, LayoutGrid, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { WHATSAPP_URL } from "@/lib/constants";
 
 const moreMenuItems = [
   { label: "Marketplace", href: "#markets" },
   { label: "BDC Onboarding", href: "#bdc-onboarding" },
   { label: "Treasury", href: "#treasury" },
   { label: "Market Network", href: "#market-network" },
-  { label: "Learn", href: "#learn" },
+  { label: "Learn", href: "#bdc-onboarding" },
   { label: "Sign In", href: "/login" },
 ];
 
@@ -36,13 +37,13 @@ export function MobileBottomNav() {
             <span className="text-[10px] font-medium">Home</span>
           </a>
           <a
-            href="#exchange"
+            href="#markets"
             className="flex flex-col items-center gap-1 py-2 px-3 text-text_muted hover:text-text_primary transition-colors"
           >
             <BarChart3 size={22} strokeWidth={1.8} />
             <span className="text-[10px] font-medium">Rates</span>
           </a>
-          <a href="#whatsapp" className="flex flex-col items-center justify-center -mt-4">
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center -mt-4">
             <div
               className="w-14 h-14 flex items-center justify-center"
               style={{

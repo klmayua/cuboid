@@ -130,7 +130,7 @@ export function BDCSection() {
               </span>
             </div>
             <a
-              href="#bdc"
+              href="#bdc-onboarding"
               className="btn text-[15px]"
               style={{
                 height: 52,

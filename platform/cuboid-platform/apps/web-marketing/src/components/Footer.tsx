@@ -22,9 +22,9 @@ export function Footer() {
           <div>
             <h4 className="text-[12px] font-semibold text-text_muted mb-3">Product</h4>
             <ul className="space-y-2.5">
-              <li><a href="#exchange" className="text-[14px] text-text_muted hover:text-text_primary transition-colors">Exchange</a></li>
+              <li><a href="#markets" className="text-[14px] text-text_muted hover:text-text_primary transition-colors">Exchange</a></li>
               <li><a href="#brokers" className="text-[14px] text-text_muted hover:text-text_primary transition-colors">Brokers</a></li>
-              <li><a href="#bdc" className="text-[14px] text-text_muted hover:text-text_primary transition-colors">BDC Infrastructure</a></li>
+              <li><a href="#bdc-onboarding" className="text-[14px] text-text_muted hover:text-text_primary transition-colors">BDC Infrastructure</a></li>
             </ul>
           </div>
           <div>
@@ -38,7 +38,7 @@ export function Footer() {
           <div>
             <h4 className="text-[12px] font-semibold text-text_muted mb-3">Resources</h4>
             <ul className="space-y-2.5">
-              <li><a href="#learn" className="text-[14px] text-text_muted hover:text-text_primary transition-colors">Learn</a></li>
+              <li><a href="#bdc-onboarding" className="text-[14px] text-text_muted hover:text-text_primary transition-colors">Learn</a></li>
               <li><a href="#" className="text-[14px] text-text_muted hover:text-text_primary transition-colors">API Docs</a></li>
             </ul>
           </div>

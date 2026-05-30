@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Wallet, Repeat, Shield, Building2, ArrowRight, Headphones, FileSignature, Code } from "lucide-react";
+import { WHATSAPP_URL } from "@/lib/constants";
 
 const centerpieceItems = [
   { icon: Wallet, title: "Settlement rails", desc: "Fast, tracked settlement for business volumes." },
@@ -89,7 +90,9 @@ export function BusinessSection() {
 
           <div className="mt-10 text-center">
             <a
-              href="#business"
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn btn-outline text-[15px]"
               style={{ borderRadius: 10, height: 52, paddingInline: 28 }}
             >

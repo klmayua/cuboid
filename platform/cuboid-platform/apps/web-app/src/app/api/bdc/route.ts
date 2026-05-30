@@ -31,7 +31,7 @@ import {
   getBdcAnalytics,
 } from '@cuboid/api-sdk';
 import { ValidationError, idempotencyRepository, shouldUseMockData } from '@cuboid/domain-core';
-import { getMockBdcMetrics, getMockBdcDesks, getMockBdcInventory } from '@cuboid/domain-core/mock';
+import { getMockBdcMetrics, getMockBdcDesks, getMockBdcInventory, getMockBdcDeskStats, getMockBdcDailyStats } from '@cuboid/domain-core/mock';
 import { z } from 'zod';
 
 export async function GET(req: Request) {
@@ -102,6 +102,14 @@ export async function GET(req: Request) {
       const result = await getBdcAnalytics(orgId);
       return NextResponse.json({ success: true, data: result, requestId: `req_${Date.now()}`, timestamp: new Date().toISOString() });
     }
+    if (action === 'deskStats') {
+      const result = getMockBdcDeskStats();
+      return NextResponse.json({ success: true, data: result, requestId: `req_${Date.now()}`, timestamp: new Date().toISOString() });
+    }
+    if (action === 'dailyStats') {
+      const result = getMockBdcDailyStats();
+      return NextResponse.json({ success: true, data: result, requestId: `req_${Date.now()}`, timestamp: new Date().toISOString() });
+    }
 
     const result = await getBdcDashboard(orgId);
     return NextResponse.json({ success: true, data: result, requestId: `req_${Date.now()}`, timestamp: new Date().toISOString() });
@@ -111,6 +119,8 @@ export async function GET(req: Request) {
       const action = searchParams.get('action');
       let data;
       if (action === 'desks' || action === 'desk') data = getMockBdcDesks();
+      else if (action === 'deskStats') data = getMockBdcDeskStats();
+      else if (action === 'dailyStats') data = getMockBdcDailyStats();
       else if (action === 'inventory' || action === 'inventoryByDesk') data = getMockBdcInventory();
       else data = getMockBdcMetrics();
       return NextResponse.json({ success: true, mock: true, data, requestId: `req_${Date.now()}`, timestamp: new Date().toISOString() });

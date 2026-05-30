@@ -10,7 +10,10 @@ export type UserRole =
   | 'COMPLIANCE'
   | 'ADMIN'
   | 'SUPER_ADMIN'
-  | 'REGULATOR';
+  | 'REGULATOR'
+  | 'MANAGER'
+  | 'ANALYST'
+  | 'PARTNER';
 
 export interface User {
   id: string;

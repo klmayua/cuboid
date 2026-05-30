@@ -52,7 +52,7 @@ export function BrokerSection() {
 
             <div className="mt-auto">
               <a
-                href="#broker"
+                href="#brokers"
                 className="btn btn-green text-[15px]"
                 style={{ borderRadius: 10, height: 52, paddingInline: 28 }}
               >

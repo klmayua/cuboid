@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { MarketCommandPanel } from "../MarketCommandPanel";
 import { MessageCircle, Users, Shield, Zap, Lock, CheckCircle } from "lucide-react";
+import { WHATSAPP_URL } from "@/lib/constants";
 
 export function HeroSection() {
   return (
@@ -37,7 +38,7 @@ export function HeroSection() {
 
             {/* CTAs — 2 only: WhatsApp + Broker Network */}
             <div className="flex flex-wrap gap-3 mb-10">
-              <a href="#whatsapp" className="btn btn-green h-[56px] px-7 text-[15px]" style={{ borderRadius: 10 }}>
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn btn-green h-[56px] px-7 text-[15px]" style={{ borderRadius: 10 }}>
                 <MessageCircle size={18} />
                 Start on WhatsApp
               </a>

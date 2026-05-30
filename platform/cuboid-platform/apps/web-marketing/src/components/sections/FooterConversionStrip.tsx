@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { MessageCircle, ArrowRight } from "lucide-react";
+import { WHATSAPP_URL } from "@/lib/constants";
 
 export function FooterConversionStrip() {
   return (
@@ -22,7 +23,9 @@ export function FooterConversionStrip() {
               Join buyers, sellers, brokers, and verified desks already trading on WhatsApp.
             </p>
             <a
-              href="#whatsapp"
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn btn-green h-[56px] px-8 text-[16px]"
               style={{ borderRadius: 10 }}
             >
