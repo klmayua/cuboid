@@ -21,7 +21,7 @@ export default function Login() {
         {/* Dashboard access */}
         <div className="space-y-3 mb-8">
           <a
-            href="http://localhost:3000/signin"
+            href={process.env.NEXT_PUBLIC_APP_URL ? `${process.env.NEXT_PUBLIC_APP_URL}/signin` : "/signin"}
             className="w-full py-3.5 bg-[#00A86B] text-[#07111A] font-semibold rounded-xl hover:bg-[#00c27d] transition-all flex items-center justify-center gap-2"
           >
             Access Dashboard
