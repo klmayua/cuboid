@@ -78,7 +78,7 @@ export default function SignInPage() {
               <input type="checkbox" className="rounded border-white/20 bg-white/[0.04] text-[#5E8DFF]" />
               Remember me
             </label>
-            <Link href="/forgot-password" className="text-[#5E8DFF] hover:text-white transition-colors">
+            <Link href="/contact" className="text-[#5E8DFF] hover:text-white transition-colors">
               Forgot password?
             </Link>
           </div>

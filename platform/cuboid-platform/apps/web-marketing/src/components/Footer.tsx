@@ -39,14 +39,14 @@ export function Footer() {
             <h4 className="text-[12px] font-semibold text-text_muted mb-3">Resources</h4>
             <ul className="space-y-2.5">
               <li><a href="#bdc-onboarding" className="text-[14px] text-text_muted hover:text-text_primary transition-colors">Learn</a></li>
-              <li><a href="#" className="text-[14px] text-text_muted hover:text-text_primary transition-colors">API Docs</a></li>
+              <li><a href="/about" className="text-[14px] text-text_muted hover:text-text_primary transition-colors">API Docs</a></li>
             </ul>
           </div>
           <div>
             <h4 className="text-[12px] font-semibold text-text_muted mb-3">Legal</h4>
             <ul className="space-y-2.5">
-              <li><a href="#" className="text-[14px] text-text_muted hover:text-text_primary transition-colors">Privacy</a></li>
-              <li><a href="#" className="text-[14px] text-text_muted hover:text-text_primary transition-colors">Terms</a></li>
+              <li><a href="/about" className="text-[14px] text-text_muted hover:text-text_primary transition-colors">Privacy</a></li>
+              <li><a href="/contact" className="text-[14px] text-text_muted hover:text-text_primary transition-colors">Terms</a></li>
             </ul>
           </div>
         </div>

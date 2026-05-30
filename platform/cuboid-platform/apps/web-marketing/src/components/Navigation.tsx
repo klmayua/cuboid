@@ -9,7 +9,6 @@ const navLinks = [
   { label: "Technology", href: "/technology" },
   { label: "Compliance", href: "/compliance-page" },
   { label: "About", href: "/about" },
-  { label: "Developers", href: "/developers" },
 ];
 
 export function Navigation() {
